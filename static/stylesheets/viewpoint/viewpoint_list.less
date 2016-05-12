@@ -1,0 +1,149 @@
+/*
+* 观点列表样式
+*
+*/
+
+.list-box {
+  padding: @padding-base-horizontal;
+}
+
+// header
+.list-header {
+  background: @background-default-color;
+  border: 1px solid @border-default-color;
+
+  h3.module-title {
+    padding-left: 15px;
+    margin-top: 15px;
+    height: 32px;
+    line-height: 32px;
+    color: @gray;
+    text-align: left;
+  }
+
+  .col-xs-3 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    .qn-btn {
+      margin: 12px 15px 0 0;
+      width: @btn-fixed-width-default;
+    }
+  }
+
+  dl { margin: 0; }
+
+  dt,
+  dd { text-align: center; }
+
+  dd.no-data,
+  dt { color: @gray-light; }
+
+  dd {
+    font-size: 26px;
+    font-weight: bold;
+    color: @gray-dark;
+  }
+}
+
+// feed item
+.feed-item {
+  padding: 10px 10px 10px 34px;
+  border-bottom: 1px solid @border-default-color;
+
+  &:last-child {
+    border-bottom: 0 none;
+  }
+
+  .item-head {
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+
+    .clearfix();
+
+    .icon-viewpoint {
+      position: absolute;
+      top: 0;
+      left: -19px;
+      display: block;
+      width: 24px;
+      height: 24px;
+      background: url(/images/icon_viewpoint.png) no-repeat 0 0;
+    }
+
+    .viewpoint-title {
+      vertical-align: middle;
+
+      a {
+        font-size: @font-size-h4;
+        color: @viewpoint-title-link-color;
+      }
+
+      .icon-elite {
+        display: inline-block;
+        margin: 0 5px;
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        background: @brand-primary;
+        border-radius: 2px;
+        color: #fff;
+      }
+    }
+
+    .viewpoint-meta {
+      text-align: right;
+      line-height: 24px;
+
+      span {
+        margin-left: 15px;
+        color: @gray-light;
+      }
+    }
+  }
+
+  .item-artice {
+    width: 100%;
+    word-break: break-all;
+    .col-xs-3 {
+      max-height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .item-foot {
+
+    a.foot-delete {
+
+      i.fa {
+        margin-right: 5px;
+      }
+
+      cursor: pointer;
+
+      &:hover {
+        color: @link-color;
+      }
+    }
+
+    a.foot-link + a.foot-link {
+      margin-left: 20px;
+    }
+  }
+
+  .item-foot-action {
+    text-align: right;
+
+    a {
+      margin-left: 15px;
+    }
+  }
+}

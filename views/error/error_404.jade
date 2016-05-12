@@ -1,0 +1,12 @@
+extends ../common/full_width_layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/error/error_index.css')
+
+block main_content
+  div.error
+    img(src="/images/error/404.jpg")

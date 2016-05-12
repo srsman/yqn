@@ -1,0 +1,127 @@
+table { background-color: @table-bg; }
+
+th { text-align: left; }
+
+/* 表格基础样式 */
+.qn-table,
+.qn-widget-table {
+  width: 100%;
+  max-width: 100%;
+
+  // 单元格
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: @table-cell-padding;
+        line-height: @line-height-base;
+        vertical-align: top;
+        //border-top: 1px solid @table-border-color;
+      }
+    }
+  }
+
+  // 表头的文字居底对齐
+  > thead > tr > th {
+    vertical-align: bottom;
+    background-color: #f9f9f9;
+    //border-bottom: 1px solid @table-border-color;
+    font-weight: normal;
+    color: @gray;
+  }
+
+  // 多行表头的情况
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+
+  // 多个表体的情况
+  > tbody + tbody {
+    border-top: 2px solid @table-border-color;
+  }
+
+  // 表格内A标签
+  > tbody {
+    > tr {
+      > td a {
+        color: @gray-base;
+
+        &:hover,
+        &:focus { color: @brand-info; }
+      }
+    }
+  }
+
+  // 内嵌表格
+  .qn-table {
+    background-color: @body-bg;
+  }
+
+  // 紧凑型的
+  &.condensed {
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          padding: @table-condensed-cell-padding;
+        }
+      }
+    }
+  }
+
+  // 带边框的
+  &.bordered {
+    border: 1px solid @table-border-color;
+
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          border: 1px solid @table-border-color;
+        }
+      }
+    }
+
+    > thead > tr {
+      > th,
+      > td {
+        border-bottom-width: 2px;
+      }
+    }
+  }
+
+  // 隔行换色
+  &.striped {
+    > tbody > tr:nth-of-type(even) {
+      background-color: @table-bg-accent;
+    }
+  }
+
+  // 鼠标移入行换色
+  &.hover {
+    > tbody > tr:hover {
+      background-color: @table-bg-hover;
+    }
+  }
+
+  // 内容中间对齐
+  &.vertical-middle {
+    > tbody {
+      > tr {
+        > th,
+        > td { vertical-align: middle; }
+      }
+    }
+  }
+}

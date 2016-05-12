@@ -1,0 +1,41 @@
+//- head部分
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+  meta(name='renderer', content='webkit')
+  if seoMeta && seoMeta.title
+    title #{seoMeta.title}
+  else
+    title #{title}
+
+  if seoMeta && seoMeta.keywords
+    meta(name='keywords', content=seoMeta.keywords)
+  else
+    meta(name='keywords', content=keywords)
+
+  if seoMeta && seoMeta.description
+    meta(name='description', content=seoMeta.description)
+  else
+    meta(name='description', content=description)
+
+  block css
+    link(rel='stylesheet', href='/javascripts/lib/bootstrap/css/bootstrap.min.css')
+  block head_scripts
+    script
+      |   var url = window.location.href;
+      |   if(url.indexOf('https') < 0) {
+      |     url = url.replace('http:', 'https:');
+      |     window.location.replace(url);
+      |   }
+      |   if(url.indexOf('.com.cn') > 0) {
+      |     url = url.replace('.com.cn', '.com');
+      |     window.location.replace(url);
+      |   } else if(url.indexOf('.cn') > 0) {
+      |     url = url.replace('.cn', '.com');
+      |     window.location.replace(url);
+      |   }
+
+    script(src='/javascripts/main.js')
+  //if lte IE 9
+    script(src='/javascripts/lib/easemob/jplayer/jquery.jplayer.min.js')
+    script(src='/javascripts/lib/easemob/swfupload/swfupload.js')

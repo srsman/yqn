@@ -1,0 +1,88 @@
+// 问答推送
+.push-question {
+
+  // 盒子
+  &.qn-pager-wrap {
+    position: fixed;
+    top: auto;
+    right: 10px;
+    bottom: -200px;
+    left: auto;
+    margin-top: 10px;
+    margin-left: 0;
+    width: 320px;
+    height: auto;
+    .box-shadow(2px 2px 5px rgba(0, 0, 0, .5));
+  }
+
+  // 主体
+  .qn-pager-main {
+    padding: 10px;
+    min-height: 112px;
+    height: auto;
+  }
+
+  .qn-pager-title {
+    .pager-title {
+      float: left;
+      color: @push-pager-title-color;
+    }
+  }
+
+  // 用户
+  .item-user {
+    position: relative;
+    padding-left: 54px;
+
+    .clearfix();
+
+    .qn-avatar {
+      float: left;
+      margin-left: -54px;
+    }
+
+    .item-user-main {
+      width: 100%;
+
+      .source {
+        color: @gray-light;
+      }
+    }
+
+    .qn-btn {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      width: 70px;
+    }
+  }
+
+  .qn-row {
+    margin-top: 5px;
+  }
+
+  // 问题
+  .item-question {
+    padding: 0;
+
+    .item-question-about {
+      margin-bottom: 0;
+      color: @gray;
+
+      span,
+      a {
+        margin-right: @padding-base-horizontal;
+      }
+      a,
+      a:hover {
+        color: @brand-primary;
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+
+    .item-question-content {
+      margin-bottom: 0;
+    }
+  }
+}

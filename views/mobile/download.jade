@@ -1,0 +1,397 @@
+//
+   Created by ayou on 2016/1/23.
+
+doctype html
+html
+   head
+      meta(charset='utf-8')
+      meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+      meta(name='format-detection', content='telephone=no')
+      meta(name='apple-mobile-web-app-capable', content='yes')
+      meta(name='apple-mobile-web-app-status-bar-style', content='black')
+      link(rel='shortcut icon', href='favicon.ico', type='image/x-icon')
+      link(href='/stylesheets/mobile/download_index.css?ver=20150624', rel='stylesheet')
+      title 下载一起牛|一起牛-齐牛金融-百姓身边的投资顾问
+   body
+      // 顶部
+      header
+         .nav-warp
+            // 头部工具栏
+            .nav-con
+               i.nav-menu-btn
+               h1.page-title 下载一起牛
+               .logo
+                  img(src='/images/mobile/logo.png?ver=20150624', alt='齐牛金融')
+            // 导航菜单
+            .nav-menu
+               ul.nav-menu-lists.clearfix
+                  li
+                     a(href='/mobile') 首页
+                  li
+                     a.cur(href='javascript:void(0);') 下载
+                  li
+                     a(href='/mobile/cooperation') 合作
+                  li
+                     a(href='/mobile/jobs') 招聘
+                  li
+                     a(href='/mobile/about_us') 我们
+      .page
+         // banner
+         .page-banner
+            img(src='/images/mobile/download-banner.jpg?ver=20151103', alt='下载一起牛')
+            i#download-logo.download-logo
+         // 苹果显示内容
+         #version-iphone.down-item-warp.hide
+            // 下载一起牛
+            .lastest-down-wrap
+               .icon
+                  img(src='/images/mobile/icon-ios.png?ver=20150624', alt='一起牛')
+               h2.name 一起牛
+               p.lastest-info
+                  span.version-num 最新版本：1.0.501
+                  span.version-date 2016年1月10日
+               .download-btn-bar
+                  a.download-btn(href='https://itunes.apple.com/zh/app/yi-qi-niu/id964690038?l=zh&ls=1&mt=8') 下   载
+               .update-des-title 1.0.501 更新说明：
+               .upadte-des-text
+                  p
+                     | 1、全新首页，直达我的专属投顾
+                     br
+                     |                     2、有问必答，千名投顾在线坐诊
+                     br
+                     |                     3、投顾广场，精选组合一键关注
+                     br
+                     |                     4、群聊升级，屏蔽干扰只看群主
+            // 更新历史
+            .version-history-warp
+               .title 更新历史
+               .version-item.first-child
+                  h3.num Ver. 1.0.501
+                  p.date 2016年1月10日
+                  .upadte-des-text
+                     p
+                        | 1、全新首页，直达我的专属投顾
+                        br
+                        |                         2、有问必答，千名投顾在线坐诊
+                        br
+                        |                         3、投顾广场，精选组合一键关注
+                        br
+                        |                         4、群聊升级，屏蔽干扰只看群主
+               .version-item
+                  h3.num Ver. 0.6.511
+                  p.date 2015年11月11日
+                  .upadte-des-text
+                     p
+                        | 1、新增个股的F10介绍，让您更全面了解公司的财务状况，股本结构等情况，更精准的分析和把握投资机会
+                        br
+                        |                         2、提升应用稳定性
+               .version-item
+                  h3.num Ver. 0.6.510
+                  p.date 2015年10月23日
+                  .upadte-des-text
+                     p
+                        | 1、支持将组合、股票、资讯、观点分享到投资圈和聊天
+                        br
+                        |                         2、市场中增加全新资讯版块，并支持概念与行业搜索
+                        br
+                        |                         3、聊天中可以自动识别股票名称与代码
+                        br
+                        |                         4、个股增加MACD、BOOL、RSI技术指标
+                        br
+                        |                         5、认证投顾可以设置其专属开户服务页面与开户二维码
+               .version-item
+                  h3.num Ver. 0.6.501
+                  p.date 2015年9月16日
+                  .upadte-des-text
+                     p
+                        | 1、新增市场行情，发现市场最新热点
+                        br
+                        |                         2、新增个股实时行情、个股新闻和公告
+                        br
+                        |                         3、新增发现栏目，发现精选投顾观点
+                        br
+                        |                         4、新增消息栏目，支持一对一私聊
+                        br
+                        |                         5、认证投顾支持创建群聊
+               .version-item
+                  h3.num Ver. 0.5.507
+                  p.date 2015年8月8日
+                  .upadte-des-text
+                     p
+                        | 1、模拟组合增加现金仓位
+                        br
+                        |                         2、投资圈支持发送链接
+                        br
+                        |                         3、持仓详情增加盈亏比例
+                        br
+                        |                         4、多项体验及性能优化
+               .version-item
+                  h3.num Ver. 0.5.506
+                  p.date 2015年8月5日
+                  .upadte-des-text
+                     p
+                        | 1、新增投顾认证功能
+                        br
+                        |                         2、支持备注名设置
+                        br
+                        |                         3、优化概念选股页面
+                        br
+                        |                         4、投资圈支持上传图片
+               .version-item
+                  h3.num Ver. 0.5.211
+                  p.date 2015年7月10日
+                  .upadte-des-text
+                     p
+                        | 1、增加了系统通知
+                        br
+                        |                         2、增加了新手引导功能
+                        br
+                        |                         3、支持显示图片、Emoji表情了
+                        br
+                        |                         4、优化了实盘交易页面
+                        br
+                        |                         5、多项体验及性能优化
+               .version-item
+                  h3.num Ver. 0.5.205
+                  p.date 2015年6月16日
+                  .upadte-des-text
+                     p
+                        | 1、支持国信证券开户
+                        br
+                        |                         2、支持将已持仓的股票创建为实盘组合
+                        br
+                        |                         3、可以给一起牛评分、推荐应用给好友了
+                        br
+                        |                         4、可以在组合列表中一键关注了
+                        br
+                        |                         5、优化了投资圈的UI设计
+               .version-item
+                  h3.num Ver. 0.5.201
+                  p.date 2015年6月6日
+                  .upadte-des-text
+                     p
+                        | 1、修复问题并提升应用稳定性
+               .version-item
+                  h3.num Ver. 0.5.200
+                  p.date 2015年6月6日
+                  .upadte-des-text
+                     p
+                        | 1.支持实盘买卖组合
+                        br
+                        |                         2.支持实盘跟单好友组合
+                        br
+                        |                         3.可以在投资圈，看好友的全部动态
+                        br
+                        |                         4.支持添加通讯录好友，推荐好友
+                        br
+                        |                         5.支持查看组合的月收益率、市盈率、个股行业分类
+               .version-item
+                  h3.num Ver. 0.1.201
+                  p.date 2015年4月26日
+                  .upadte-des-text
+                     p
+                        | 1.优化个股状态显示不准确问题
+                        br
+                        |                         2.修复应用偶尔闪退BUG，系统稳定性加强
+                        br
+                        |                         3.修复投资笔记评论位置偶尔错位现象
+               .version-item
+                  h3.num Ver. 0.1.200
+                  p.date 2015年4月16日
+                  .upadte-des-text
+                     p
+                        | 1.微信绑定手机后实现微信、手机号互通登录“一起牛”
+                        br
+                        |                         2.修复使用手机号需要频繁登录问题
+                        br
+                        |                         3.输入框默认不再记录上次输入结果
+               .version-item
+                  h3.num Ver. 0.1.101
+                  p.date 2015年3月27日
+                  .upadte-des-text
+                     p
+                        | 【一起牛】全球首款私密社交投资应用，正式上线
+         // 安卓显示内容
+         #version-android.down-item-warp.hide
+            // 下载一起牛
+            .lastest-down-wrap
+               .icon
+                  img(src='/images/mobile/icon-android.png?ver=20150624', alt='一起牛')
+               h2.name 一起牛
+               p.lastest-info
+                  span.version-num 最新版本：1.0.001
+                  span.version-date 2016年1月10日
+               .download-btn-bar
+                  a.download-btn(href='http://api.yiqiniu.com:8000/1.0.001/app-release-1.0.001-official.apk') 下载
+               .update-des-title 1.0.001 更新说明：
+               .upadte-des-text
+                  p
+                     | 1、全新首页，直达我的专属投顾
+                     br
+                     |                     2、有问必答，千名投顾在线坐诊
+                     br
+                     |                     3、投顾广场，精选组合一键关注
+                     br
+                     |                     4、群聊升级，屏蔽干扰只看群主
+            // 更新历史
+            .version-history-warp
+               .title 更新历史
+               .version-item.first-child
+                  h3.num Ver. 1.0.001
+                  p.date 2016年1月10日
+                  .upadte-des-text
+                     p
+                        | 1、全新首页，直达我的专属投顾
+                        br
+                        |                         2、有问必答，千名投顾在线坐诊
+                        br
+                        |                         3、投顾广场，精选组合一键关注
+                        br
+                        |                         4、群聊升级，屏蔽干扰只看群主
+               .version-item
+                  h3.num Ver. 0.6.012
+                  p.date 2015年11月3日
+                  .upadte-des-text
+                     p
+                        | 1、完成F10功能
+                        br
+                        |                         2、完成F10的引导功能
+                        br
+                        |                         3、修复部分BugHD上收集的生产上crash问题
+                        br
+                        |                         4、增加了分享的统计
+                        br
+                        |                         5、修改了第一次绑定券商的跳转页面
+               .version-item
+                  h3.num Ver. 0.6.011
+                  p.date 2015年10月23日
+                  .upadte-des-text
+                     p
+                        | 1、支持将组合、股票、资讯、观点分享到投资圈和聊天
+                        br
+                        |                         2、市场中增加全新资讯版块，并支持概念与行业搜索
+                        br
+                        |                         3、聊天中可以自动识别股票名称与代码
+                        br
+                        |                         4、个股详情中增加了相关概念和个股热度
+                        br
+                        |                         5、个股增加MACD、BOOL、RSI技术指标
+                        br
+                        |                         6、认证投顾可以设置其专属开户服务页面与开户二维码
+               .version-item
+                  h3.num Ver. 0.6.001
+                  p.date 2015年9月16日
+                  .upadte-des-text
+                     p
+                        | 1、新增市场行情，发现市场最新热点
+                        br
+                        |                         2、新增个股实时行情、个股新闻和公告
+                        br
+                        |                         3、新增发现栏目，发现精选投顾观点
+                        br
+                        |                         4、新增消息栏目，支持一对一私聊
+                        br
+                        |                         5、认证投顾支持创建群聊
+               .version-item
+                  h3.num Ver. 0.5.301
+                  p.date 2015年8月8日
+                  .upadte-des-text
+                     p
+                        | 1、新增个股行情功能
+                        br
+                        |                         2、模拟组合增加了现金仓位
+                        br
+                        |                         3、持仓详情增加了盈亏比例
+                        br
+                        |                         4、多项体验及性能优化
+               .version-item
+                  h3.num Ver. 0.5.213
+                  p.date 2015年7月27日
+                  .upadte-des-text
+                     p
+                        | 1、新增投顾认证功能
+                        br
+                        |                         2、新增微信帐号绑定
+                        br
+                        |                         3、优化个人主页样式
+                        br
+                        |                         4、投资圈体验优化
+               .version-item
+                  h3.num Ver. 0.5.211
+                  p.date 2015年7月4日
+                  .upadte-des-text
+                     p
+                        | 1、增加了新手引导功能
+                        br
+                        |                         2、支持发布图片、Emoji表情了
+                        br
+                        |                         3、优化了实盘交易页面
+                        br
+                        |                         4、多项体验及性能优化
+               .version-item
+                  h3.num Ver. 0.5.204
+                  p.date 2015年6月18日
+                  .upadte-des-text
+                     p
+                        | 1.投资圈内容支持复制了
+                        br
+                        |                         2.优化了投资圈的UI设计
+                        br
+                        |                         3.优化了程序的运行速度
+                        br
+               .version-item
+                  h3.num Ver. 0.5.203
+                  p.date 2015年6月6日
+                  .upadte-des-text
+                     p
+                        | 1.支持实盘买卖组合
+                        br
+                        |                         2.支持实盘跟单好友组合
+                        br
+                        |                         3.可以在投资圈，看好友的全部动态
+                        br
+                        |                         4.支持添加通讯录好友，推荐好友
+                        br
+                        |                         5.支持查看组合的月收益率、市盈率、个股行业分类
+               .version-item
+                  h3.num Ver. 0.1.004
+                  p.date 2015年3月5日
+                  .upadte-des-text
+                     p
+                        | 1.更新一起牛MVP版本所有功能模块
+               .version-item
+                  h3.num Ver. 0.1.003
+                  p.date 2015年3月3日
+                  .upadte-des-text
+                     p
+                        | 1.修复点击用户头像闪退的BUG
+               .version-item
+                  h3.num Ver. 0.1.001
+                  p.date 2015年1月28日
+                  .upadte-des-text
+                     p
+                        | 【一起牛】全球首款私密社交投资应用，正式上线
+      // 底部
+      footer
+         .server-tel.clearfix
+            .icon-tel
+               img(src='/images/mobile/icon-tel.png?ver=20150624', alt='')
+            .server-info
+               a.tel(href='tel:400-1515-176') 客服电话: 400-1515-176
+               p.time 工作日 08:30 - 17:30
+         .address-info
+            p 地址：深圳市南山区学府路95号怡化金融科技大厦 601
+            p 邮箱：cs@yiqiniu.com
+            p 电话：0755-26921766
+         .copyright-wrap.clearfix
+            .logo
+               img(src='/images/mobile/logo.png?ver=20150624', alt='齐牛金融')
+            .copyright
+               p.company-name 深圳齐牛互联网金融服务有限公司
+               p.text Copyright © 2014-2015 齐牛金融 版权所有.
+               p.text 粤ICP备14078038号-1
+      // 回到顶部
+      .goto-top.hide 回到顶部
+      script(src="/javascripts/lib/jquery/jquery.js")
+      script(src='/javascripts/mobile/easing.js?ver=20150624')
+      script(src='/javascripts/mobile/common.js?ver=20150624')

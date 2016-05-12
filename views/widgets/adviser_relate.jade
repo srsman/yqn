@@ -1,0 +1,205 @@
+//- 侧边栏 投顾详情
+//- #qiulijun
+
+
+mixin ADrelevant(adviser, questions, viewpoints)
+  .qn-section
+    h3.qn-section-title 投顾
+    .qn-section-main
+      .qn-widget-adviser
+
+
+        .qn-widget-adInfo.clearfix
+          .qn-widget-adIcon
+            if adviser.userIcon
+              img(src="#{adviser.userIcon}" alt="个人头像")
+              img(src="/images/icon_vip.png", alt="vip" class="qn-icon-vip")
+            else
+              img(src="/images/default_avatar_man.jpg" alt="个人头像" )
+              img(src="/images/icon_vip.png", alt="vip" class="qn-icon-vip")
+          dl
+            - var info = adviser.adviser
+            dt.qn-widget-adName #{info.nickName}
+              if adviser.gender == 1
+                img.adSex(src="/images/icon-sex-1.png", alt="男")
+              else
+                img.adSex(src="/images/icon-sex-0.png", alt="女")
+            if info.orgName
+              dd.qn-widget-adOrg #{info.orgName}（#{info.adviserName}）
+            else
+              dd.qn-widget-adOrg #{info.adviserName}
+        - var field = adviser.specialFields
+        - var fields = ''
+        if field
+          dl.qn-widget-adAdvantage.clearfix
+            dt 擅长领域
+            for f in field
+              - fields = fields + ' ' + f;
+            dd #{fields}
+
+        //- 投顾的成绩
+        .qn-widget-adAchievement
+          - var invest = adviser.investAbility
+          .row
+            dl.col-xs-4
+              dt 选股胜率#{invest.selWinRate}
+              dd.qn-widget-adBigFont=invest.selPolicy
+              dt 近一月收益
+              dd.qn-widget-adPercentage(class=parseFloat(invest.mYield) < 0 ? 'loss' : 'earnings')=invest.mYield
+                //- span.percentage-symbol %
+            dl.col-xs-4
+              dt 平均持仓#{invest.hldDay}
+              dd.qn-widget-adBigFont=invest.hldPolicy
+              dt 近一周收益
+              dd.qn-widget-adPercentage(class=parseFloat(invest.wYield) < 0 ? 'loss' : 'earnings')=invest.wYield
+                //- span.percentage-symbol %
+            dl.col-xs-4
+              dt 最大回辙#{invest.retracement}
+              dd.qn-widget-adBigFont=invest.retracePolicy
+              dt 今年以来
+              dd.qn-widget-adPercentage(class=parseFloat(invest.yYield) < 0 ? 'loss' : 'earnings')=invest.yYield
+                //- span.percentage-symbol %
+        - var dialog = {};
+        - dialog.img = adviser.userIcon
+        - dialog.name = info.nickName
+        - dialog.orgName = info.orgName
+        - dialog.adviserName = info.adviserName
+        - dialog.fields = adviser.specialFields
+        - sDialog = JSON.stringify(dialog)
+        a.qn-btn.primary.lg.invokeDialog(data-qrurl=adviser.thisUrl, data-adInfo=sDialog) 向TA提问
+
+        .qn-widget-adQA
+          if questions && questions.result && questions.result.qa
+
+            //- 投顾的回答
+            h2 Ta的回答
+            dl.qn-widget-adAnswer
+              for q in questions.result.qa
+                dt
+                  a.qn-post-title-link.small(href="/wenda/#{q.qId}")=q.qContent
+                    i.qn-font-icon.info 问
+                dd
+                  p=q.aContent
+                  i.qn-font-icon.primary 答
+                .qn-widget-adAnswerTs 回答时间: #{utils.timeDifference(q.aTime)}
+
+          if viewpoints && viewpoints.result && viewpoints.result.data
+
+            //- 投顾的观点
+            h2 Ta的观点
+            dl.qn-widget-adViewpoint
+              for v in viewpoints.result.data
+                dt
+                  a.qn-post-title-link.small(href="/guandian/#{v.viewpointId}")=v.title
+                  if v.isSelection
+                    i.qn-font-icon.primary.icon-featured 精
+                dd=v.summary
+                .qn-meta-panel
+                  .qn-meta-createTs #{utils.timeDifference(v.viewpointTs)}
+                  if v.stkLables
+                    - var count = 2;
+                    .qn-meta-stocks 相关股票
+                      for s in v.stkLables
+                        if count > 0
+                          a(href="/gupiao/#{s.value}")=s.name
+                        - count--
+
+
+//- mixin ADrelevant(adviser, questions, viewpoints)
+//-   .qn-section
+//-     h3.qn-section-title 投顾
+//-     .qn-section-main
+//-       .qn-widget-adviser
+//-         .qn-widget-adInfo.clearfix
+//-           .qn-widget-adIcon
+//-             if adviser.userIcon
+//-               img(src="#{adviser.userIcon}" alt="个人头像")
+//-               img(src="/images/icon_vip.png", alt="vip" class="qn-icon-vip")
+//-             else
+//-               img(src="/images/default_avatar_man.jpg" alt="个人头像" )
+//-               img(src="/images/icon_vip.png", alt="vip" class="qn-icon-vip")
+//-           dl
+//-             - var info = adviser.adviser
+//-             dt.qn-widget-adName #{info.nickName}
+//-             if info.orgName
+//-               dd.qn-widget-adOrg #{info.orgName}（#{info.adviserName}）
+//-             else
+//-               dd.qn-widget-adOrg #{info.adviserName}
+//-         dl.qn-widget-adAdvantage.clearfix
+//-           dt 擅长领域
+//-           dd 政策解读 技术分析 互联网 军工行业 金融业
+//-         .qn-widget-adAchievement
+//-           - var invest = adviser.investAbility
+//-           .row
+//-             dl.col-xs-4
+//-               dt 选股胜率#{invest.selWinRate}
+//-               dd.qn-widget-adBigFont=invest.selPolicy
+//-               dt 近一月收益
+//-               dd.qn-widget-adPercentage.earnings=invest.mYield
+//-                 span.percentage-symbol %
+//-             dl.col-xs-4
+//-               dt 平均持仓28天
+//-               dd.qn-widget-adBigFont=invest.hldPolicy
+//-               dt 近一周收益
+//-               dd.qn-widget-adPercentage.earnings=invest.wYield
+//-                 span.percentage-symbol %
+//-             dl.col-xs-4
+//-               dt 最大回辙#{invest.retracement}
+//-               dd.qn-widget-adBigFont=invest.retracePolicy
+//-               dt 今年以来
+//-               dd.qn-widget-adPercentage.earnings=invest.yYield
+//-                 span.percentage-symbol %
+//-         a.qn-btn.primary.lg 向TA提问
+
+//-         .qn-widget-adQA
+//-           h2 Ta的回答
+//-           dl.qn-widget-adAnswer
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.info 问
+//-             dd
+//-               p 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃吧是吧是吧是吧
+//-               i.qn-font-icon.primary 答
+//-             .qn-widget-adAnswerTs 回答时间: 01月20日 07:21:00
+
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.info 问
+//-             dd
+//-               p 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃吧是吧是吧是吧
+//-               i.qn-font-icon.primary 答
+//-             .qn-widget-adAnswerTs 回答时间: 01月20日 07:21:00
+
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.info 问
+//-             dd
+//-               p 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃吧是吧是吧是吧
+//-               i.qn-font-icon.primary 答
+//-             .qn-widget-adAnswerTs 回答时间: 01月20日 07:21:00
+
+//-           h2 Ta的观点
+//-           dl.qn-widget-adViewpoint
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.primary.icon-featured 精
+//-             dd 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃
+//-             .qn-meta-panel
+//-               .qn-meta-createTs 7分钟前
+//-               .qn-meta-stocks 相关股票
+//-                 a(href="javascript:;") 平安银行
+//-                 a(href="javascript:;") 欧亚非
+
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.primary.icon-featured 精
+//-             dd 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃
+//-             .qn-meta-panel
+//-               .qn-meta-createTs 7分钟前
+//-               .qn-meta-stocks 相关股票
+//-                 a(href="javascript:;") 平安银行
+//-                 a(href="javascript:;") 欧亚非
+
+//-             dt 请问银行开展3525亿元重汽借贷政民银行开展3525亿元重汽借贷政?
+//-               i.qn-font-icon.primary.icon-featured 精
+//-             dd 请问平安吗？可以重仓买进吗可以重仓买进吗奋斗是个好问题许不想吃
+//-             .qn-meta-panel
+//-               .qn-meta-createTs 7分钟前
+//-               .qn-meta-stocks 相关股票
+//-                 a(href="javascript:;") 平安银行
+//-                 a(href="javascript:;") 欧亚非

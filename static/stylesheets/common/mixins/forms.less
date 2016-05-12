@@ -1,0 +1,36 @@
+// input风格
+.input-style {
+  color: @input-color;
+  background-color: @input-bg;
+  background-image: none;
+  border: 1px solid @input-border;
+  .placeholder();
+}
+
+// input大小
+.input-size(@input-width; @input-height; @padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  width: @input-width;
+  height: @input-height;
+  line-height: @line-height;
+  font-size: @font-size;
+  border-radius: @border-radius;
+
+  select& {
+    height: @input-height;
+    line-height: @input-height;
+  }
+
+  textarea&,
+  select[multiple]& {
+    height: auto;
+  }
+}
+
+// input获得焦点
+.input-focus(@color: @input-border-focus) {
+  &:focus {
+    border-color: @color;
+    outline: 0;
+  }
+}

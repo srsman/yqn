@@ -1,0 +1,96 @@
+@import 'sidebar'; // 联系人侧边栏
+@import 'chat'; // 聊天窗口
+@import 'group_manage'; // 群管理
+@import 'reward'; // 聊天窗口
+
+// 最小化时的状态
+.qn-pager-minimize {
+  position: fixed;
+  right: 10px;
+  bottom: 0;
+  z-index: 399;
+  padding: 0 15px;
+  width: 260px;
+  height: 40px;
+  line-height: 38px;
+  background-color: @pager-title-background-color;
+  .border-top-radius(@border-radius-base);
+  .box-shadow(3px 3px 8px rgba(0, 0, 0, .5));
+  cursor: pointer;
+  .user-select(none);
+
+  .qn-badge { margin-left: 5px; }
+
+  .fa-chevron-up {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    color: #fff;
+  }
+}
+
+// 聊天模块主体
+.qn-pager-wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -470px;
+  z-index: 4999;
+  width: 940px;
+  height: 600px;
+  background-color: #fff;
+  border: 1px solid @border-default-color;
+  border-radius: @border-radius-base;
+  .box-shadow(0 0 25px rgba(0, 0, 0, .5));
+}
+
+// 聊天的标题，可拖拽头
+.qn-pager-title {
+  position: relative;
+  padding-left: 15px;
+  height: 40px;
+  line-height: 38px;
+  color: #fff;
+  background-color: @pager-title-background-color;
+  .border-top-radius(@border-radius-base);
+  .box-shadow(0 -1px 0 rgba(0, 0, 0, .1) inset);
+  // cursor: move; // 可拖动手形状
+  .user-select(none);
+
+  .qn-pager-wrap-handle {
+    float: right;
+
+    li { float: left; }
+
+    a {
+      display: block;
+      padding: 0 15px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  // 返回
+  .qn-pager-return-window {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    color: #fff;
+    background-color: @pager-title-background-color;
+
+    &:hover,
+    &:focus { text-decoration: none; }
+
+    .fa { margin-right: 10px; }
+  }
+}
+
+// 聊天的主体
+.qn-pager-main {
+  position: relative;
+  height: 560px;
+  background-color: #fff;
+  .border-bottom-radius(@border-radius-base);
+  overflow: hidden;
+}

@@ -1,0 +1,39 @@
+//- 侧边栏头像
+.sidebar-user-wrap
+  .qn-avatar.sidebar-user-avatar
+    img(src=user.avatar, width='110', height='110')
+  .sidebar-user-desc
+    h1.sidebar-username #{user.nickname}
+    if user.signature
+      .sidebar-user-intro #{user.signature}
+
+//- 侧边栏导航
+.sidebar-menu-wrap
+  //- .sidebar-menu-item
+  //-   ul
+  //-     li.menu-item.active
+  //-       a(href='#') 首页
+
+  .sidebar-menu-item
+    ul
+      li.menu-item.question.square#newSquareNum
+        a(href='/question/square') 广场问答
+          span.qn-badge.hide 0
+      li.menu-item.question.exclusive#newExclusiveNum
+        a(href='/question/exclusive') 客户问答
+          span.qn-badge.hide 0
+
+  .sidebar-menu-item
+    ul
+      li.menu-item.viewpoint#newViewpointNum
+        a(href='/viewpoint/list') 观点
+          span.qn-badge.hide 0
+      li.menu-item.live_room
+        a(href='/live_room/list') 直播群
+      li.menu-item
+        a(href='/portfolio/advisor_portfolio_list', target='_blank') 组合
+
+  .sidebar-menu-item
+    ul
+      li.menu-item
+        a(href='/contacts/list', target='_blank') 我的客户

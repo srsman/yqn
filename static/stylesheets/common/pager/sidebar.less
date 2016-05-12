@@ -1,0 +1,233 @@
+// 聊天侧边栏
+.qn-pager-sidebar {
+  float: left;
+  width: 250px;
+  height: 100%;
+  border-right: 1px solid @border-default-color;
+
+  .qn-tab-card {
+    li {
+      width: 50%;
+
+      .fa {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .qn-tab-paper {
+    position: relative;
+    border-top: 1px solid @border-default-color;
+
+    .paper-item {
+      height: 478px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+
+// 好友模糊查询-搜索框
+.qn-pager-fuzzy-query {
+  position: relative;
+  height: 40px;
+
+  .fa-search {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 2;
+    font-size: 18px;
+    color: @gray-light;
+    .transition(color .2s linear);
+  }
+
+  &.active {
+    .fa-search { color: @tab-header-active-text-color; }
+  }
+
+  input[type='text'] {
+    margin-left: 15px;
+    padding-left: 30px;
+    width: 220px;
+    height: 40px;
+    line-height: 38px;
+    border: none;
+  }
+}
+
+// 模糊查询结果列表
+.qn-pager-fuzzy-query-result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 100%;
+  height: 478px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+// 好友分组
+.qn-pager-contacts-group {
+  .group-title {
+    padding: 0 15px 0 10px;
+    height: 25px;
+    line-height: 25px;
+    font-size: @font-size-small;
+    background-color: lighten(@pager-title-background-color, 5%);
+    .box-shadow(0 -1px 0 rgba(0, 0, 0, .1) inset);
+    //border-bottom: 1px solid darken(@border-default-color, 15%);
+    cursor: pointer;
+
+    i {
+      margin-left: 5px;
+      font-style: normal;
+      color: @gray-light;
+    }
+
+    .fa {
+      margin-right: 5px;
+      margin-left: 0;
+      width: 7px;
+    }
+  }
+
+  // 好友列表
+  .qn-pager-contacts-list { display: none; }
+
+  &.open {
+    .qn-pager-contacts-list { display: block; }
+  }
+}
+
+// 对话列表
+.qn-pager-contacts-list {
+  .contacts-item {
+    & > a {
+      position: relative;
+      padding: 0 15px;
+      display: block;
+      height: 65px;
+      border-bottom: 1px solid @border-default-color;
+
+      &:hover,
+      &:focus { text-decoration: none; }
+    }
+
+    &.active {
+      .qn-avatar {
+        img { .box-shadow(0 0 14px @brand-primary); }
+      }
+    }
+
+    &.active,
+    & > a:hover,
+    & > a:focus { background-color: @background-default-color; }
+
+    .fa {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      z-index: 10px;
+      display: block;
+      width: 30px;
+      height: 30px;
+      line-height: 28px;
+      text-align: center;
+      color: @gray;
+      border: 1px solid @border-default-color;
+      border-radius: 50%;
+    }
+
+    &.selected-member {
+      .fa {
+        color: #fff;
+        background-color: @brand-success;
+        border-color: @brand-success;
+      }
+    }
+  }
+
+  .qn-avatar {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+
+    img:hover {
+      .box-shadow(none);
+    }
+  }
+
+  .contacts-title {
+    padding: 15px 0 0 50px;
+    font-weight: normal;
+    color: @gray-dark;
+  }
+
+  .contacts-content {
+    padding: 2px 0 0 50px;
+    color: @gray-light;
+  }
+
+  .contacts-time {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    z-index: 3;
+    font-size: @font-size-small;
+    font-style: normal;
+    color: @gray-light;
+  }
+
+  // 打点
+  .qn-badge {
+    position: absolute;
+    right: 15px;
+    bottom: 13px;
+    z-index: 5;
+  }
+}
+
+// 模糊查询结果，备选新成员列表及普通好友列表
+.qn-pager-fuzzy-query-result,
+.alternative-new-member-list,
+.qn-pager-contacts-group {
+  .qn-pager-contacts-list {
+    .contacts-item {
+      & > a { height: 50px; }
+
+      &.error {
+        padding: 10px 15px;
+        text-align: center;
+        border-bottom: 1px solid @border-default-color;
+
+        & > a {
+          padding: 0;
+          height: auto;
+          display: inline;
+          border: none;
+
+          &:hover,
+          &:focus { background-color: transparent; }
+        }
+      }
+
+      &.in-group .fa { background-color: @gray-lighter; }
+    }
+
+    .qn-avatar { top: 5px; }
+
+    .contacts-title { padding-top: 18px; }
+  }
+}
+
+.alternative-new-member-list {
+  .qn-pager-contacts-list {
+    .contacts-item {
+      .fa-times { border: none; }
+    }
+  }
+}
+

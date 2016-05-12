@@ -1,0 +1,40 @@
+// 水波纹效果
+.ripple-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .4);
+  .scale(0);
+  .opacity(1);
+}
+
+.ripple-effect {
+  .animation(rippleDrop .4s linear);
+}
+
+@-webkit-keyframes rippleDrop {
+  100% {
+    .scale(2);
+    .opacity(0);
+  }
+}
+
+@-o-keyframes rippleDrop {
+  100% {
+    .scale(2);
+    .opacity(0);
+  }
+}
+
+@keyframes rippleDrop {
+  100% {
+    .scale(2);
+    .opacity(0);
+  }
+}

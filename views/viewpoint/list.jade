@@ -1,0 +1,89 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/viewpoint_index.css')
+
+block main_content
+  .list-wrap
+
+    //-统计信息
+    .qn-section.list-header
+      .row
+        .col-xs-3
+          h3.module-title 观点
+        .col-xs-3
+          dl
+            dt 观点总数
+            dd.no-data#totalNum --
+        .col-xs-3
+          dl
+            dt 今日观点
+            dd.no-data#todayNum --
+        .col-xs-3.text-right
+          a.qn-btn.primary(href="/viewpoint/new")
+            i.fa.fa-plus
+            | 发表新观点
+
+    //- 观点列表
+    .qn-section.viewpoint-feed
+
+      if data && data.result && data.result.data
+        //- 渲染
+        each item in data.result.data
+          //- 观点
+          .feed-item(data-tt="Y", data-id="#{item.viewpointId}")
+
+            //-标题
+            .qn-row.row.item-head
+              i.icon-viewpoint
+              .col-xs-8
+                .viewpoint-title
+                  a(href="/viewpoint/detail/#{item.viewpointId}") #{item.title}
+                  if item.isSelection
+                    i.icon-elite 精
+              .col-xs-4
+                .viewpoint-meta
+                  span #{item.viewpointTs}
+                  span 阅读: #{item.readNum}
+
+            //-摘要
+            .qn-row.item-artice
+              if item.firstImg
+                .row
+                  .col-xs-3
+                    img(src='#{item.firstImg}')
+                  .col-xs-9 !{item.summary}
+
+              else
+                .row
+                  .col-xs-12 !{item.summary}
+
+            //.test #{item.summary}
+
+            //-操作
+            .qn-row.row.item-foot
+              .col-xs-12.item-foot-action
+                if item.isMine
+                  a.foot-delete.hide(href="javascript:;")
+                    i.fa.fa-trash-o
+                    | 删除
+                a(href="/viewpoint/detail/#{item.viewpointId}") #{item.commentNum}条评论
+                a(href="/viewpoint/detail/#{item.viewpointId}") #{item.likeNum}个赞
+      else
+        .qn-no-result
+          ul
+            li
+              img(src="/images/list_null.png", height="106")
+            li 暂无观点
+
+    //-加载更多
+    .qn-row.qn-loading-animate.hide#ajaxLoading(data-count="0", data-over="N")
+      img(src="/images/loading.gif")
+      |正在加载中，请稍候...
+
+append foot_scripts
+  script(data-main='/javascripts/viewpoint/list.js' src='/javascripts/lib/requirejs/require.js')

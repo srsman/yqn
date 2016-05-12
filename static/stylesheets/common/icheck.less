@@ -1,0 +1,40 @@
+/* 自定义iCheck插件样式 */
+.qn-icheckbox,
+.qn-iradio {
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  background: url('@{image-path}/icheck.png') no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+.qn-icheckbox {
+  background-position: 0 0;
+
+  &.checked { background-position: -18px 0; }
+
+  &.disabled {
+    background-position: -44px 0;
+    cursor: default;
+  }
+}
+
+.qn-icheckbox.checked.disabled { background-position: -66px 0; }
+
+.qn-iradio {
+  background-position: -108px 0;
+
+  &.checked { background-position: -90px 0; }
+
+  &.disabled {
+    background-position: -132px 0;
+    cursor: default;
+  }
+}
+
+.qn-iradio.checked.disabled { background-position: -154px 0; }

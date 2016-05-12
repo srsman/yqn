@@ -1,0 +1,48 @@
+// 全局变量
+var require = {
+  baseUrl: '/javascripts/',
+  paths: {
+    jquery: 'lib/jquery/jquery',
+    cookie: 'lib/jquery.cookie/jquery.cookie',
+    easing: 'lib/jquery-easing/jquery.easing.min',
+    iCheck: 'lib/iCheck/icheck.min',
+    formValidation: 'lib/jquery-validation/jquery.validate.min',
+    bootstrapSwitch: 'lib/bootstrap-switch/bootstrap-switch.min',
+    easemob: 'lib/easemob/easemob.im-1.0.7',
+    easemobJson: 'lib/easemob/json2',
+    easemobStrophe: 'lib/easemob/strophe',
+    easemobConfig: 'lib/easemob/easemob.im.config',
+    tinymce: 'lib/tinymce/tinymce.min',
+    emoji: 'lib/emoji.min',
+    socket: 'lib/socket',
+    functions: 'functions',
+    dialog: 'dialog',
+    common: 'common',
+    pager: 'pager',
+    push: 'push',
+    niuimage: 'plugins/niuimage/niuimage',
+    niustock: 'plugins/niustock/niustock',
+    template: 'template',
+    qrcode: 'lib/jquery.qrcode.min'
+  },
+  shim: {
+    'cookie': ['jquery'],
+    'easing': ['jquery'],
+    'iCheck': ['jquery'],
+    'formValidation': ['jquery'],
+    'bootstrapSwitch': ['jquery'],
+    'easemobJson': ['jquery'],
+    'easemobStrophe': ['jquery'],
+    'easemob': ['jquery', 'easemobStrophe', 'easemobJson'],
+    'easemobConfig': ['easemob'],
+    'functions': ['jquery', 'easing', 'emoji'],
+    'dialog' : ['jquery'],
+    'pager': ['jquery', 'formValidation', 'easemob', 'easemobConfig', 'functions'],
+    'push' : ['jquery', 'socket', 'functions'],
+    'common': ['jquery', 'functions', 'iCheck'],
+    'niustock': ['tinymce'],
+    'niuimage': ['tinymce'],
+    'template': ['jquery'],
+    'qrcode': ['jquery']
+  }
+};

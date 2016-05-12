@@ -1,0 +1,71 @@
+//- 分页 @qiulijun
+//- totalPage 总页数
+//- currPage 当前页数
+//- link 赋值给a标签的链接
+
+mixin page(totalPage, currPage, link)
+  ul.qn-pagination
+    - var page = 1
+    if totalPage <= 7
+      while page <= totalPage
+        li(class={active: currPage == page})
+          a(href=link+page) #{page++}
+    else
+      if currPage >= 4
+        li
+          a(href=link+1) 1
+        if currPage > 4
+          li
+            a(href="javascript:;") ...
+      - var page = currPage - 2
+      while page <= currPage + 2
+        if page > 0 && page <= totalPage
+          li(class={active: currPage == page})
+            a(href=link+page) #{page++}
+        else
+          - page++
+      if currPage <= totalPage - 4 + 1
+        if currPage < totalPage - 4 + 1
+          li
+            a(href="javascript:;") ...
+        li
+          a(href=link+totalPage) #{totalPage}
+
+//- mixin page(totalPage, currPage, link, extendClass)
+//-   ul.qn-pagination
+//-     - var page = 1
+//-     if totalPage <= 7
+//-       while page <= totalPage
+//-         li(class={active: currPage == page})
+//-           a(href=link+'&page='+page) #{page++}
+//-     else if currPage <= 4
+//-       - page = 1
+//-       while page <= 4
+//-         li(class={active: currPage == page})
+//-           a(href=link+'&page='+page) #{page++}
+//-       li
+//-         a(href="javascript:;") ...
+//-       li
+//-         a(href=link+'&page='+totalPage) #{totalPage}
+//-     else if currPage > totalPage - 4 + 1
+//-       - page = totalPage - 7 + 1
+//-       li
+//-         a(href=link+'&page=1') 1
+//-       li
+//-         a(href="javascript:;") ...
+//-       while page <= totalPage
+//-         li(class={active: currPage == page})
+//-           a(href=link+'&page='+page) #{page++}
+//-     else
+//-       li
+//-         a(href=link+'&page=1') 1
+//-       li
+//-         a(href="javascript:;") ...
+//-       - var page = currPage - 2
+//-       while page <= currPage + 2
+//-         li(class={active: currPage == page})
+//-           a(href="#") #{page++}
+//-       li
+//-         a(href="javascript:;") ...
+//-       li
+//-         a(href=link+'&page='+totalPage) #{totalPage}

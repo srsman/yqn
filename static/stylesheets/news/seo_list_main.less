@@ -1,0 +1,32 @@
+// 列表
+.seo-news-list-main {
+  padding: 0 20px;
+
+  .seo-news-list-item + .seo-news-list-item { border-top: 1px dotted @border-default-color; }
+}
+
+// 列表项目
+.seo-news-list-item {
+  padding: 20px 0;
+
+  dd { padding-top: 10px; }
+
+  dd {
+    p {
+      margin-bottom: 0;
+      word-wrap: break-word;
+    }
+
+    .seo-news-meta {
+      margin-top: 10px;
+      color: @gray-light;
+      font-size: @font-size-small;
+
+      i {
+        display: inline-block;
+        margin-left: 10px;
+        font-style: normal;
+      }
+    }
+  }
+}

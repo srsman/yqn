@@ -1,0 +1,154 @@
+
+.qn-static-row {
+
+  .margin35 { margin-bottom: 35px !important; }
+  .margin15 { margin-bottom: 15px !important; }
+
+  .static-header {
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 1px dashed @border-default-color;
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 17px;
+      color: @gray-light;
+    }
+  }
+
+  &.row-aboutus {
+    padding: 40px 128px 25px;
+
+    img, dl { display: inline-block; vertical-align: top; }
+
+    dd {
+      p {
+        line-height: 24px;
+        color: @gray;
+      }
+    }
+
+    dt {
+      line-height: 1;
+      margin-bottom: 15px;
+      color: @gray-dark;
+    }
+
+    .company {
+      margin-left: 40px;
+
+      dt {
+        font-size: 18px;
+      }
+    }
+
+    .person-info {
+      width: 638px;
+      margin-left: 25px;
+
+      dt {
+        font-size: 20px;
+      }
+    }
+
+    .aboutus-culture-box {
+      float: left;
+      margin:0 120px 35px 0;
+
+      &:nth-of-type(odd) { margin-right: 0px;}
+
+      h3 {
+        display: inline-block;
+        padding: 10px 19px 9px;
+        color: #fff;
+        vertical-align: bottom;
+        margin-right: 13px;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: bottom;
+        line-height: 1;
+        font-size: 20px;
+      }
+
+      h4 {
+        margin: 20px 0 15px;
+        font-size: 20px;
+        color: @gray-dark;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 24px;
+        color: @gray;
+      }
+
+      &.info {
+        h3 { background-color: #0084ff;}
+        span {color: #0084ff; }
+      }
+
+      &.warning {
+        h3 { background-color: #ff8a00;}
+        span {color: #ff8a00; }
+      }
+
+      &.success {
+        h3 { background-color: #009c3e;}
+        span {color: #009c3e; }
+      }
+
+      &.danger {
+        h3 { background-color: #e54100;}
+        span {color: #e54100; }
+      }
+    }
+  }
+
+  &.row-cooperation {
+    padding: 40px;
+
+    ul {
+      margin-top: 20px;
+
+      li {
+        float: left;
+        border: 1px solid @border-default-color;
+        margin: 0 8px 9px 0;
+
+        a {
+          display: block;
+          padding: 13px 27px;
+          color: @gray-dark;
+
+          &.long { padding: 13px 13px;}
+
+          img {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 6px;
+          }
+
+          span {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+
+  .second-title {
+    padding-left: 10px;
+    font-size: 20px;
+    line-height: 1;
+    border-left: 3px solid @brand-primary;
+    color: @gray-dark;
+  }
+}

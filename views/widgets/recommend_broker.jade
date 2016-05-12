@@ -1,0 +1,12 @@
+//- 推荐券商
+.qn-section
+  h3.qn-section-title 券商开户
+  a(href='/quanshang', title='全部券商').qn-section-more 全部券商
+    i.fa.fa-angle-right
+  .qn-section-main
+    ul.qn-weiget-broker.clearfix
+      each item in widgetBrokers
+        li
+          a(href='/quanshang?area=0&broker=' + item.brokerId + '&page=1', title=item.brokerName)
+            img(src=item.brokerIcon, width='32', height='32', alt=item.brokerName)
+            span #{item.brokerName}

@@ -1,0 +1,178 @@
+//
+   Created by ayou on 2016/1/23.
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    meta(name='format-detection', content='telephone=no')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    link(href='/stylesheets/mobile/index.css?ver=20151103', rel='stylesheet')
+    title 一起牛-齐牛金融-百姓身边的投资顾问
+  body
+    // 顶部
+    header
+      .nav-warp
+        // 头部工具栏
+        .nav-con
+          i.nav-menu-btn
+          h1.page-title 首页
+          .logo
+            img(src='/images/mobile/logo.png?ver=20151103', alt='齐牛金融')
+        // 导航菜单
+        .nav-menu
+          ul.nav-menu-lists.clearfix
+            li
+              a.cur(href='javascript:void(0);') 首页
+            li
+              a(href='/mobile/download') 下载
+            li
+              a(href='/mobile/cooperation') 合作
+            li
+              a(href='/mobile/jobs') 招聘
+            li
+              a(href='/mobile/about_us') 我们
+    .page
+      // banner
+      #banner.banner
+        ul.silder-box.clearfix
+          li
+            .img
+              img(src='/images/mobile/b-index-1.jpg?ver=20151103', alt='一起牛，百姓身边的投资顾问')
+            i#b-bg-1.b-bg-1
+            #download-btn-wrap.download-btn-wrap
+              i.download-btn-shadow
+              a.download-btn(href='/mobile/download') 下载“一起牛”APP
+          li
+            .img
+              img(src='/images/mobile/b-index-2.jpg?ver=20151103', alt='实盘交易')
+            i.b-bg-2
+          li
+            .img
+              img(src='/images/mobile/b-index-3.jpg?ver=20151103', alt='更快的行情')
+            i.b-bg-3
+      // 核心列表
+      .hexin-lists-warp
+        ul.hexin-list.clearfix
+          li
+            .list-icon
+              i.icon.icon1
+            h2.tit 免费投顾服务
+          li
+            .list-icon
+              i.icon.icon2
+            h2.tit 投资组合
+          li
+            .list-icon
+              i.icon.icon3
+            h2.tit 聊股神器
+          li.noborder-r
+            .list-icon
+              i.icon.icon4
+            h2.tit 概念资讯
+      // 易建联
+      .person-intro-wrap.bg-black
+        .person-intro.clearfix
+          .image
+            img(src='/images/mobile/person/person-6.jpg?ver=20160107', alt='易建联')
+          .info
+            h3.person-name
+              | 易建联
+              span.job-office （中国男篮明星）
+            p.intro-detail “我投资圈的好朋友都在一起牛，他们给了我很多专业投资建议，让我即使忙于比赛，照样能做好股票投资。他们也是我的‘好队友’。”
+        i.icon-arrow
+      // 免费投顾服务
+      .site-floor.bg-gray
+        h1.title 免费投顾服务
+        h3.subtit 买了就跌，卖了就涨，套了就慌？
+        p.person-rec-detail 没关系，找个专属证券投资顾问指导您做决策，帮您解决买什么、什么时候买、什么时候卖三大难题，为您的投资保驾护航。
+        .img-box
+          img.lazy-load-img(src='/images/mobile/index-adv-1.jpg?ver=20160107', data-src='/images/mobile/index-adv-5.jpg?ver=20160107')
+      // 王茹远
+      .person-intro-wrap.bg-red
+        .person-intro.clearfix
+          .image
+            img(src='/images/mobile/person/person-7.jpg?ver=20160107', alt='王茹远')
+          .info
+            h3.person-name
+              | 王茹远
+              span.job-office （宏流投资董事长）
+            p.intro-detail “一起牛，倡导和践行组合投资、长期投资理念。这或许可以改变中国股民集中持股、追涨杀跌、频繁交易的炒股习惯，值得推荐。”
+        i.icon-arrow
+      // 投资组合
+      .site-floor.bg-white
+        h1.title 投资组合
+        h3.subtit 想知道你和专业投资人的不同吗？
+        p.person-rec-detail
+          | 告别追涨杀跌，跟着投顾买卖股票，体验组合投资的全新投资方式。
+          br
+          | 一起牛运用专业评级体系，对组合收益和风险进行全方位的评价，带您开启基金经理的盈利模式，拥有与过去完全不同的投资心态！
+        .img-box
+          img.lazy-load-img(src='/images/mobile/index-adv-2.jpg?ver=20160107', data-src='/images/mobile/index-adv-6.jpg?ver=20160107')
+      // 钟海波
+      .person-intro-wrap.bg-black
+        .person-intro.clearfix
+          .image
+            img(src='/images/mobile/person/person-5.jpg?ver=20151103', alt='钟海波')
+          .info
+            h3.person-name
+              | 钟海波
+              span.job-office （前海方舟资本总裁）
+            p.intro-detail
+              | “齐牛的组合交易模式非常有特色，是投资管理的一大利器。实时查看组合收益走势，多方面评价组合业绩，20只股票一键下单交易，让广大投资者也享受了一把做基金经理的感觉。”
+        i.icon-arrow
+      // 聊股神器
+      .site-floor.bg-gray
+        h1.title 聊股神器
+        h3.subtit 聊股票在哪里不是聊？错了！
+        p.person-rec-detail 市场行情变幻莫测，投资机会稍纵即逝。大量顶级投顾坐镇直播群，为您实时解盘。独有股票名称/代码识别技术，聊天中轻松查看股票行情、进行交易。聊天、炒股两不误！
+        .img-box
+          img.lazy-load-img(src='/images/mobile/index-adv-3.jpg?ver=20160107', data-src='/images/mobile/index-adv-7.jpg?ver=20160107')
+      // 肖风
+      .person-intro-wrap.bg-red
+        .person-intro.clearfix
+          .image
+            img(src='/images/mobile/person/person-2.jpg?ver=20151103', alt='肖风')
+          .info
+            h3.person-name
+              | 肖风
+              span.job-office （通联数据董事长）
+            p.intro-detail “大数据的核心是帮助投资者提高预测能力，一起牛通过大数据技术帮助投资者抓住主题投资机会，享受人工智能在金融领域的最新成果。”
+        i.icon-arrow
+      // 智能选股
+      .site-floor.bg-white
+        h1.title 概念资讯
+        h3.subtit.small 如何洞察投资先机？获取更快的消息？
+        p.person-rec-detail
+          | 在变幻莫测的股市，每个用户都是美洲亚马逊丛林的“蝴蝶”，每一次扇动翅膀，都影响到股票走势。
+          br
+          | 我们用“卫星”监控行业，利用大数据优势构建微模型，为您捕捉最新的投资主题和市场情绪，精准定位最热门的投资机会，助你快速决策，获得超额回报。
+        .img-box
+          img.lazy-load-img(src='/images/mobile/index-adv-4.jpg?ver=20160107', data-src='/images/mobile/index-adv-8.jpg?ver=20160107')
+    // 底部
+    footer
+      .server-tel.clearfix
+        .icon-tel
+          img(src='/images/mobile/icon-tel.png?ver=20151103', alt='')
+        .server-info
+          a.tel(href='tel:400-1515-176') 客服电话: 400-1515-176
+          p.time 工作日 08:30 - 17:30
+      .address-info
+        p 地址：深圳市南山区学府路95号怡化金融科技大厦 601
+        p 邮箱：cs@yiqiniu.com
+        p 电话：0755-26921766
+      .copyright-wrap.clearfix
+        .logo
+          img(src='/images/mobile/logo.png?ver=20151103', alt='齐牛金融')
+        .copyright
+          p.company-name 深圳齐牛互联网金融服务有限公司
+          p.text Copyright © 2014-2015 齐牛金融 版权所有.
+          p.text 粤ICP备14078038号-1
+    // 回到顶部
+    .goto-top.hide 回到顶部
+    script(src="/javascripts/lib/jquery/jquery.js")
+    script(src='/javascripts/mobile/easing.js?ver=20151103')
+    script(src='/javascripts/mobile/touchsilder.js?ver=20151103')
+    script(src='/javascripts/mobile/common.js?ver=20151103')
+

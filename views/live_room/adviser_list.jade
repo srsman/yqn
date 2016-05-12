@@ -1,0 +1,81 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/live_room/live_room_index.css')
+
+block main_content
+  //- 直播群页眉
+  .qn-section.live-room-header
+    .row
+      .col-xs-3
+        h3.module-title 直播群
+      .col-xs-3
+        dl
+          dt 直播群总数(个)
+          dd #{count.groupNum}
+      .col-xs-3
+        dl
+          dt 付费直播群总数(个)
+          dd #{count.groupChargeNum}
+      .col-xs-3.text-right
+        a.qn-btn.primary(href='/live_room/create')
+          i.fa.fa-plus
+          | 创建直播群
+
+  //- 直播群列表
+  .qn-section.live-room-list
+    if list.length > 0
+      each item in list
+        .live-room-item(data-id=item.groupId)
+          .item-header.row
+            .col-xs-9
+              a.item-icon.open-live-room(href='javascript:', data-id=item.groupId, data-name=item.groupName, data-charge=item.isCharge, data-owner_imid=item.ownerId)
+                .qn-avatar
+                  if item.icon !== undefined && item.icon !== null
+                    img(src=item.icon, width='36', height='36', alt=item.groupName)
+                  else
+                    img(src='/images/default_avatar_man.jpg', width='36', height='36', alt=item.groupName)
+              h4.item-title #{item.groupName}
+                if item.isCharge === 'Y'
+                  span.item-type-icon 收费
+
+            .col-xs-3
+              .item-people-count
+                case item.isFull
+                  when 'Y'
+                    span.active
+                      i.fa.fa-exclamation
+                      | 已满员：
+                    span.active #{item.memberCount}
+                    | &nbsp;/&nbsp;#{item.maxUsers}
+                  when 'C'
+                    span.active 即将满员：
+                    span.active #{item.memberCount}
+                    | &nbsp;/&nbsp;#{item.maxUsers}
+                  default
+                    span 群成员：
+                    span.current #{item.memberCount}
+                    | &nbsp;/&nbsp;#{item.maxUsers}
+
+          .item-body
+            if item.description !== undefined
+              p 简介：#{item.description}
+            else
+              p 暂无简介
+
+          .item-footer
+            a.qn-btn.sm.edit-live-room(href='javascript:', data-id=item.groupId, data-charge=item.isCharge) 编辑
+            a.qn-btn.sm.open-live-room(href='javascript:', data-id=item.groupId, data-name=item.groupName, data-charge=item.isCharge, data-owner_imid=item.ownerId) 进入
+    else
+      .qn-no-result
+          ul
+            li
+              img(src="/images/list_null.png", height="106")
+            li 暂无直播群
+
+append foot_scripts
+  script(data-main='/javascripts/live_room/adviser_list.js' src='/javascripts/lib/requirejs/require.js')

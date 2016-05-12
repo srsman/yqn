@@ -1,0 +1,415 @@
+//- .qn-popup-overlay
+//-   .qn-reward-info-box
+//-     .qn-reward-info-header
+//-       span.qn-avatar.disable
+//-         img(src='/images/default_avatar_man.jpg')
+//-       h4.nickname 哈哈哈哈
+//-     .qn-reward-info-main
+//-       p 群主辛劳人缘好，这个红包是
+//-         i 无敌帅小男
+//-         | 对群主的赞赏哦
+//-       span 100.29
+//-         i 元
+
+//- 全局聊天
+#qn-pager-minimize.qn-pager-minimize(data-im_id=user.imId, data-im_token=user.imToken) 聊天
+  i.fa.fa-chevron-up
+  //- span.qn-badge(data-num='10') 10
+
+#qn-pager-wrap.qn-pager-wrap.hide
+
+  #qn-pager-title.qn-pager-title
+    ul.qn-pager-wrap-handle
+      li
+        a#close-qn-pager(href='javascript:')
+          i.fa.fa-times
+
+  #qn-pager-main.qn-pager-main
+    //- 聊天侧边栏
+    .qn-pager-sidebar.qn-tab
+      ul.qn-tab-card
+        li
+          i.fa.fa-commenting
+        li
+          i.fa.fa-user
+
+      .qn-pager-fuzzy-query.qn-pager-fuzzy-query-identify
+        i.fa.fa-search
+        input.qn-pager-fuzzy-query-input(type='text', data-type='1', placeholder='搜索好友')
+
+      .qn-tab-paper
+        #qn-pager-recent-box.paper-item
+          ul.qn-pager-contacts-list
+            //- li.contacts-item.active
+            //-   a(href='javascript:')
+            //-     .qn-avatar
+            //-       img(src='/images/default_avatar_man.jpg', width='36', height='36')
+            //-     h5.contacts-title 会话标题
+            //-     p.contacts-content 会话内容
+            //-     i.contacts-time 10:13
+            //-     span.qn-badge(data-num='10') 10
+
+            //- li.contacts-item
+            //-   a(href='javascript:')
+            //-     .qn-avatar
+            //-       img(src='/images/default_avatar_man.jpg', width='36', height='36')
+            //-     h5.contacts-title 会话标题
+            //-     p.contacts-content 会话内容
+            //-     i.contacts-time 10:13
+            //-     span.qn-badge(data-num='10') 10
+
+        #qn-pager-contacts-box.paper-item
+          //- .qn-pager-contacts-group.open
+          //-   .group-title
+          //-     i.fa.fa-caret-down
+          //-     | 失败示例
+          //-   ul.qn-pager-contacts-list
+          //-     li.contacts-item.error 加载失败，
+          //-       a(href='javascript:') 点击重试
+
+        //- .qn-pager-fuzzy-query-result
+        //-   ul.qn-pager-contacts-list
+        //-     li.contacts-item
+        //-       a(href='javascript:')
+        //-         .qn-avatar
+        //-           img(src='/images/default_avatar_man.jpg', width='36', height='36')
+        //-         h5.contacts-title 联系人名称
+        //-     li.contacts-item.error 没有搜索结果
+
+    //- 聊天窗口
+    .qn-pager-chat-box
+      .qn-pager-chat-item.active
+        .chat-null
+          h3 暂无会话
+
+      //- .qn-pager-chat-item.active
+      //-   //- 聊天页眉
+      //-   .chat-header
+      //-     span.chat-title 这里是聊天标题
+      //-       i 收费
+      //-     ul.chat-header-secondary
+      //-       li
+      //-         a(href='javascript:')
+      //-           i.fa.fa-user-plus
+      //-       li
+      //-         a(href='javascript:')
+      //-           i.fa.fa-cog
+
+      //-   //- 聊天主体
+      //-   .chat-main
+      //-     a(href='javascript:').btn-chat-more 点击查看更多
+
+      //-     ul.chat-content
+      //-       //- 我的基本消息
+      //-       li.myself-msg
+      //-         //- 聊天时间
+      //-         .sys-time
+      //-           em.line-left
+      //-           span.time 16:03
+      //-           em.line-right
+
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           .msg-box
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             | 这里是消息的内容
+
+      //-       //- 朋友的基本信息
+      //-       li.friends-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           .msg-box
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             | 这里是消息的内容
+
+      //-       //- 我的带名字的信息
+      //-       li.myself-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           span.msg-username
+      //-             i 群主
+      //-             | 昵称
+
+      //-           .msg-box
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             | 这里是消息的内容
+
+      //-       //- 朋友带名字的信息
+      //-       li.friends-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           span.msg-username 昵称
+      //-             i 群主
+
+      //-           .msg-box
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             | 这里是消息的内容
+
+      //-       //- 系统提示消息
+      //-       li.sys-msg
+      //-         span 某某某加了入了该群
+
+      //-       //- 我的红包信息
+      //-       li.myself-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           .msg-box.reward
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             .msg-reward-main
+      //-               span.reward-icon
+      //-               | 送给群主一个红包
+      //-             .msg-reward-footer 一起牛红包
+
+      //-       //- 朋友的红包信息
+      //-       li.friends-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           span.msg-username 昵称
+
+      //-           .msg-box.reward
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             .msg-reward-main
+      //-               span.reward-icon
+      //-               | 送给群主一个红包
+      //-             .msg-reward-footer 一起牛红包
+
+      //-       //- 我的图片信息
+      //-       li.myself-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           .msg-box.img
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             img(src='/images/default_avatar_man.jpg')
+
+      //-       //- 朋友的图片信息
+      //-       li.friend-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           span.msg-username 昵称
+
+      //-           .msg-box.img
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             img(src='/images/default_avatar_woman.jpg')
+
+      //-       //- 我的自定义信息
+      //-       li.myself-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           .msg-box.custom
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             .msg-custom-main
+      //-               h5 我的自定义信息
+      //-               .msg-custom-content
+      //-                 .custom-content-icon
+      //-                   img(src='/images/default_avatar_man.jpg', width='63', height='63')
+      //-                 .custom-content 这里只有内容
+      //-             .msg-custom-footer 暂时只能在一起牛APP中打开
+
+      //-       //- 朋友的自定义信息
+      //-       li.friend-msg
+      //-         .qn-avatar
+      //-           img(src='/images/default_avatar_man.jpg')
+
+      //-         .msg-wrap
+      //-           span.msg-username 昵称
+
+      //-           .msg-box.custom
+      //-             span.msg-arrow
+      //-               i
+      //-               em
+      //-             .msg-custom-main
+      //-               h5 我的自定义信息
+      //-               .msg-custom-content
+      //-                 .custom-content-icon
+      //-                   img(src='/images/default_avatar_man.jpg', width='63', height='63')
+      //-                 .custom-content 这里只有内容
+      //-             .msg-custom-footer 暂时只能在一起牛APP中打开
+
+      //-   //- 聊天页脚
+      //-   .chat-footer
+      //-     //- 聊天输入工具栏
+      //-     ul.chat-msg-input-toolbar
+      //-       li
+      //-         a(href='javascript:')
+      //-           i.fa.fa-smile-o
+      //-       li
+      //-         a(href='javascript:')
+      //-           i.fa.fa-picture-o
+
+      //-     //- 聊天输入框
+      //-     textarea.chat-msg-input
+
+      //-     //- 聊天输入提交层
+      //-     .chat-msg-submit
+      //-       i Ctrl&nbsp;+&nbsp;Enter换行
+      //-       a(href='javascript:').qn-btn.primary.xs.chat-msg-submit-btn.disabled 发送
+
+    //- 聊天群成员列表
+    #qn-pager-group-manage-member-list.qn-pager-group-manage.member-list
+      .qn-pager-group-manage-member-header.row
+        .col-xs-7
+          .qn-form-group.inline
+            label.qn-control-label(for='query-room-members-input') 搜索成员
+            .qn-form-control-box
+              input.qn-form-control#query-room-members-input(type='text', placeholder='请填写昵称或备注名')
+            a.qn-btn#query-room-members-btn(href='javascript:')
+              i.fa.fa-search
+              | 搜索
+
+        .col-xs-5.text-right
+          //- a.qn-btn(href='javascript:') 删除成员
+          //- a.qn-btn.info(href='javascript:')
+          //-   i.fa.fa-plus
+          //-   | 邀请新成员
+
+      .qn-pager-group-manage-member-main.row
+        .col-xs-12
+          //- table.qn-table.hover.vertical-middle
+          //-   thead
+          //-     tr
+          //-       th 成员
+          //-       th.text-right 服务到期时间
+          //-       th.text-right 最后发言时间
+          //-       th.text-center
+          //-         input.icheck(type='checkbox')
+          //-   tbody
+          //-     tr
+          //-       td
+          //-         span.qn-avatar.disable
+          //-           img(src='/images/default_avatar_man.jpg')
+          //-         | 用户名称
+          //-       td.text-right 2016.03.15
+          //-       td.text-right 2016.01.12 13:45
+          //-       td.text-center
+          //-         input.icheck(type='checkbox')
+          //-   tfoot
+          //-     tr
+          //-       td(colspan='4')
+          //-         .qn-page-nav
+          //-           span.pages 第10页，共20页
+          //-           a.page(href='javascript:') 1
+          //-           span.extend …
+          //-           a.page(href='javascript:') 9
+          //-           span.current 10
+          //-           a.page(href='javascript:') 11
+          //-           span.extend …
+          //-           a.page(href='javascript:') 20
+
+    //- 聊天群添加成员
+    #qn-pager-group-manage-add-member.qn-pager-group-manage.add-member
+      .qn-pager-group-manage-add-member-main
+        .qn-pager-add-member-contacts-box
+          .qn-pager-fuzzy-query.qn-pager-fuzzy-query-identify
+            i.fa.fa-search
+            input.qn-pager-fuzzy-query-input(type='text', data-type='2', placeholder='搜索好友')
+          .qn-pager-add-member-contacts-list
+
+            //- .qn-pager-fuzzy-query-result
+            //-   ul.qn-pager-contacts-list
+            //-     li.contacts-item
+            //-       a(href='javascript:')
+            //-         .qn-avatar
+            //-           img(src='/images/default_avatar_man.jpg', width='36', height='36')
+            //-         h5.contacts-title 联系人名称
+            //-     li.contacts-item.error 没有搜索结果
+
+        .qn-pager-add-member-selected-box
+          .qn-pager-add-member-selected-title 邀请新成员
+            span （已选择
+              i 0
+              | 人）
+
+          .alternative-new-member-list
+            ul.qn-pager-contacts-list
+              //- li.contacts-item
+              //-   a(href='javascript:')
+              //-     .qn-avatar
+              //-       img(src='/images/default_avatar_man.jpg', width='36', height='36')
+              //-     h5.contacts-title 会话标题
+              //-     i.fa.fa-times
+
+        input(type='hidden', id='qn-pager-add-member-room-id')
+
+      .row
+        .col-xs-12.text-center
+          a#submit-new-member-btn.qn-btn.primary(href='javascript:') 保存
+
+
+    //- 查看群信息
+    #qn-pager-group-manage-room-info.qn-pager-group-manage.room-info
+      //- .qn-pager-room-description
+      //-   span.qn-avatar.disable
+      //-     img(src='/images/default_avatar_man.jpg')
+
+      //-   dl
+      //-     dt
+      //-       .qn-form-group.inline#qn-pager-room-info-name
+      //-         .qn-form-control-box
+      //-           input.qn-form-control.hide#qn-pager-room-info-name-input(type='text', placeholder='请填写直播群名称')
+      //-           p.qn-control-static 一些默认显示的内容
+      //-     dd
+      //-       span 创建人：
+      //-       .qn-form-group.inline#qn-pager-room-info-description
+      //-         .qn-form-control-box
+      //-           textarea.qn-form-control.hide#qn-pager-room-info-description-input(placeholder='请填写直播群描述')
+      //-           p.qn-control-static 一些默认显示的内容
+
+
+      //- .qn-form-section
+      //-   span.qn-form-section-title 群公告
+      //-   .qn-form-group.inline#qn-pager-room-info-announcement
+      //-     .qn-form-control-box
+      //-       textarea.qn-form-control.hide#qn-pager-room-info-announcement-input(placeholder='请填写直播群公告')
+      //-       p.qn-control-static 一些默认显示的内容
+
+      .qn-form-section
+        span.qn-form-section-title 群成员
+
+        table.qn-table
+          thead
+            tr
+              th 成员
+          tbody
+            tr
+              td 哈哈
+
+      .qn-form-section
+        span.qn-form-section-title 收费设置
+        | 哈哈
+

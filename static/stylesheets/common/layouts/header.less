@@ -1,0 +1,355 @@
+.header {
+  position: relative;
+  height: 95px;
+  background-color: #fff;
+  .box-shadow(0 1px 0 rgba(0, 0, 0, 0.1));
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 400;
+    height: 65px;
+    .box-shadow(0 0 7px rgba(0, 0, 0, 0.1));
+
+    .header-logo { margin-top: 13px; }
+    .header-search { margin-top: 15px; }
+    .header-navigation { margin-top: 20px; }
+    .header-account {
+      height: 65px;
+
+      &:before { top: 25px; }
+
+      ul { margin-top: 16px; }
+    }
+  }
+
+  a:hover { text-decoration: none; }
+}
+
+.header,
+.header-account {
+  .transition(height .4s ease);
+}
+
+.header-logo,
+.header-search,
+.header-navigation,
+.header-account ul {
+  .transition(margin-top .4s ease);
+}
+
+.header-account:before {
+  .transition(top .4s ease);
+}
+
+/* Logo */
+.header-logo {
+  position: relative;
+  float: left;
+  margin-top: 27px;
+  padding-top: 3px;
+  padding-left: 45px;
+  width: 117px;
+  font-size: 24px;
+  .user-select(none);
+
+  a {
+    display: block;
+    color: @gray;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    height: 40px;
+  }
+}
+
+/* 页眉搜索 */
+.header-search {
+  position: relative;
+  float: left;
+  margin-top: 30px;
+  margin-left: 30px;
+  width: 290px;
+  height: 35px;
+  border: 1px solid @brand-primary;
+  border-radius: @border-radius-base;
+
+  input,
+  button {
+    height: 33px;
+    border: none;
+  }
+
+  input {
+    padding: 0 10px;
+    width: 220px;
+    .border-left-radius(@border-radius-base);
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    background-color: @brand-primary;
+    color: #fff;
+    //font-size: 20px;
+  }
+
+  .header-search-result-list {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    z-index: 99;
+    width: 228px;
+    border: 1px solid #e9e8e8;
+    border-top: none;
+    background-color: #f9f9f9;
+
+    li {
+      padding: 0 10px;
+
+      &.active,
+      &:hover { background-color: darken(#f9f9f9, 10%); }
+
+      a {
+        padding: 5px 0;
+        display: block;
+        color: @gray-dark;
+
+        i {
+          font-style: normal;
+          color: @brand-info;
+        }
+      }
+    }
+
+    li + li {
+      a { border-top: 1px dashed #cdcdcd; }
+    }
+  }
+}
+
+/* 页眉导航栏 */
+.header-navigation {
+  float: right;
+  margin-top: 38px;
+
+  .header-menu,
+  .header-menu > li { float: left; }
+
+  .header-menu > li {
+    margin: 0 15px;
+
+    a {
+      display: block;
+      font-size: 16px;
+      color: @gray;
+      padding: 0 2px 2px;
+    }
+
+    &.active a,
+    a:hover { color: @brand-primary; border-bottom: 3px solid #ff4e00; }
+  }
+}
+
+/* 页眉账号部分 */
+.header-account {
+  position: relative;
+  float: right;
+  height: 95px;
+
+  &:before {
+    position: absolute;
+    top: 41px;
+    left: 0;
+    content: ' ';
+    height: 16px;
+    border-left: 1px solid #e9e8e8;
+  }
+
+  ul,
+  ul > li { float: left; }
+
+  ul { margin-top: 33px; }
+
+  ul > li {
+    margin-left: 15px;
+
+    a {
+      padding: 5px 0;
+      display: block;
+      font-size: 16px;
+      color: @gray;
+
+      &:hover { color: @brand-primary; }
+
+      &.point {
+        padding: 5px 10px;
+        background-color: @brand-primary;
+        border-radius: @border-radius-base;
+        color: #fff;
+
+        &:hover { color: #fff; }
+      }
+    }
+  }
+}
+
+/* 页眉主要部分 */
+.header-main {
+  float: left !important;
+  margin-left: 60px;
+}
+
+/* 页眉主要部分及页眉次要部分 */
+.header-main,
+.header-secondary {
+  float: right;
+
+  > ul > li {
+    float: left;
+
+    > a {
+      display: block;
+      padding: 0 10px;
+      height: 40px;
+      line-height: 38px;
+      color: #fff;
+
+      &:hover,
+      &:focus { background-color: darken(@brand-primary, 5%); }
+    }
+
+    &.active > a { background-color: darken(@brand-primary, 5%); }
+  }
+}
+
+/* 页眉用户操作 */
+.header-account-wrap {
+  position: relative;
+
+  &.active,
+  &:hover {
+    span.header-user-avatar img { .box-shadow(0 0 14px @brand-info); }
+  }
+
+  &.active {
+    .header-account-box { display: block; }
+  }
+}
+
+/* 页眉用户头像 */
+.header-user-avatar-box {
+  position: relative;
+  top: -14px;
+  padding-right: 10px;
+  padding-left: 0;
+
+  &:hover,
+  &:focus,
+  &:active { background-color: transparent !important; }
+
+  .fa-caret-down,
+  .fa-caret-up {
+    position: absolute;
+    top: 14px;
+    color: #fff;
+  }
+}
+
+span.header-user-avatar {
+  margin: 5px 5px 0 0;
+  padding: 1px;
+  width: 40px;
+  height: 40px;
+  background-color: @brand-primary;
+
+  img {
+    width: 38px;
+    height: 38px;
+
+    &:hover {
+      .box-shadow(0 0 14px @brand-info);
+    }
+  }
+}
+
+/* 页眉操作列表 */
+.header-account-box {
+  position: absolute;
+  top: 50px;
+  right: -14px;
+  z-index: 999;
+  display: none;
+  width: 120px;
+  background-color: #fff;
+  border: 1px solid @border-default-color;
+  border-radius: @border-radius-base;
+  .box-shadow(0 3px 8px rgba(0, 0, 0, .5));
+
+  .content {
+    position: relative;
+
+    > ul {
+      margin: 0 !important;
+      width: 100%;
+    }
+  }
+
+  // 箭头
+  .arrow-box {
+    position: absolute;
+    top: -22px;
+    right: 28px;
+    z-index: 2;
+    overflow: hidden;
+    display: block;
+
+    i,
+    em {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-width: 11px;
+      border-style: solid;
+      overflow: hidden;
+      font-size: 0;
+      line-height: 0;
+      vertical-align: top;
+    }
+
+    i {
+      border-color: transparent transparent @border-default-color transparent;
+    }
+
+    em {
+      margin: 1px 0 0 -22px;
+      border-color: transparent transparent #fff transparent;
+    }
+  }
+
+  ul + ul {
+    border-top: 1px solid @border-default-color;
+  }
+
+  a {
+    display: block;
+    padding: 5px 10px;
+    color: @text-color;
+
+    &:hover,
+    &:focus { color: @brand-primary; }
+
+    .fa {
+      margin-right: 5px;
+      color: @brand-primary;
+    }
+  }
+}

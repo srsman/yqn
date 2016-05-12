@@ -1,0 +1,84 @@
+extends ../common/seo_full_width_layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/accounts/accounts_index.css')
+
+block main_content
+  .accounts-operate-wrap#register-page
+    .container
+      .accounts-operate-box
+        .accounts-operate-title
+          .row
+            .col-xs-8
+              span.title 注册
+            .col-xs-4.text-right
+              span 已有账号，
+                a(href='/denglu') 登录
+
+        //- 注册的主体
+        .accounts-operate-main
+          .accounts-operate-content
+            form#reg-form(action='/account/register', method='post')
+              .qn-form-group
+                label.qn-control-label(for='username') 手机号
+                .qn-form-control-box
+                  input.qn-form-control#username(type='text', name='username', placeholder='请填写手机号', tabindex='1')
+
+              .qn-form-group.captcha-section
+                label.qn-control-label(for='captcha') 验证码
+                .qn-form-control-box
+                  input.qn-form-control#captcha(type='text', name='captcha', placeholder='请填写验证码', tabindex='2')
+                  a.qn-btn.primary#get-captcha(href='javascript:') 获取验证码
+                input.hide#event-id(type='hidden', name='event_id')
+
+              .qn-form-group
+                label.qn-control-label(for='nickname') 昵称
+                .qn-form-control-box
+                  input.qn-form-control#nickname(type='text', name='nickname', placeholder='请填写昵称', tabindex='3')
+
+              .qn-form-group
+                label.qn-control-label(for='password') 密码
+                .qn-form-control-box
+                  input.qn-form-control#password(type='password', name='password', placeholder='请填写密码', tabindex='4')
+
+              .qn-form-group.special.offset-label.agreement-box
+                .qn-checkbox
+                  input#agreement.icheck(type='checkbox', name='agreement', checked, tabindex='5')
+                  label(for='agreement') 我已阅读并接受
+                  a(href='/protocols/user', target='_blank') 《一起牛用户协议》
+
+              .qn-form-group.offset-label#reg-form-submit-box
+                button.qn-btn.primary(type='submit') 注册
+
+          //- 注册页的网站介绍
+          .accounts-operate-intro
+            dl
+              dt 百姓身边的投资顾问
+              dd
+                ul
+                  li 我们是万里挑一的顶级证券投资顾问
+                  li 我们耐心解答您的每个投资问题
+                  li 我们的研究比新闻更有深度
+                  li 您的收益率是我们能力的度量
+
+            table
+              tbody
+                tr
+                  td 手机下载一起牛
+                  td 我们也在微信上
+                  td 微博上也有我
+                tr
+                  td
+                    img(src='/images/download.jpg')
+                  td
+                    img(src='/images/weixin.jpg')
+                  td
+                    a(href='http://weibo.com/u/5833239331?refer_flag=1005055013_&is_hot=1', target='_blank')
+                      img(src='/images/weibo.png')
+
+append foot_scripts
+  script(data-main='/javascripts/accounts/register.js' src='/javascripts/lib/requirejs/require.js')

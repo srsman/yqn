@@ -1,0 +1,148 @@
+extends ../common/seo_layout
+
+block header
+  +he('xiazai')
+
+append css
+  link(rel='stylesheet', href='/stylesheets/static/seo_index.css')
+
+block main_content
+  //- 全宽滑块
+  .full-container
+    .qn-slider.auto
+      ul.qn-slides
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/banner_download.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+            ul
+              li.marginB48
+                a(href="https://itunes.apple.com/zh/app/yi-qi-niu/id964690038?l=zh&ls=1&mt=8").qn-btn
+                  i.fa.fa-apple
+                  | IOS下载
+              li
+                a(href="http://api.yiqiniu.com:8000/1.2.001/app-release-1.2.001-official.apk").qn-btn
+                  i.fa.fa-android
+                  | 安卓下载
+
+  .container.main-container
+    .qn-section-static.qn-static-special.clearfix
+
+      .qn-static-row
+        ul.download-header.clearfix
+          li
+            img(src="/images/static/icon-download-1.png", alt="")
+            h4 免费问答
+            p 投顾耐心回答您的每个问题
+            .more(data-id='#DL1')
+              h3 免费问答
+              p 问股票，问大盘<br>智能匹配合适您的投顾<br>为您及时详细解答
+          li
+            img(src="/images/static/icon-download-3.png", alt="")
+            h4 投资组合
+            p 盘中买卖点实时提醒
+            .more(data-id='#DL2')
+              h3 投资组合
+              p 看投顾精选股票池<br>组合调仓实时通知<br>实盘一键跟单交易
+          li
+            img(src="/images/static/icon-download-2.png", alt="")
+            h4 观点直播
+            p 随时把握市场先机
+            .more(data-id='#DL3')
+              h3 观点直播
+              p 进投顾股票群看直播<br>实时讨论盘中热点<br>每日精选市场观点
+          li.border0
+            img(src="/images/static/icon-download-4.png", alt="")
+            h4 概念资讯
+            p 投资界的“度娘”
+            .more(data-id='#DL4')
+              h3 概念资讯
+              p 大数据24小时舆情监控<br>0延迟热门概念推送<br>全面及时的市场资讯
+
+
+      .qn-static-row.row-person-intro.intro-style-1
+        img(src="/images/static/avatar-download-1.png", alt="易建联 CBA 中国男篮")
+        h3 易建联
+          span （中国男篮国家队主力，CBA总决赛MVP）
+        p “ 我投资圈的好朋友都在一起牛，他们给了我很多专业投资建议，让我即使忙于比赛，<br>照样能做好股票投资。他们也是我的好队友 ”
+
+      .qn-static-row.row-download#DL1
+        h2 免费投顾服务
+        h3 买了就跌，卖了就涨，套了就慌？
+        p 没关系，找个专属证券投资顾问指导您做决策，帮您解决买什么、什么时候买、<br>什么时候卖三大难题，为您的投资保驾护航。
+        img(src="/images/static/image-download1.jpg", alt="免费投顾服务")
+
+      .qn-static-row.row-person-intro.intro-style-2
+        img(src="/images/static/avatar-download-2.png", alt="王茹远 宏流投资")
+        .person-info
+          h3 王茹远
+            span （宏流投资董事长）
+          p “ 一起牛，倡导和践行组合投资、长期投资理念。<br>这或许可以改变中国股民集中持股、追涨杀跌、频繁交易的炒股习惯，值得<br>推荐 ”
+        a(href="#").qn-btn.primary 下载”一起牛”
+
+      .qn-static-row.row-download#DL2
+        h2 投资组合
+        h3 想知道你和专业投资人的不同吗？
+        p 告别追涨杀跌，跟着投顾买卖股票，体验组合投资的全新投资方式。<br>一起牛运用专业评级体系，对组合收益和风险进行全方位的评价，带您开启基金经理的盈利模式，<br>拥有与过去完全不同的投资心态！
+        img(src="/images/static/image-download2.jpg", alt="投资组合")
+
+      .qn-static-row.row-person-intro.intro-style-1
+        img(src="/images/static/avatar-download-3.png", alt="钟海波 前海方舟资本")
+        h3 钟海波
+          span ( 前海方舟资本总裁 )
+        p 齐牛的组合交易模式非常有特色，是投资管理的一大利器。<br>实时查看组合收益走势，多方面评价组合业绩，20只股票一键下单交易，让广大投资者也享受了一把做基金经理的感觉。”
+
+      .qn-static-row.row-download#DL3
+        h2 观点直播
+        h3 盘中全程指点，把握市场先机
+        p 市场行情变幻莫测，投资机会稍纵即逝。大量顶级投顾坐镇直播群，为您实时解盘。独有股票名称/代码识别技术，<br>聊天中轻松查看股票行情、进行交易。聊天、炒股两不误！
+        img(src="/images/static/image-download3.jpg", alt="聊股神器")
+
+      .qn-static-row.row-person-intro.intro-style-2
+        img(src="/images/static/avatar-download-4.png", alt="肖风 通联数据")
+        .person-info
+          h4 肖风
+            span （通联数据董事长）
+          p “ 大数据的核心是帮助投资者提高预测能力，一起牛通过大数据技术帮助投<br>资者抓住主题投资机会，享受人工智能在金融领域的最新成果 ”
+        a(href="#").qn-btn.primary 下载”一起牛”
+
+      .qn-static-row.row-download#DL4
+        h2 概念资讯
+        h3 如何洞察投资先机？获取更快的消息？
+        p 在变幻莫测的股市，每个用户都是美洲亚马逊丛林的“蝴蝶”，每一次扇动翅膀，都影响到股票走势。<br>我们用“卫星”监控行业，利用大数据优势构建微模型，为您捕捉最新的投资主题和市场情绪，精准定位最热门的投资机会，<br>助你快速决策，获得超额回报。
+        img(src="/images/static/image-download4.jpg", alt="概念资讯")
+
+
+
+      .qn-relate-software
+        h4.qn-section-second-title
+          span 相关软件
+        ul.clearfix
+          +sf('http://jr.emoney.cn/hd/baidu_qs1/index.html?ozs=921867-1014', 'dfcf', '东方财富通')
+          +sf('http://www.dfzq.com.cn/dfzq/index.jsp', 'dfzq', '东方赢家')
+          +sf('http://www.dxzq.net/main/index.shtml?r=0.7195909774194239', 'dxzq', '东兴证券')
+          +sf('http://www.foundersc.com/', 'qyt', '泉友通')
+          +sf('https://store.gf.com.cn/portal/ldy/ldythree/ld2?channel=baidu00050', 'jgj', '金管家')
+          +sf('http://www.gtja.com/i/', 'dzh', '大智慧')
+          +sf('http://www.gtja.com/content/dam/appstore/pc/html/', 'yf', '富易')
+          +sf('http://www.gtja.com/content/dam/appstore/pc/html/', 'yyz', '易阳指')
+          +sf('http://www.guosen.com.cn/gxzq/index.jsp', 'jty', '金太阳')
+          +sf('http://www.newone.com.cn/', 'zszq', '招商证券')
+          +sf('http://www.hlzqgs.com/main/web/index.shtml', 'hlzq', '华龙点金')
+          +sf('http://www.htsc.com.cn/htzq/index/index.html', 'htzq', '华泰证券')
+          +sf('http://www.cfsc.com.cn/', 'hxzq', '华鑫证券')
+          +sf('http://www.jingzhuan.cn/', 'jczq', '经传证券')
+          +sf('http://www.mszq.com/market/DownLoad.html', 'mszq', '民E通')
+          +sf('http://www.zts.com.cn/', 'qlzq', '齐鲁证券')
+          +sf('http://www.962518.com/download/dllist.htm', 'shzq', '上海证券')
+          +sf('http://www.tpyzq.com/main/home/index.shtml', 'tpyzq', '太平洋证券')
+          +sf('http://www.cs.ecitic.com/', 'zxzq', '中信证券')
+          +sf('http://www.scstock.com/main/home/index.shtml', 'zhzq', '中航证券')
+
+      //- 相关软件
+      mixin sf(aurl, aclass, name)
+        li
+          a(href=aurl, target="_blank")
+            i.software-img(class=aclass)
+            p=name
+
+append foot_scripts
+  script(data-main='/javascripts/static/static.js' src='/javascripts/lib/requirejs/require.js')

@@ -1,0 +1,28 @@
+//- 股票列表主体
+table.qn-table.striped.hover.seo-stock-list-table
+  thead
+    tr
+      th 股票名称
+      th.text-center 股票代码
+      th.text-right 当前价
+      th.text-right 涨跌幅
+      th.text-right 今开
+      th.text-right 昨收
+      th.text-right 最高
+      th.text-right 最低
+      th.text-right 成交额
+      th.text-right 市盈率
+  tbody
+    each item in stocks.stks
+      tr
+        td
+          a(href='/gupiao/' + item.assetId, title=item.stkName) #{item.stkName}
+        td.text-center #{item.stkCode}
+        td.text-right #{item.price}
+        td.text-right !{utils.formatPct(item.changePct, 1)}
+        td.text-right #{item.open}
+        td.text-right #{item.prevClose}
+        td.text-right #{item.high}
+        td.text-right #{item.low}
+        td.text-right #{utils.formatNumVal(item.turnOver, 3)}
+        td.text-right #{item.pe}

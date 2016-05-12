@@ -1,0 +1,266 @@
+/* 观点详情 */
+
+.detail-container {
+  padding: 20px 0;
+}
+
+.detail-title {
+
+  h3 {
+    font-size: @font-size-h3;
+  }
+
+  .icon-elite {
+    display: inline-block;
+    margin: 0 5px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    background: @brand-primary;
+    border-radius: 2px;
+    color: #fff;
+  }
+}
+
+.detail-meta {
+  padding-bottom: 10px;
+  border-bottom: 1px dashed @border-default-color;
+  text-align: center;
+
+  span {
+    margin-right: 20px;
+    color: @gray-light;
+  }
+}
+
+.detail-content {
+  text-align: left;
+  width: 100%;
+  word-break: break-all;//截断
+  padding: 0;
+  min-height: 350px;
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 600px;
+
+  }
+
+}
+
+.qn-row.detail-content ol {
+  list-style: inside decimal none !important;
+}
+.qn-row.detail-content ul {
+  list-style: inside disc none !important;
+}
+.detail-action {
+  padding: 10px 0 0;
+  text-align: center;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+/* detail-footer */
+.detail-footer-tab {
+
+  .clearfix();
+
+  li {
+    float: left;
+    width: 50%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border: 1px solid @border-default-color;
+
+    background: @background-default-color;
+    cursor: pointer;
+
+    i {
+      margin-right: 5px;
+    }
+
+    &.active {
+      color: @btn-primary-bg;
+      background: #fff;
+    }
+  }
+
+  li + li {
+    border-left: 0 none;
+  }
+}
+
+.detail-footer-content {
+  background-color: #fff;
+}
+
+.detail-comment-wrap {
+  padding-top: 15px;
+}
+
+// 评论列表
+.detail-comment-feed {
+  //border-top: 1px dashed @border-default-color;
+
+  .comment-item {
+    position: relative;
+    padding: 15px 0 15px 50px;
+    border-bottom: 1px dashed @border-default-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    //头像
+    .qn-avatar {
+      position: absolute;
+      top: 15px;
+      left: 0;
+    }
+
+    // 内容
+    .comment-content {
+      width: 100%;
+      word-break:break-all;
+      i {
+        font-style: normal;
+        margin: 0 5px;
+      }
+
+      a {
+        cursor: default;
+
+        &:hover {
+          text-decoration: none;
+          color: @link-color;
+        }
+      }
+    }
+
+    // 用户名称
+    .user-name {
+      cursor: default;
+
+      &:hover {
+        color: @brand-primary;
+      }
+    }
+
+    // 评论信息
+    .comment-meta {
+      position: relative;
+      margin-top: 10px;
+      font-size: 14px;
+
+      // 日期
+      .date {
+        display: inline-block;
+        color: @gray-light;
+        line-height: 34px;
+      }
+    }
+  }
+}
+
+// 点赞列表
+.detail-thumb-feed {
+
+  .thumbs-item {
+    display: inline-block;
+    padding: 10px 0;
+    width: 50%;
+    line-height: 40px;
+    border-bottom: 1px solid @border-default-color;
+
+    .qn-avatar {
+      float: left;
+    }
+
+    .user-name {
+      margin-left: 10px;
+      float: left;
+    }
+  }
+}
+
+/* 回复评论 */
+.comment-reply {
+
+  .comment-reply-textarea {
+    position: relative;
+  }
+
+  textarea.qn-form-control {
+    width: 100%;
+    min-height: 34px;
+    height: 34px;
+  }
+
+  pre {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    z-index: -1;
+    padding: 0 !important;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .comment-reply-action {
+    .clearfix();
+
+    li {
+      float: right;
+      padding: 10px 0;
+    }
+  }
+
+  .qn-btn {
+    width: @btn-fixed-width-small;
+  }
+}
+
+.send-comment-operation {
+  margin-top: 15px;
+
+  li {
+    position: relative;
+    float: right;
+    margin-left: 30px;
+
+    .emoji-face-wrap {
+      left: auto;
+      right: -87px;
+
+      .up-arrow-box {
+        left: auto;
+        right: 97px;
+      }
+    }
+  }
+
+  .send-comment-emoji-btn {
+    color: @gray-dark;
+
+    .fa {
+      margin-top: 5px;
+      margin-right: 5px;
+      margin-right: 5px;
+      color: @brand-info;
+    }
+
+    &.active { color: @brand-info; }
+  }
+
+  .niu-btn {
+    font-size: 12px;
+  }
+}

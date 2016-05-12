@@ -1,0 +1,209 @@
+.qn-slider {
+  .container {
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 80px; left: 50%;
+      margin-left: 40px;
+    }
+
+    ul {
+      float: right;
+      margin: 63px 35px 0 0;
+
+      .marginB48 { margin-bottom: 30px; }
+
+      .qn-btn {
+        width: 235px;
+        height: 60px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 48px;
+        background-color: transparent;
+        border: 1px solid #fff;
+
+        i.fa {
+          position: relative;
+          top: 3px;
+          font-size: 30px;
+        }
+      }
+    }
+
+  }
+}
+
+.qn-static-special {
+  margin-bottom: 40px;
+  border-bottom: 1px solid @border-default-color;
+}
+
+.qn-static-row {
+  .download-header {
+    padding: 40px 0;
+    text-align: center;
+
+    li {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 244px;
+      border-right: 1px dashed @border-default-color;
+
+      img { margin-bottom: 20px; }
+      h4 { line-height: 1; margin-bottom: 7px; font-size: 20px; }
+      p { color: @gray-light; }
+
+      .more {
+        display: none;
+        position: absolute;
+        padding: 33px;
+        top: -10px; left: 0;
+        width: 100%; height: 190px;
+        background-color: @brand-primary;
+        color: #fff;
+        text-align: left;
+
+        h3 { font-size: 24px; margin-bottom: 14px; }
+        p { color: #fff; line-height: 28px; font-size: 14px; }
+      }
+
+      &:hover {
+        .more {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &.row-person-intro {
+    position: relative;
+    padding: 28px 0 25px;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 90px;
+      height: 23px;
+      bottom: -23px;
+      left: 50%;
+      margin-left: -45px;
+      background: url(/images/static/arrow.png) no-repeat;
+    }
+
+    &.intro-style-1 {
+      text-align: center;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      h3 { margin-bottom: 10px; }
+      p { line-height: 22px; margin-bottom: 0; }
+    }
+
+    &.intro-style-2 {
+      padding-left: 154px;
+
+      img, .person-info, { display: inline-block; vertical-align: middle; }
+      h3 { margin-bottom: 10px; }
+      p { line-height: 22px; margin-bottom: 0; }
+      .person-info {
+        margin: 0 75px 0 27px;
+      }
+      .qn-btn {
+        width: 202px;
+        height: 45px;
+        line-height: 33px;
+        font-size: 18px;
+      }
+    }
+
+    h3 {
+      font-size: 20px;
+      color: @brand-primary;
+
+      span { color: @gray; }
+    }
+
+    p { color: @gray; }
+  }
+
+  &.row-download {
+    padding: 60px 0 30px;
+    text-align: center;
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 24px;
+      color: @gray;
+    }
+  }
+}
+
+.qn-relate-software {
+  margin: 0 40px;
+
+  ul {
+    margin: 28px -50px 0 0;
+
+    li {
+      float: left;
+      width: 70px;
+      margin:0 40px 20px 0;
+      text-align: center;
+
+      p {
+        margin: 9px 0 0;
+        text-align: center;
+      }
+
+      .software-img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background:url(/images/static/software-sprite.png)  no-repeat;
+      }
+
+      .sprite(@x, @y) {
+        background-position: @x @y;
+      }
+
+      .dfcf{ .sprite(0, 0) }
+      .dfzq{ .sprite(-42*1px, 0) }
+      .dxzq{ .sprite(-42*2px, 0) }
+      .qyt{ .sprite(-42*3px, 0) }
+      .jgj{ .sprite(-42*4px, 0) }
+      .dzh{ .sprite(-42*5px, 0) }
+      .yf{ .sprite(-42*6px, 0) }
+      .yyz{ .sprite(-42*7px, 0) }
+      .jty{ .sprite(-42*8px, 0) }
+      .zszq{ .sprite(-42*9px, 0) }
+
+      .hlzq{ .sprite( 0, -42px) }
+      .htzq{ .sprite( -42*1px, -42px ) }
+      .hxzq{ .sprite( -42*2px, -42px ) }
+      .jczq{ .sprite( -42*3px, -42px ) }
+      .mszq{ .sprite( -42*4px, -42px ) }
+      .qlzq{ .sprite( -42*5px, -42px ) }
+      .shzq{ .sprite( -42*6px, -42px ) }
+      .tpyzq{ .sprite( -42*7px, -42px ) }
+      .zxzq{ .sprite( -42*8px, -42px ) }
+      .zhzq{ .sprite( -42*9px, -42px ) }
+
+    }
+  }
+}
+

@@ -1,0 +1,121 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/question/question_index.css')
+
+block main_content
+  .question-wrap
+
+    //- 统计信息
+    .qn-section.qn-row.question-header
+      .row.header-top
+        .col-xs-3
+          h3.module-title.exclusive 客户问答
+        .col-xs-3
+          dl
+            dt 总问答量
+            dd.no-data#qTotalNum --
+        .col-xs-3
+          dl
+            dt 今日问答量
+            dd.no-data#qTodayNum --
+        .col-xs-3
+
+    //- 筛选条件
+    .qn-section.qn-row.question-filter
+      .filter-item
+        .filter-item-name 状态:
+        .filter-item-value#qStatusFilter
+          a.active 全部
+          a(data-status='1') 待解答
+          a(data-status='2') 已解答
+
+    //- 问答列表
+    .qn-section.qn-row.question-feed#questionFeedWrap
+
+      //- 渲染列表
+      if data.result && data.result.qa
+        each item in data.result.qa
+          .feed-item(data-qid='#{item.qId}')
+
+            //- 用户
+            .qn-row.item-user
+              .qn-avatar
+                img(src='#{item.qIcon}')
+              .item-user-main
+                .name #{item.qName}
+                .source #{item.qAddr}
+
+            //- 问题
+            .qn-row.item-question
+              i.icon-question 问
+
+              if item.assetName
+                .item-question-about
+                  a(href="javascript:;") #{item.assetName}(#{item.assetId})
+                  if item.price
+                    span 成本：#{item.price}元
+                  if item.position
+                    span 持仓：#{item.position}
+              .item-question-content !{item.qContent}
+              .item-question-meta
+                span.date #{item.qTime}
+
+            //- 回答
+            case item.qStatus
+              when 0
+                .qn-row.item-answer
+                  .item-answer-content
+                    .row
+                      .col-xs-12.text-right
+                        a.qn-btn.J-refuse(role='button') 放弃抢答
+                        a.qn-btn.primary.J-rush(role='button') 立即抢答
+              when 1
+                .qn-row.item-answer
+                  .item-answer-content
+                    .row
+                      .col-xs-12
+                        textarea.qn-form-control(placeholder='请输入您对问题的分析和建议')
+                    .row
+                      .col-xs-7.text-left
+                      .col-xs-5.text-right
+                        a.qn-btn.primary.J-submit(role='button') 提交
+              when 2
+                .qn-row.item-answer
+                  i.icon-answer 答
+                  .item-answer-content !{item.aContent}
+                  .item-answer-meta
+                    span.date #{item.aTime}
+              when 3
+                .qn-row.item-answer
+                  .row
+                    .col-xs-12.text-left
+                      .qn-alert.warning
+                        i.fa.fa-info
+                        | 已放弃
+              when 4
+                .qn-row.item-answer
+                  .row
+                    .col-xs-12.text-left
+                      .qn-alert.warning
+                        i.fa.fa-info
+                        | 已超时
+
+      else
+        .qn-no-result
+          ul
+            li
+              img(src="/images/list_null.png", height="106")
+            li 您还没有收到客户提问
+
+    //-加载更多
+    .qn-row.qn-loading-animate.hide#ajaxLoading(data-count="0", data-over="N")
+      img(src="/images/loading.gif")
+      | 正在加载中，请稍候...
+
+append foot_scripts
+  script(data-main='/javascripts/question/exclusive.js' src='/javascripts/lib/requirejs/require.js')

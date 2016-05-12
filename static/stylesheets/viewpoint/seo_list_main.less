@@ -1,0 +1,92 @@
+// 列表
+.seo-viewpoint-list-main {
+  padding: 0 20px;
+
+  .seo-viewpoint-list-item + .seo-viewpoint-list-item { border-top: 1px dashed @border-default-color; }
+}
+
+// 列表项
+.seo-viewpoint-list-item {
+  padding: 20px 0;
+
+  .seo-viewpoint-header {
+    // 头像
+    .qn-avatar {
+      float: left;
+      padding: 0;
+    }
+
+    .qn-avatar,
+    .qn-avatar img {
+      width: 38px;
+      height: 38px;
+    }
+
+    // 作者信息
+    .viewpoint-author-info {
+      float: left;
+      margin-left: 10px;
+
+      li {
+        font-size: @font-size-small;
+        color: @gray-light;
+
+        a {
+          font-size: 18px;
+          color: @gray-dark;
+          cursor: default; // 有链接时删除
+        }
+      }
+    }
+  }
+
+  .seo-viewpoint-main {
+    dt,
+    dd { padding-top: 10px; }
+
+    dd {
+      p {
+        margin-bottom: 0;
+        word-wrap: break-word;
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      // 文章缩略图
+      .post-thumbnail {
+        margin-top: 15px;
+        max-height: 300px;
+        overflow: hidden;
+
+        img { max-width: 200px; }
+      }
+    }
+  }
+
+  .seo-viewpoint-footer {
+    margin-top: 15px;
+
+    .date,
+    ul,
+    li { float: left; }
+
+    ul,
+    li { margin-left: 5px; }
+
+    li { border-top: none; }
+
+    .date,
+    .readed-times { color: @gray-light; }
+
+    .readed-times {
+      float: right;
+
+      i {
+        padding-left: 5px;
+        font-style: normal;
+        color: @gray;
+      }
+    }
+  }
+}

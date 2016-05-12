@@ -1,0 +1,24 @@
+{
+  "curly": true,
+  // "eqeqeq": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "boss": true,
+  "node": true,
+  "globals": {
+    "jQuery": true,
+    "console": true,
+    "module": true,
+    "document": true,
+    "alert": true,
+    "window": true,
+    "define": true,
+    "require": true,
+    "Easemob": true,
+    "location": true,
+    "FileReader": true,
+    "template": true
+  }
+}

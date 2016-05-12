@@ -1,0 +1,223 @@
+extends ../common/seo_layout
+
+block header
+  +he('shouye')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/utils/home_index.css')
+
+block main_content
+  //- 全宽滑块
+  .full-container
+    .qn-slider.auto
+      ul.qn-slides
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/home_banner_01.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+            a#home-slide-download-btn.qn-btn.primary.lg(href='/static/xiazai') 下载&nbsp;“一起牛”&nbsp;APP
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/home_banner_02.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/home_banner_03.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      //- 投顾推荐
+      if adviser.length > 0
+        .qn-section.home-adviser-section
+          h3.qn-section-title 投顾推荐
+
+          if adviser.length > 3
+            a#switch-home-adviser.qn-section-more(href='javascript:', title='换一批投顾')
+              i.seo-icon-1.icon-refresh
+              span 换一换
+
+          if adviser.length > 0
+            .row
+              - for(var i = 0; i < 3; i++) {
+                - var item = adviser[i]
+
+                +adviserItem(item)
+              - }
+
+          if adviser.length > 3 && adviser.length <= 6
+            .row.hide
+              - for(var i = 3; i < 6; i++) {
+                - var item = adviser[i]
+
+                +adviserItem(item)
+              - }
+
+      //- 投资组合
+      .qn-section
+        h3.qn-section-title 投资组合
+        .row
+          - for(var i = 0; i < 2; i++) {
+            - var item = portfolio[i]
+
+            +ptfItem(item)
+          - }
+        .row
+          - for(var i = 0; i < 4; i++) {
+            - if(i > 1 && i < 4) {
+              - var item = portfolio[i]
+
+              +ptfItem(item)
+            - }
+          - }
+
+      //- 精选观点
+      .qn-section
+        //- 标题部分
+        h3.qn-section-title 精选观点
+        a(href='/guandian', title='全部观点').qn-section-more 全部观点
+          i.fa.fa-angle-right
+
+        //- 主体部分
+        .qn-section-main
+          ul.seo-viewpoint-list-main
+            each item in viewpoints
+              include ../viewpoint/seo_list_main
+
+      //- 最新问答
+      .qn-section
+        //- 标题部分
+        h3.qn-section-title 最新问答
+        a(href='/wenda', title='全部问答').qn-section-more 全部问答
+          i.fa.fa-angle-right
+
+        //- 主体部分
+        .qn-section-main
+          ul.seo-questions-list-main
+            each item in questions
+              include ../question/seo_list_main
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 投顾相关信息总览
+      .qn-section
+        .qn-section-main.home-overview-info
+          h3 一起牛投顾服务
+
+          table
+            thead
+              tr
+                th 入驻投顾
+                th 回答问题
+                th 发布观点
+                th 牛组合
+            tbody
+              tr
+                td.active #{overview.enterNum}
+                td #{overview.total}
+                td #{overview.viewPointNum}
+                td #{overview.ptfNum}
+
+          a.qn-btn.primary(href='/static/renzhen', title='申请成为投顾')
+            i.seo-icon-1.icon-apply
+            span 申请投顾入驻
+
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 热点新闻
+      include ../widgets/news
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+//- 推荐投顾项
+mixin adviserItem(item)
+  .col-xs-4
+    .qn-section-main.home-rcmd-adviser.clearfix
+      .rcmd-adviser-avatar
+        .qn-avatar.disable.clearfix
+          if item.uImg
+            img(src=item.uImg, alt=item.uName)
+          else
+            img(src='/images/default_avatar_man.jpg', alt=item.uName)
+
+        - var dialog = {};
+        - dialog.img = item.uImg
+        - dialog.name = item.uName
+        - dialog.orgName = item.orgName
+        - dialog.adviserName = item.adviserName
+        - dialog.fields = item.rcmdDesc.split('、')
+        - sDialog = JSON.stringify(dialog)
+        a.qn-btn.info.sm.invokeDialog(href='javascript:', data-qrurl=item.shareUrl, data-adInfo=sDialog) 提问
+
+      dl.rcmd-adviser-info
+        dt
+          if item.uName.length > 8
+            - adName = item.uName.slice(0, 8) + '…'
+            a(href='javascript:', title=item.uName) adName
+          else
+            a(href='javascript:', title=item.uName) #{item.uName}
+
+          if item.orgName
+            i #{item.adviserName}（#{item.orgName}）
+          else
+            i #{item.adviserName}
+        dd
+          if item.rcmdDesc.length > 20
+            - rcmdDesc = item.rcmdDesc.slice(0, 20) + '…'
+            | #{rcmdDesc}
+          else
+            | #{item.rcmdDesc}
+
+//- 投资组合项的方法
+mixin ptfItem(item)
+  .col-xs-6
+    .qn-section-main.home-portfolio
+      .home-portfolio-header.clearfix
+        .qn-avatar.disable.pull-left
+          img(src=item.uImg)
+        ul.pull-left
+          li
+            a.qn-post-title-link(href='javascript:', title=item.name) #{item.name}
+          li 创建人：
+            a(href='javascript:', title=item.uName) #{item.uName}
+            | &nbsp;&nbsp;&nbsp;&nbsp;创建时间：
+            i #{moment(item.createTime).format('YYYY.MM.DD')}
+      .home-portfolio-main
+        table
+          thead
+            th 累计收益
+            th 月均收益
+            th 最大回撤
+            th 胜率
+          tbody
+            if item.tYield > 0
+              td.up +#{utils.formatNumVal(item.tYield, 2)}
+                i %
+            else if item.tYield < 0
+              td.down #{utils.formatNumVal(item.tYield, 2)}
+                i %
+            else
+              td #{utils.formatNumVal(item.tYield, 2)}
+                i %
+
+            if item.mYield > 0
+              td.up +#{utils.formatNumVal(item.mYield, 2)}
+                i %
+            else if item.mYield < 0
+              td.down #{utils.formatNumVal(item.mYield, 2)}
+                i %
+            else
+              td #{utils.formatNumVal(item.mYield, 2)}
+                i %
+
+            td #{utils.formatNumVal(item.ptfMaxRetrace, 2)}
+              i %
+            td #{parseInt(item.ptfWinRate.rate * 100)}
+              i %
+
+append foot_scripts
+  script(data-main='/javascripts/home.js' src='/javascripts/lib/requirejs/require.js')

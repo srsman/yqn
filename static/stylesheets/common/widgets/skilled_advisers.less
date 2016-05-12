@@ -1,0 +1,45 @@
+/* 擅长投顾 */
+
+.qn-widget-skilled-advisers {
+  .qn-section-main {
+    padding: 0 10px;
+  }
+
+  .qn-widget-skilled-adviser-list {
+    > li {
+      position: relative;
+      padding: 20px 10px;
+    }
+
+    > li + li { border-top: 1px solid @border-default-color; }
+
+    .qn-avatar,
+    .qn-avatar img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .qn-vip {
+      width: 12px;
+      height: 12px;
+    }
+
+    ul {
+      li:first-of-type { font-size: 16px; }
+    }
+
+    a.adviser-quiz-btn {
+      position: absolute;
+      top: 23px;
+      right: 10px;
+      z-index: 2;
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #fff;
+      border: 1px solid @brand-primary;
+      border-radius: @border-radius-base;
+      color: @brand-primary;
+      font-size: @font-size-large;
+    }
+  }
+}

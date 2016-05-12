@@ -1,0 +1,114 @@
+.qn-tab-card {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid @tab-header-border-color;
+  overflow: hidden;
+  .clearfix();
+
+  li {
+    float: left;
+    padding: 0 15px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    color: @tab-header-text-color;
+    cursor: pointer;
+
+    &.active { color: @tab-header-active-text-color; }
+
+    &.back {
+      position: absolute;
+      bottom: 0;
+      z-index: 2;
+      padding: 0;
+      height: 2px;
+      background-color: @tab-header-active-border-color;
+    }
+  }
+}
+
+.qn-tab-paper {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+
+  .paper-item {
+    display: none;
+    .box-shadow(-5px 0 25px rgba(0, 0, 0, .3));
+
+    &.active { display: block; }
+  }
+}
+
+// seo官网 TAB
+// @qiulijun
+.qn-tab-box {
+  padding: 13px 20px 20px;
+  width: 800px;
+
+  .qn-radio-btn {
+    position: absolute;
+    top: -9999px;
+  }
+
+  .qn-tab-label {
+    position: relative;
+    padding: 0 4px 11px;
+    margin: 0 168px;
+    font-size: 16px;
+    line-height: 16px;
+    color: @text-color;
+    cursor: pointer;
+  }
+
+  .qn-radio-btn:checked + .qn-tab-label {
+    color: @brand-primary;
+    border-bottom: 2px solid @brand-primary;
+  }
+
+  .qn-radio-btn:checked + .qn-tab-label:after { //三角形
+    content: '';
+    display: block;
+    border-width: 3px;
+    border-color: transparent;
+    border-style: solid;
+    border-bottom-color: @brand-primary;
+    position: absolute;
+    width: 0; height: 0;
+    left: 50%; bottom: 0;
+    margin-left: -3px;
+  }
+
+  .qn-tab-innerbox {
+    border-top: 1px solid @border-default-color;
+
+    .qn-tab-items {
+      padding: 0;
+      display: none;
+    }
+
+    .more-items {
+      display: block;
+      height: 42px;
+      line-height: 42px;
+      font-size: 15px;
+      text-align: center;
+      border: 1px solid @border-default-color;
+
+      img {
+        width: 30px;
+        margin-right: 10px;
+      }
+    }
+
+    p.no-more {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+
+  .seo-viewpoint-list-item {
+    margin: 0;
+  }
+}

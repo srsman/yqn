@@ -1,0 +1,9 @@
+extends update_layout
+
+//- 添加自定义样式
+append css
+   link(rel='stylesheet', href='/stylesheets/error/error_index.css')
+
+block main_content
+  div.error
+    h1(style='padding: 100px 20px;') #{message}

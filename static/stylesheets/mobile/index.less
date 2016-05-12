@@ -1,0 +1,290 @@
+@charset "UTF-8";
+@import './common';
+/*首页*/
+.banner {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background: #fff;
+  overflow: hidden; }
+  .banner .silder-box {
+    position: relative; }
+  .banner .silder-box li {
+    position: relative;
+    float: left;
+    min-width: 3.2rem; }
+    .banner .silder-box li .b-bg-1 {
+      position: absolute;
+      width: 2.9rem;
+      height: 0.69rem;
+      top: 0.47rem;
+      left: 50%;
+      margin-left: -1.45rem;
+      background: url(/images/mobile/b-bg-1.png) no-repeat;
+      background-size: 2.9rem 0.69rem; }
+    .banner .silder-box li .download-btn-wrap {
+      position: absolute;
+      width: 2.49rem;
+      height: 0.83rem;
+      bottom: 0.7rem;
+      left: 50%;
+      margin-left: -1.25rem; }
+      .banner .silder-box li .download-btn-wrap .download-btn-shadow {
+        position: absolute;
+        width: 2.49rem;
+        height: 0.83rem;
+        top: 0;
+        left: 0;
+        background: url(/images/mobile/download-btn-shadow.png) -0.15rem 0 no-repeat;
+        background-size: 100% 100%;
+        z-index: 1; }
+      .banner .silder-box li .download-btn-wrap .download-btn {
+        position: absolute;
+        top: 0;
+        left: 0.15rem;
+        width: 2.2rem;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        background: #ff4e00;
+        text-align: center;
+        color: #fff;
+        font-size: 0.14rem;
+        border-radius: 0.03rem;
+        z-index: 2; }
+    .banner .silder-box li .b-bg-2 {
+      position: absolute;
+      width: 2.53rem;
+      height: 2.24rem;
+      top: 0.76rem;
+      left: 50%;
+      margin-left: -1.26rem;
+      background: url(/images/mobile/b-bg-2.png) no-repeat;
+      background-size: 2.53rem 2.24rem;
+      animation: polygon 8s ease-in-out 0s infinite normal;
+      -moz-animation: polygon 8s ease-in-out 0s infinite normal;
+      -webkit-animation: polygon 8s ease-in-out 0s infinite normal;
+      -o-animation: polygon 8s ease-in-out 0s infinite normal; }
+    .banner .silder-box li .b-bg-3 {
+      position: absolute;
+      width: 2.34rem;
+      height: 1.95rem;
+      top: 0.88rem;
+      left: 50%;
+      margin-left: -1.17rem;
+      background: url(/images/mobile/b-bg-3.png) no-repeat;
+      background-size: 2.34rem 1.95rem;
+      animation: round 8s ease-in-out 0s infinite normal;
+      -moz-animation: round 8s ease-in-out 0s infinite normal;
+      -webkit-animation: round 8s ease-in-out 0s infinite normal;
+      -o-animation: round 8s ease-in-out 0s infinite normal; }
+  .banner .ctrls {
+    position: absolute;
+    bottom: 0.15rem;
+    left: 50%;
+    width: 0.72rem;
+    margin-left: -0.36rem;
+    z-index: 3; }
+    .banner .ctrls li {
+      float: left;
+      margin: 0 0.08rem;
+      width: 0.08rem;
+      height: 0.08rem;
+      border-radius: 0.04rem;
+      background: #f8f8f8;
+      opacity: 0.6; }
+      .banner .ctrls li.cur {
+        opacity: 1; }
+
+/*核心列表*/
+.hexin-list li {
+  float: left;
+  width: 25%;
+  padding: 0.15rem 0; }
+.hexin-list .list-icon .icon {
+  display: block;
+  width: 0.44rem;
+  height: 0.49rem;
+  margin: 0 auto; }
+  .hexin-list .list-icon .icon.icon1 {
+    background: url(/images/mobile/sprite.png) 0rem 0 no-repeat;
+    background-size: 2rem 1.5rem; }
+  .hexin-list .list-icon .icon.icon2 {
+    background: url(/images/mobile/sprite.png) -0.5rem 0 no-repeat;
+    background-size: 2rem 1.5rem; }
+  .hexin-list .list-icon .icon.icon3 {
+    background: url(/images/mobile/sprite.png) -1rem 0 no-repeat;
+    background-size: 2rem 1.5rem; }
+  .hexin-list .list-icon .icon.icon4 {
+    background: url(/images/mobile/sprite.png) -1.5rem 0 no-repeat;
+    background-size: 2rem 1.5rem; }
+.hexin-list .tit {
+  margin-top: 0.1rem;
+  text-align: center;
+  font-size: 0.12rem;
+  color: #333; }
+
+/*人物推荐*/
+.person-intro-wrap {
+  position: relative;
+  padding: 0.2rem 0 0.15rem; }
+  .person-intro-wrap .image {
+    float: left;
+    width: 22%;
+    height: 0.76rem;
+    margin-left: 0.1rem; }
+    .person-intro-wrap .image img {
+      width: 0.7rem;
+      height: 0.76rem; }
+  .person-intro-wrap .info {
+    float: left;
+    margin-left: 0.1rem;
+    width: 68%; }
+    .person-intro-wrap .info .person-name {
+      font-size: 0.13rem;
+      font-weight: normal;
+      color: #ffa800; }
+      .person-intro-wrap .info .person-name .job-office {
+        color: #fff; }
+    .person-intro-wrap .info .intro-detail {
+      padding-top: 0.05rem;
+      font-size: 0.12rem;
+      font-weight: normal;
+      line-height: 0.18rem;
+      color: #999; }
+  .person-intro-wrap .icon-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: -0.12rem;
+    margin-left: -0.23rem;
+    width: 0.45rem;
+    height: 0.12rem;
+    z-index: 1; }
+  .person-intro-wrap.bg-black {
+    background: #373737; }
+    .person-intro-wrap.bg-black .icon-arrow {
+      background: url(/images/mobile/sprite.png) -0.85rem -0.5rem no-repeat;
+      background-size: 2rem 1.5rem; }
+  .person-intro-wrap.bg-red {
+    background: #b81b26; }
+    .person-intro-wrap.bg-red .icon-arrow {
+      background: url(/images/mobile/sprite.png) -1.35rem -0.5rem no-repeat;
+      background-size: 2rem 1.5rem; }
+    .person-intro-wrap.bg-red .person-name {
+      color: #fff; }
+    .person-intro-wrap.bg-red .intro-detail {
+      color: #dda8aa; }
+
+.site-floor {
+  padding: 0.35rem 0 0.2rem 0; }
+  .site-floor .title {
+    line-height: 0.3rem;
+    font-size: 0.2rem;
+    text-align: center; }
+  .site-floor .subtit {
+    margin-top: 0.1rem;
+    line-height: 0.2rem;
+    font-size: 0.14rem;
+    color: #666;
+    text-align: center; }
+    .site-floor .subtit.small {
+      font-size: 0.14rem; }
+  .site-floor .person-rec-detail {
+    padding: 0 0.18rem;
+    margin-top: 0.1rem;
+    line-height: 0.18rem;
+    font-size: 0.13rem;
+    color: #666;
+    text-align: center; }
+  .site-floor .img-box {
+    margin-top: 0.1rem; }
+
+/*banner多边形动画*/
+@keyframes polygon {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-moz-keyframes polygon {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-webkit-keyframes polygon {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-o-keyframes polygon {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+/*banner圆点动画*/
+@keyframes round {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-moz-keyframes round {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-webkit-keyframes round {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }
+@-o-keyframes round {
+  0% {
+    left: 50%; }
+  25% {
+    left: 52%; }
+  50% {
+    left: 50%; }
+  75% {
+    left: 48%; }
+  100% {
+    left: 50%; } }

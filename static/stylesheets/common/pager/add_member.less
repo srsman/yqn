@@ -1,0 +1,54 @@
+/* 邀请新成员 */
+.qn-pager-group-manage-add-member-main {
+  margin-bottom: 15px;
+  height: 480px;
+  border: 1px solid @border-default-color;
+}
+
+.qn-pager-add-member-contacts-box,
+.qn-pager-add-member-selected-box {
+  float: left;
+  width: 453px;
+  height: 480px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.qn-pager-add-member-contacts-box {
+  border-right: 1px solid @border-default-color;
+
+  .qn-pager-fuzzy-query {
+    height: 41px;
+    border-bottom: 1px solid @border-default-color;
+
+    input[type='text'] { width: 422px; }
+  }
+}
+
+.qn-pager-add-member-contacts-list {
+  position: relative;
+  height: 436px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .qn-pager-fuzzy-query-result { height: 436px; }
+}
+
+.qn-pager-add-member-selected-title {
+  height: 41px;
+  line-height: 38px;
+  text-align: center;
+  border-bottom: 1px solid @border-default-color;
+
+  span {
+    color: @gray-light;
+
+    i {
+      padding: 0 5px;
+      color: @brand-danger;
+      font-style: normal;
+    }
+  }
+}
+
+#submit-new-member-btn { width: 200px; }

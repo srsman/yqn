@@ -1,0 +1,61 @@
+/* 群信息简介 */
+.qn-pager-room-description {
+  margin-bottom: 20px;
+  .clearfix();
+
+  span.qn-avatar,
+  dl { float: left; }
+
+  span.qn-avatar {
+    padding: 4px;
+    width: 110px;
+    height: 110px;
+
+    img {
+      width: 102px;
+      height: 102px;
+    }
+  }
+
+  dl {
+    margin-left: 15px;
+    width: 450px;
+
+    .qn-form-control { width: 450px; }
+
+    textarea.qn-form-control {
+      margin-top: 10px;
+      height: 60px;
+      min-height: 60px;
+    }
+  }
+
+  dt {
+    min-height: 39px;
+    font-weight: normal;
+
+    p.qn-control-static {
+      font-size: @font-size-large;
+    }
+  }
+
+  dd {
+    padding-top: 5px;
+
+    span {
+      padding-bottom: 2px;
+      display: block;
+      font-size: @font-size-small;
+      color: @gray-light;
+    }
+  }
+}
+
+#qn-pager-room-info-announcement-input { width: 590px; }
+
+// 退出直播群
+#logout-live-room-box {
+  text-align: center;
+
+  .qn-btn { width: 200px; }
+}

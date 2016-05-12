@@ -1,0 +1,119 @@
+/*
+ * 直播群列表
+ * @Author: 大发
+ */
+
+/* 直播间页眉 */
+.live-room-header {
+  padding: 15px;
+  background-color: @background-default-color;
+  border: 1px solid @border-default-color;
+
+  dl { margin: 0; }
+
+  dt,
+  dd { text-align: center; }
+
+  dt { color: @gray-light; }
+
+  dd {
+    font-size: 26px;
+    font-weight: bold;
+    color: @gray-dark;
+  }
+
+  h3.module-title {
+    margin-top: 15px;
+    color: @gray;
+  }
+
+  .col-xs-3:last-child {
+    .qn-btn { margin-top: 11px; }
+  }
+}
+
+/* 直播间列表 */
+.live-room-item + .live-room-item {
+  margin-top: 15px;
+}
+
+.live-room-item {
+  padding: 0 15px;
+  background-color: @background-default-color;
+  border: 1px solid @border-default-color;
+
+  .item-header,
+  .item-body { padding: 15px 0; }
+
+  .item-header {
+    padding: 15px 0;
+    border-bottom: 1px solid @border-default-color;
+
+    .col-xs-9,
+    .col-xs-3 {
+      position: relative;
+      min-height: 40px;
+    }
+
+    .col-xs-9 {
+      padding-left: 65px;
+    }
+
+    .col-xs-3 {
+      height: 40px;
+      line-height: 38px;
+      text-align: right;
+    }
+
+    .item-icon {
+      position: absolute;
+      top: 0;
+      left: 15px;
+    }
+
+    .item-title {
+      position: relative;
+      display: inline-block;
+      padding: 10px 50px 0 0;
+    }
+
+    .item-type-icon {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      display: inline-block;
+      padding: 2px 5px;
+      color: #fff;
+      font-size: @font-size-base;
+      font-weight: normal;
+      background-color: @brand-info;
+      border-radius: @border-radius-base;
+    }
+
+    .item-people-count {
+      color: @gray-light;
+
+      span {
+        display: inline-block;
+
+        .fa { margin-right: 5px; }
+
+        &.current { color: @gray; }
+
+        &.active { color: @brand-primary !important; }
+      }
+    }
+  }
+
+  .item-body {
+    p {
+      margin: 0;
+      color: @gray;
+    }
+  }
+
+  .item-footer {
+    padding-bottom: 15px;
+    text-align: right;
+  }
+}

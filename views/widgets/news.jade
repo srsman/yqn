@@ -1,0 +1,14 @@
+//- 热点新闻
+.qn-section
+  //- 标题部分
+  h3.qn-section-title 热点新闻
+  a(href='/xinwen', title='全部新闻').qn-section-more 全部新闻
+    i.fa.fa-angle-right
+
+  //- 主体部分
+  .qn-section-main
+    ul.qn-weiget-list.qn-weiget-news
+      each item in widgetNews
+        li
+          a.qn-post-title-link.small(href='/xinwen/' + item.newsId, title=item.title) #{item.title}
+          .post-meta #{moment(item.date).format('MM月DD日 HH:mm:ss')}

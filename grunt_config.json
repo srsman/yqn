@@ -1,0 +1,20 @@
+{
+  "dist": {
+    "css": "public/stylesheets",
+    "js": "public/javascripts",
+    "lib": "public/javascripts/lib",
+    "plugins": "public/javascripts/plugins",
+    "images": "public/images",
+    "fonts": "public/fonts"
+  },
+  "src": {
+    "css": "static/stylesheets",
+    "js": "static/javascripts",
+    "lib": "static/javascripts/lib",
+    "plugins": "static/javascripts/plugins",
+    "tpls": "static/javascripts/tpls",
+    "images": "static/images",
+    "utils": "utils",
+    "routes": "routes"
+  }
+}

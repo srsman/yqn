@@ -1,0 +1,49 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/stock/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      //- 面包屑
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        span 股票排行
+
+      //- 股票列表
+      .qn-section
+        .qn-section-main
+          h3.qn-section-title 股票排行
+
+          //- 股票列表主体
+          include seo_stock_list_main
+
+          //- 分页
+          - var currPage = stocks.page.curPage
+          - var totalPage = stocks.page.pageCount
+          - var pageLink = '/gupiao?page='
+          include ../common/pagination
+          +page(totalPage, currPage, pageLink)
+
+     //- 侧边组件
+    .seo-main-sidebar
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

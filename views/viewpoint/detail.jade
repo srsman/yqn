@@ -1,0 +1,89 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/viewpoint_index.css')
+
+block main_content
+  .detail-wrap
+
+    //- 面包屑
+    .qn-row.qn-breadcrumbs
+      a(href='/viewpoint/list') 返回
+      i.fa &gt;
+      span 观点详情
+
+    //- 详情
+    .detail-container
+
+      //- 隐藏域 观点ID
+      input#viewpointId(type="hidden" value="#{data.result.viewpointId}")
+
+      //- 标题
+      .qn-row.detail-title
+        h3.text-center #{data.result.shareTitle}
+          if data.result.isSelection
+            i.icon-elite 精
+
+      //- 信息
+      .qn-row.detail-meta
+        span #{data.result.viewpointTs}
+        span 阅读：#{data.result.readNum}
+
+      //- 内容
+      .qn-row.detail-content !{utils.formatStkUrl(data.result.content)}
+
+      //- 操作
+      .qn-row.detail-action
+        a#delete(href="javascript:;")
+          i.fa.fa-trash-o
+          | 删除
+
+      .qn-row.detail-footer
+
+        //- tabs切换
+        ul.detail-footer-tab#footerTab
+          li.active(data-tag="commentWrap")
+            i.fa.fa-commenting-o
+            | 评论（
+            span#commentNum #{data.result.commentNum}
+            | ）
+          li(data-tag="thumbWrap")
+            i.fa.fa-thumbs-o-up
+            | 点赞（#{data.result.likeNum}）
+
+        .detail-footer-content
+
+          //- 评论盒子
+          .detail-comment-wrap.J-detail-footer#commentWrap
+
+            //- 发表评论
+            .qn-comment-form.comment-reply
+              .qn-comment-form-textarea
+                textarea.qn-form-control.J-comment-textarea#newComment(placeholder="写下你的评论...", data-limit-num="500")
+                em.limit-num 500
+              .qn-comment-form-actions
+                button.qn-btn.sm.primary.J-comment-new 评论
+
+            //- 评论列表
+            ul.detail-comment-feed#commentFeed
+
+            //-加载更多
+            .qn-row.qn-loading-animate.hide#ajaxLoadingComment(data-over="N", data-active="N")
+              | 查看更多
+
+          //- 点赞盒子
+          .detail-thumb-wrap.J-detail-footer.hide#thumbWrap
+            //- 点赞列表
+            ul.detail-thumb-feed#thumbFeed
+
+            //- 加载更多
+            .qn-row.qn-loading-animate.hide#ajaxLoadingLike(data-over="N", data-active="N")
+              | 查看更多
+
+
+append foot_scripts
+  script(data-main='/javascripts/viewpoint/detail.js' src='/javascripts/lib/requirejs/require.js')

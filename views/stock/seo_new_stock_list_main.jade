@@ -1,0 +1,40 @@
+//- 新股列表主体
+table.qn-table.striped.hover.seo-stock-list-table
+  thead
+    tr
+      th 股票名称
+      th.text-center 申购代码
+      th.text-center 申购日期
+      th.text-right 发行价
+      th.text-center 中签号公布日
+      th.text-right 中签率(%)
+      th.text-center 上市时间
+      th.text-right 市盈率
+  tbody
+    each item in newStocks.stks
+      tr
+        td
+          a(href='/xingu/' + item.assetId, title=item.stkName) #{item.stkName}
+        td.text-center #{item.applyCode}
+        td.text-center
+          if item.onlineDate
+            | #{item.onlineDate}
+          else
+            | -
+        td.text-right #{item.issuePrice}
+        td.text-center
+          if item.lotDate
+            | #{item.lotDate}
+          else
+            | -
+        td.text-right
+          if item.lotRate
+            | #{item.lotRate}
+          else
+            | -
+        td.text-center
+          if item.listDate
+            | #{item.listDate}
+          else
+            | -
+        td.text-right #{item.pe}

@@ -1,0 +1,11 @@
+extends ../common/full_width_layout
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/accounts/accounts_index.css')
+
+block main_content
+  h1 #{title}
+
+append foot_scripts
+  script(src='/javascripts/common.js')

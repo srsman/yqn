@@ -1,0 +1,261 @@
+/*---------- 变量 ----------*/
+
+/* 路径 */
+@image-path: '../../images';
+@font-path: '/fonts';
+
+/* 颜色 */
+// 5阶灰色
+@gray-base: #000;
+@gray-darker: lighten(@gray-base, 13.5%); // #222
+@gray-dark: lighten(@gray-base, 20%);   // #333
+@gray: lighten(@gray-base, 40%); // #666
+@gray-light: lighten(@gray-base, 60%); // #999
+@gray-lighter: lighten(@gray-base, 93.5%); // #eee
+
+// 主体颜色
+@brand-primary: #ff4e00; // 网站主色（橙）
+@brand-success: #5cb85c; // 成功（绿）
+@brand-info: #24a9fe; // 一般信息（蓝） 以前颜色#5bc0de
+@brand-warning: #f0ad4e; // 警告（黄）
+@brand-danger: #d9534f; // 危险（红）
+
+// 状态的颜色
+// 成功
+@state-success-text: #3c763d;
+@state-success-bg: #dff0d8;
+@state-success-border: darken(spin(@state-success-bg, -10), 5%);
+
+// 普通信息
+@state-info-text: #31708f;
+@state-info-bg: #d9edf7;
+@state-info-border: darken(spin(@state-info-bg, -10), 7%);
+
+// 警告
+@state-warning-text: #8a6d3b;
+@state-warning-bg: #fcf8e3;
+@state-warning-border: darken(spin(@state-warning-bg, -10), 5%);
+
+// 危险
+@state-danger-text: #a94442;
+@state-danger-bg: #f2dede;
+@state-danger-border: darken(spin(@state-danger-bg, -10), 5%);
+
+/* 基础变量 */
+@body-bg: #f0f0f0; // 网站背景颜色
+@text-color: @gray-dark; // 网站文字颜色
+@background-default-color: #f9fbfc; // 默认的背景颜色
+@border-default-color: #e9e8e8; // 默认边框颜色
+
+/* 超链接 */
+@link-color: #2692cd;
+@link-hover-color: darken(@link-color, 15%);
+@link-hover-decoration: none;
+
+/* 排版 */
+// 字体
+@font-family-base: "Helvetica Neue",Helvetica,Arial,"pingfang sc","Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,SimSun,sans-serif;
+
+// 字体大小
+@font-size-base: 14px;
+@font-size-large: ceil((@font-size-base * 1.10)); // ~16px
+@font-size-small: ceil((@font-size-base * 0.85)); // ~12px
+
+// 6阶标题字体大小
+@font-size-h1: floor((@font-size-base * 2.6)); // ~36px
+@font-size-h2: floor((@font-size-base * 2.15)); // ~30px
+@font-size-h3: ceil((@font-size-base * 1.7)); // ~24px
+@font-size-h4: ceil((@font-size-base * 1.10)); // ~16px
+@font-size-h5: @font-size-base;
+@font-size-h6: ceil((@font-size-base * 0.85)); // ~12px
+
+// 行间距
+@line-height-base: 1.428571429;
+@line-height-computed: floor((@font-size-base * @line-height-base)); // ~20px
+
+// 标题
+@headings-font-family: inherit;
+@headings-font-weight: 500;
+@headings-line-height: 1.1;
+@headings-color: inherit;
+@headings-small-color: @gray-light;
+
+/* 组件 */
+// 普通组件的padding大小
+@padding-base-vertical: 6px;
+@padding-base-horizontal: 12px;
+
+// 大型组件的padding大小
+@padding-large-vertical: 10px;
+@padding-large-horizontal: 16px;
+
+// 小型组件的padding大小
+@padding-small-vertical: 5px;
+@padding-small-horizontal: 10px;
+
+// 超小型组件的padding大小
+@padding-xs-vertical: 1px;
+@padding-xs-horizontal: 5px;
+
+// 组件行间距
+@line-height-large: 1.3333333;
+@line-height-small: 1.5;
+
+// 圆角规格
+@border-radius-base: 4px;
+@border-radius-large: 6px;
+@border-radius-small: 3px;
+
+/* 表格 */
+@table-cell-padding: 8px;
+@table-condensed-cell-padding: 5px; // 紧凑的
+@table-bg: transparent;
+@table-bg-accent: #fef9f6; // 隔行换的色
+@table-bg-hover: #e9f4ff;
+@table-bg-active: @table-bg-hover;
+@table-border-color: @border-default-color;
+
+/* 按钮 */
+@btn-font-weight: normal;
+
+// 默认按钮
+@btn-default-color: @gray-dark;
+@btn-default-bg: #fff;
+@btn-default-border: @border-default-color;
+
+// 首选按钮
+@btn-primary-color: #fff;
+@btn-primary-bg: @brand-primary;
+@btn-primary-border: darken(@btn-primary-bg, 15%);
+
+// 成功按钮
+@btn-success-color: #fff;
+@btn-success-bg: @brand-success;
+@btn-success-border: darken(@btn-success-bg, 15%);
+
+// 一般信息按钮
+@btn-info-color: #fff;
+@btn-info-bg: @brand-info;
+@btn-info-border: darken(@btn-info-bg, 15%);
+
+// 警告按钮
+@btn-warning-color: #fff;
+@btn-warning-bg: @brand-warning;
+@btn-warning-border: darken(@btn-warning-bg, 15%);
+
+// 危险按钮
+@btn-danger-color: #fff;
+@btn-danger-bg: @brand-danger;
+@btn-danger-border: darken(@btn-danger-bg, 15%);
+
+// 禁用按钮
+@btn-disabled-color: #fff;
+@btn-disabled-bg: @gray-light;
+@btn-disabled-border: darken(@gray-light, 15%);
+
+// 按钮圆角规格
+@btn-border-radius-base: @border-radius-base;
+@btn-border-radius-large: @border-radius-large;
+@btn-border-radius-small: @border-radius-small;
+
+//按钮固定宽度
+@btn-fixed-width-default: 140px;
+@btn-fixed-width-small: 100px;
+@btn-fixed-width-large: 220px;
+
+/* 表单 */
+@label-width: 150px;
+@label-color: @text-color;
+
+// input基础样式
+@input-bg: #fff;
+@input-bg-disabled: @gray-lighter;
+@input-color: @gray;
+@input-border: @border-default-color;
+
+// input圆角
+@input-border-radius: @border-radius-base;
+@input-border-radius-large: @border-radius-large;
+@input-border-radius-small: @border-radius-small;
+
+// input获得焦点时的边框颜色
+@input-border-focus: @brand-primary;
+
+// 占位符文本颜色
+@input-color-placeholder: #999;
+
+// 默认宽度
+@input-width-base: 280px;
+
+// 默认高度
+@input-height-base: (@line-height-computed + (@padding-base-vertical * 2) + 2);
+
+// 大型的高度
+@input-height-large: (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
+
+// 小型的高度
+@input-height-small: (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
+
+// 当元素禁用时的光标样式
+@cursor-disabled: not-allowed;
+
+/* 提示警告 */
+@alert-padding: 5px 15px;
+@alert-border-radius: @border-radius-base;
+@alert-link-font-weight: bold;
+
+// 成功
+@alert-success-bg: @state-success-bg;
+@alert-success-text: @state-success-text;
+@alert-success-border: @state-success-border;
+
+// 普通信息
+@alert-info-bg: @state-info-bg;
+@alert-info-text: @state-info-text;
+@alert-info-border: @state-info-border;
+
+// 警告
+@alert-warning-bg: @state-warning-bg;
+@alert-warning-text: @state-warning-text;
+@alert-warning-border: @state-warning-border;
+
+// 危险
+@alert-danger-bg: @state-danger-bg;
+@alert-danger-text: @state-danger-text;
+@alert-danger-border: @state-danger-border;
+
+/* 打点 */
+@badge-color: #fff;
+@badge-bg: @brand-danger;
+@badge-border: darken(#fff, 5%);
+@badge-font-weight: bold;
+@badge-line-height: 1;
+@badge-border-radius: 10px;
+
+/* IM */
+@pager-title-background-color: #ccd8df;
+// 普通信息
+@msg-bubble-background-color: @background-default-color;
+@msg-bubble-border-color: @border-default-color;
+@myself-msg-bubble-background-color: @brand-info;
+@myself-msg-bubble-border-color: darken(@myself-msg-bubble-background-color, 15%);
+@msg-bubble-border-radius: @border-radius-base;
+// 红包信息
+@msg-bubble-reward-background-color: #fa9d3b;
+@msg-bubble-reward-border-color: darken(@msg-bubble-reward-background-color, 15%);
+
+/* 面包屑 */
+@breadcrumbs-background-color: @background-default-color;
+@breadcrumbs-border-color: @border-default-color;
+
+/* Tab */
+@tab-header-border-color: @border-default-color;
+@tab-header-text-color: @gray-light;
+@tab-header-active-border-color: darken(@tab-header-border-color, 50%);
+@tab-header-active-text-color: darken(@tab-header-border-color, 50%);
+
+/* 推送 */
+@push-pager-title-color: @gray-dark;
+
+/* 观点 */
+@viewpoint-title-link-color: @link-color; // 蓝

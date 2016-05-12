@@ -1,0 +1,135 @@
+extends ../common/seo_layout
+
+block header
+  +he('wenda')
+
+append css
+  link(rel='stylesheet', href='/stylesheets/question/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/wenda') 问答
+        i.fa.fa-angle-right
+        span 问答详情
+      .qn-section
+        .qn-section-main
+          h3.qn-section-title 问答详情
+          .qn-QA-box
+            .qn-QA-question
+              h4 #{data.qContent}
+              i.qn-font-icon.info 问
+              if data.assetId
+                ul.clearfix
+                  li
+                    a(href="/gupiao/#{data.assetId}") #{data.assetName}(#{data.assetId})
+                  li
+                    span 成本价：
+                    | #{data.price || '-'}
+                  li
+                    span 仓位：
+                    | #{data.position || '-'}
+              p(class={mt15: !data.assetId }) #{utils.timeDifference(data.qTime)}
+            .qn-QA-answer
+              .qn-avatar-info
+                .qn-avatar.disable.small
+                  - var adviser = data.ans[0]
+                  if adviser.aIcon
+                    img(src="#{adviser.aIcon}" alt="个人头像")
+                    .qn-vip
+                  else
+                    img(src="/images/default_avatar_man.jpg" alt="个人头像" )
+                    .qn-vip
+                ul
+                  li #{adviser.aName}
+                  if adviser.orgName
+                    li #{adviser.orgName}（#{adviser.adviserName}）
+                  else
+                    li #{adviser.adviserName}
+              p.qn-QA-answerCt #{adviser.aContent}
+                i.qn-font-icon.primary 答
+              p.qn-QA-answerTs #{utils.timeDifference(adviser.aTime)}
+          if data.assetId
+            - var stock = asset[0];
+            .qn-widget-stockInfo
+              .qn-widget-stockLeft
+                dl
+                  dt
+                    a(href="/gupiao/"+stock[0])=stock[1]
+                  dd=stock[0]
+              .qn-widget-stockMid
+                dl
+                  dt(class={up: stock[9] > 0 , down: stock[9]<0})
+                    span.stock-nowPrice #{utils.formatNumVal(stock[2],1)}
+                    i.fa.fa-arrow-up
+                    i.fa.fa-arrow-down
+                    span.stock-oldPrice #{utils.formatNumVal(stock[9],1)}
+                    span.stock-condition #{utils.formatNum(stock[10]*100)}
+                      i.percentage %
+                  dd #{utils.formatDate(stock[11], 'yyyy-MM-dd hh:mm:ss')}
+              .qn-widget-stockRight
+                ul.clearfix
+                  - var oldPrice = stock[6] || 0;
+                  li
+                    span 今开：
+                    if Number(stock[5]) == 0 || stock[5] == oldPrice
+                      span.normal #{stock[5] == 0 ? '-' : stock[5]}
+                    else if Number(stock[5]) < oldPrice
+                      span.down #{stock[5] == 0 ? '-' : stock[5]}
+                    else if Number(stock[5]) > oldPrice
+                      span.up #{stock[5] == 0 ? '-' : stock[5]}
+                  li
+                    span 最高：
+                    if Number(stock[3]) == 0 || stock[3] == oldPrice
+                      span.normal #{stock[3] == 0 ? '-' : stock[3]}
+                    else if Number(stock[3]) < oldPrice
+                      span.down #{stock[3] == 0 ? '-' : stock[3]}
+                    else if Number(stock[3]) > oldPrice
+                      span.up #{stock[3] == 0 ? '-' : stock[3]}
+                  li
+                    span 成交量：
+                    | #{stock[8] == 0 ? '-' : utils.formatNumVal(stock[8],3)}
+                  li
+                    span 昨收：
+                    | #{stock[6] == 0 ? '-' : stock[6]}
+                  li
+                    span 最低：
+                    if Number(stock[4]) == 0 || stock[4] == oldPrice
+                      span.normal #{stock[4] == 0 ? '-' : stock[4]}
+                    else if Number(stock[4]) < oldPrice
+                      span.down #{stock[4] == 0 ? '-' : stock[4]}
+                    else if Number(stock[4]) > oldPrice
+                      span.up #{stock[4] == 0 ? '-' : stock[4]}
+                  li
+                    span 成交额：
+                    | #{stock[8] == 0 ? '-' : utils.formatNumVal(stock[7],3)}
+
+
+
+        if sameQuestions && sameQuestions.qa
+          .qn-section
+            h3.qn-section-title 同类问题
+            .qn-section-main
+                ul.qn-tab-items.items-same.seo-questions-list-main
+                  each item in sameQuestions.qa
+                    include ../question/seo_list_main
+                  a.qn-moreItem-btn#more-sameQ-btn(href="javascript:;", data-asset=data.assetId)
+                    span 显示更多&nbsp;
+                    i.fa.fa-angle-double-down
+
+    .seo-main-sidebar
+      //- 顾问相关信息
+      include ../widgets/adviser_relate
+      +ADrelevant(adviserInfo, adQuestions, adViewpoints)
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+append foot_scripts
+  script(data-main='/javascripts/question/seo_info.js' src='/javascripts/lib/requirejs/require.js')

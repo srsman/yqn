@@ -1,0 +1,17 @@
+.qn-widget-table {
+  border-radius: @border-radius-base;
+
+  > thead:first-child {
+    .border-top-radius(@border-radius-base);
+  }
+
+  > tbody:last-child {
+    .border-bottom-radius(@border-radius-base);
+  }
+
+  // 表头的文字居底对齐
+  > thead > tr > th {
+    border-bottom: none;
+    //background-color: #f9f9f9;
+  }
+}

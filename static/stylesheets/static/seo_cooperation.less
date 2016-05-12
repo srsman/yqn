@@ -1,0 +1,107 @@
+.qn-section-static {
+
+  .gray3 { color: @gray-dark; }
+  .gray6 { color: @gray; }
+  .gray9 { color: @gray-light; }
+  .margin0 { margin: 0 !important; }
+  .padding0 { padding: 0 !important; }
+  .border0 { border:none !important; }
+  .marginTop40 { margin-top: 40px !important; }
+
+  .qn-static-row {
+
+    &:nth-of-type(even) {
+      background-color: #f9f9f9;
+    }
+
+    &.row-pthz {
+      padding: 40px 90px;
+
+      h2 { margin-bottom: 20px; font-size: 28px; text-align: center;}
+      li { float: left; }
+      p { text-align: center; font-size: 14px; }
+      h4 { text-align: center; font-size: 18px; }
+
+      .nrzm {
+        margin-top: 25px;
+        padding-left: 14px;
+
+        li {
+          margin-right: 54px;
+        }
+
+        h4 { margin: 8px 0 9px; line-height: 1; }
+      }
+    }
+
+    .pthz-subTitle-list {
+      position: relative;
+      text-align: center;
+      padding: 42px 0 40px 137px;
+
+      li {
+        display: inline-block;
+        margin-right: 152px;
+      }
+
+      .pthz-subTitle {
+        display: inline-block;
+        width: 181px;
+        height: 0;
+        padding-top: 144px;
+        overflow: hidden;
+
+        &.subTitle-1th {
+          background: url(/images/static/icon-pthz-1.png) no-repeat center;
+        }
+
+        &.subTitle-2th {
+          background: url(/images/static/icon-pthz-2.png) no-repeat center;
+        }
+
+        &.subTitle-3th {
+          background: url(/images/static/icon-pthz-3.png) no-repeat center;
+        }
+      }
+    }
+
+    .pthz-contact {
+      border: 1px solid @border-default-color;
+      padding: 0 200px;
+      margin: 15px 3px 0;
+      line-height: 58px;
+      font-size: 16px;
+      color: @gray;
+
+      &:after { content: ""; display: block; clear: both; }
+      div { float: left; }
+      &.borderA { border-radius: 3px; }
+      .pthz-tel { margin-right: 168px; }
+
+      &.styleA {
+        margin-top: 40px;
+        padding: 0;
+
+        .pthz-tel, .pthz-email {
+          width: 50%;
+          margin: 0;
+          text-align: center;
+        }
+
+        .pthz-tel { border-right: 1px solid @border-default-color; }
+      }
+    }
+
+    .thick-border {
+      margin-top: 25px;
+      border: 7px solid #e9e8e8;
+
+      li {
+        border-right: 6px solid #e9e8e8;
+        padding: 1px 0;
+      }
+    }
+
+
+  }
+}

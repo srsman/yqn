@@ -1,0 +1,92 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/static/seo_index.css')
+
+block main_content
+  .container.main-container
+    .qn-section-static-breadcrumbs-box
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        span 申请投顾认证
+
+    .qn-section-static.qn-static-special.clearfix
+
+      .qn-static-row.row-certification
+        .static-header
+          h2 投 顾 认 证
+          p Certification consulting
+        p 投资顾问是一项专业、严谨、饱含服务热情的职业。我们认为，只有专业能力强、服务意识足的投顾，才是投资者需要的投顾，才是值得 爱、值得尊敬的投顾。
+
+      .qn-static-row.row-certification
+        .side-content
+          h3.second-title 投顾的价值
+          ul
+            li 采用合理、多样化、竞争性的收入机制，让每一位投资顾问都劳有所得、能者多得。
+            li 平台提供个性化的推广策略，打造明星投顾，专业成就价值。
+            li 平台提供完善的培训体系，帮助每一位投顾提升专业分析能力、服务能力、自我营销能力。
+            li 平台提供强大的数据库、研报库，让每一位投顾都能体会到：您不是一个人在战斗！
+            li “一起牛”还为投顾提供专业客服、专属管理员团队，解决投顾的任何困惑。
+        i( title="投顾的价值", class="green")
+
+      .qn-static-row.row-certification
+        .side-content.right-side
+          h3.second-title 带来的服务
+          ul
+            li 提供投资观点、热点新闻解读，帮助投资者把握投资机会。
+            li 提供在线问答。投资者可以选择适合自己的投顾，享受一对一咨询服务。
+            li 提供实时解盘，帮助投资者第一时间了解盘面变化。
+            li 创建投资组合。针对不同投资者的投资风格，投顾将推荐个性化的股票投资组合。
+        i( title="带来的服务", class="red")
+
+      .qn-static-row.row-certification
+        .side-content
+          h3.second-title 认证投顾
+          p.description “一起牛”对认证投顾采用严格的审核机制，我们的投顾会包含以下类型：
+          ul
+            li 通过中国证券业协会审核的证券投资咨询（投资顾问、分析师）；
+            li 通过中国证券业协会审核的基金执业资格人员；
+            li 对于缺乏执业资格，但具备长期股市实战能力和服务经验的投资高手/达人，平台审核通过后安排入驻。
+        i( title="认证投顾", class="pupple")
+
+      .qn-static-row.certification-bottom
+        ul.clearfix
+          li
+            h3 投资顾问 / 分析师
+            p 1、持有证券执业资格证
+            p 2、正在金融机构任职&nbsp;&nbsp;&nbsp;
+          li.middle
+            h3 基金执业资格
+            p 1、持有基金执业资格证
+            p 2、正在金融机构任职&nbsp;&nbsp;&nbsp;
+          li
+            h3 投资达人
+            p 1、具备专业证券投资知识
+            p 2、具备丰富证券投资经验
+        .button-area
+          a.qn-btn.primary#certification 我要认证
+
+  //- 弹窗部分
+  .qn-seo-shadow
+  .qn-seo-dialog.static-dialog
+    i.dialog-close#dialog-close
+    h2 投顾认证流程
+    ul.dialog-content
+      li
+        i.num 1
+        p 扫描二维码下载一起牛
+        img(src="/images/download.jpg", alt="一起牛 二维码", class="qrcode")
+      li
+        i.num 2
+        p 进入一起牛APP<br>“我” - “个人资料” - “申请投顾认证” - “填写认证资料”
+        img(src="/images/static/image-cert-1.jpg", alt="一起牛 二维码" class="process")
+      li.margin0
+        i.num 3
+        p.success 审核通过
+
+append foot_scripts
+  script(data-main='/javascripts/static/static.js' src='/javascripts/lib/requirejs/require.js')

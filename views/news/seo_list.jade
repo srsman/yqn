@@ -1,0 +1,46 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/news/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        span 热点新闻
+      .qn-section
+        .qn-section-main
+          h3.qn-section-title 热点新闻
+          .qn-section-newsContent
+            dl
+              each item in newsInfo.data
+                dt
+                  a.qn-post-title-link(href="/xinwen/#{item.newsId}") #{item.title}
+                dd
+                  p.news-content #{item.content}
+                  p.post-time #{utils.timeDifference(item.date)}
+          //- 分页
+          - var currPage = newsInfo.page.curPage
+          - var totalPage = newsInfo.page.pageCount
+          - var pageLink = '/xinwen?page='
+          include ../common/pagination
+          +page(totalPage, currPage, pageLink)
+
+    .seo-main-sidebar
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

@@ -1,0 +1,26 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/viewpoint_index.css')
+
+block main_content
+  .detail-wrap
+    //- 面包屑
+    .qn-row.qn-breadcrumbs
+      a(href='/viewpoint/list') 返回
+      i.fa &gt;
+      span 观点详情
+    //- 详情
+    .detail-container
+      .qn-no-result
+        ul
+          li
+            img(src="/images/list_null.png", height="106")
+          li 观点不存在或已删除！
+
+append foot_scripts
+  script(data-main='/javascripts/viewpoint/no_result.js' src='/javascripts/lib/requirejs/require.js')

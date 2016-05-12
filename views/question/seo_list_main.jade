@@ -1,0 +1,30 @@
+//- 问答列表主体部分
+li.seo-questions-list-item(data-mid="#{item.aId}").item
+  dl
+    //- 问题
+    dt
+      i.qn-font-icon.info 问
+      if item.assetName
+        a.qn-stock-title-link(href="/gupiao/#{item.assetId}") #{item.assetName}
+      a.qn-post-title-link(href='/wenda/' + item.qId, title=item.qContent) #{item.qContent}
+
+
+    //- 回答
+    dd
+      i.qn-font-icon.primary 答
+
+      p !{item.aContent}
+      a.post-more(href='/wenda/' + item.qId, title=item.qContent) 查看详情&nbsp;
+        i.fa.fa-angle-double-right
+
+  .post-meta.clearfix
+    .author
+      if item.aIcon
+        img(src=item.aIcon, alt=item.aName)
+      else
+        img(src='/images/default_avatar_man.jpg', alt=item.aName)
+      a(href='javascripts:' title=item.aName) #{item.orgName}#{item.aName} &nbsp;
+      | 解答
+
+    //- .date #{moment(item.aTime).format('MM月DD日 hh:mm')}
+    .date #{utils.timeDifference(item.aTime)}

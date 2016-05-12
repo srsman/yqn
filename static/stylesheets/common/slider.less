@@ -1,0 +1,129 @@
+// 滑块banner
+.qn-slider {
+  position: relative;
+  overflow: hidden;
+
+  .qn-slides {
+    margin: 0;
+    padding: 0;
+
+    &:after {
+      content: ".";
+      display: block;
+      clear: both;
+      visibility: hidden;
+      line-height: 0;
+      height: 0;
+    }
+  }
+
+  .qn-slide {
+    position: relative;
+    float: left;
+    margin-right: -100%;
+    display: none;
+    width: 100%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: 100%;
+    -moz-background-size: cover;
+    background-size: 100%;
+    background-size: cover;
+    .box-shadow(inset 0 0 10px 0 rgba(0,0,0,.1));
+
+    &.active,
+    &:first-child {
+      display: list-item;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  /* Arrows */
+  .arrow-prev,
+  .arrow-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    font-size: 24px;
+    color: @gray-dark !important;
+    .transition(.2s ease-in-out);
+    opacity: 0;
+    z-index: 100;
+  }
+
+  .arrow-prev {
+    left: -30px;
+  }
+
+  .arrow-next {
+    right: -30px;
+  }
+
+  &:hover {
+    .arrow-prev,
+    .arrow-next {
+      opacity: 1;
+    }
+
+    .arrow-prev {
+      left: 30px;
+    }
+
+    .arrow-next {
+      right: 30px;
+    }
+  }
+
+  /* Controllers */
+  .qn-slider-controllers {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+
+    a {
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      background-color: rgba(51, 51, 51, .5);
+      border-radius: 50%;
+      text-indent: -9999px;
+      display: inline-block;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.active {
+        background-color: @gray-dark;
+      }
+    }
+  }
+
+  /* 如果背景是暗色调的 */
+  &.bg-dark {
+    .arrow-prev,
+    .arrow-next {
+      color: #fff !important;
+    }
+
+    .qn-slider-controllers {
+      a {
+        background-color: rgba(255, 255, 255, .5);
+
+        &.active {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

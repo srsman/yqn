@@ -1,0 +1,52 @@
+extends ../common/seo_layout
+
+block header
+  +he('guandian')
+
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+
+      //- 面包屑
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/guandian') 观点
+        i.fa.fa-angle-right
+        span 观点详情
+
+      //- 主体部分
+      .qn-section
+        .qn-section-main
+          .qn-article
+            h1.qn-article-title #{data.title}
+            .qn-meta-panel
+              .qn-meta-createTs #{utils.timeDifference(data.viewpointTs)}
+              if data.stkLables.length > 0
+                .qn-meta-stocks 相关股票
+                  each stk in data.stkLables
+                    a(href='/gupiao/' + stk.value) #{stk.name}
+              .qn-meta-readNums 阅读&nbsp;
+                span.times #{data.readNum}
+            .qn-article-content !{utils.formatStkUrl(data.content)}
+            //- .qn-article-share 分享到wechat
+
+    .seo-main-sidebar
+      //- 顾问相关信息
+      include ../widgets/adviser_relate
+      +ADrelevant(adviserInfo, adQuestions, adViewpoints)
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

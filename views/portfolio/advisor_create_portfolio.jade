@@ -1,0 +1,11 @@
+extends ../common/layout
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/portfolio/live_room_index.css')
+
+block main_content
+  h1 #{title}
+
+append foot_scripts
+  script(data-main='/javascripts/portfolio/create.js' src='/javascripts/lib/requirejs/require.js')

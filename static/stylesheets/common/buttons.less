@@ -1,0 +1,154 @@
+/* 按钮 */
+
+// 基本的按钮样式
+.qn-btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  white-space: nowrap;
+  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+  .user-select(none);
+
+  &:hover,
+  &:focus {
+    color: @btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active { background-image: none; }
+
+  &.disabled,
+  &[disabled] {
+    cursor: @cursor-disabled;
+  }
+
+  .fa { margin-right: 10px; }
+
+  .ripple { background: rgba(142, 142, 142, .6); }
+}
+
+// 基本按钮颜色
+.qn-btn {
+  // 基本显示网站主色
+  &.primary {
+    .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-color);
+  }
+
+  // 成功显示绿色
+  &.success {
+    .button-variant(@btn-success-color; @btn-success-bg; @btn-success-color);
+  }
+
+  // 一般信息显示蓝色
+  &.info {
+    .button-variant(@btn-info-color; @btn-info-bg; @btn-info-color);
+  }
+
+  // 警告显示黄色
+  &.warning {
+    .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-color);
+  }
+
+  // 危险显示红色
+  &.danger {
+    .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-color);
+  }
+
+  // 禁用按钮
+  &.disabled,
+  &[disabled] {
+    .button-variant(@btn-disabled-color; @btn-disabled-bg; @btn-disabled-border);
+    .opacity(.65);
+
+    // 水波纹颜色
+    .ripple { background: rgba(255, 255, 255, 0) !important; }
+  }
+
+  // 水波纹颜色
+  &.primary,
+  &.success,
+  &.info,
+  &.warning,
+  &.danger {
+    .ripple { background: rgba(255, 255, 255, .4); }
+  }
+}
+
+// 按钮大小
+.qn-btn {
+  // 大
+  &.lg {
+    .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large);
+  }
+
+  // 小
+  &.sm {
+    .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+  }
+
+  // 超小
+  &.xs {
+    .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+  }
+}
+
+// 酷似链接的按钮
+.qn-btn {
+  &.link {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    border-color: transparent;
+    color: @link-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: @link-hover-color;
+      text-decoration: @link-hover-decoration;
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    // 水波纹颜色
+    .ripple { background: rgba(255, 255, 255, 0); }
+  }
+}
+
+// 并列按钮
+.qn-btn + .qn-btn { margin-left: 15px; }
+
+// 全宽按钮
+.qn-btn {
+  &.block {
+    display: block;
+    width: 100%;
+  }
+
+  &.block + &.block {
+    margin-top: 15px;
+    margin-left: 0;
+  }
+}
+
+.qn-moreItem-btn {
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid @border-default-color;
+
+  img {
+    width: 30px;
+    margin-right: 10px;
+  }
+}

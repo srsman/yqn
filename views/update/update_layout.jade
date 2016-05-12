@@ -1,0 +1,15 @@
+//- 通用布局模板
+doctype html
+html(lang='zh-CN')
+  //- head部分
+  include ../common/head
+  body
+    //- 页面包装
+    .wrapper
+      //- 页眉
+      include update_header
+
+      //- 主体
+      .main
+        .full-container
+          block main_content

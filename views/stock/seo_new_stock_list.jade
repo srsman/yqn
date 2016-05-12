@@ -1,0 +1,49 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/stock/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      //- 面包屑
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        span 新股预告
+
+      //- 股票列表
+      .qn-section
+        .qn-section-main
+          h3.qn-section-title 新股预告
+
+          //- 新股列表主体
+          include seo_new_stock_list_main
+
+          //- 分页
+          - var currPage = newStocks.page.curPage
+          - var totalPage = newStocks.page.pageCount
+          - var pageLink = '/xingu?page='
+          include ../common/pagination
+          +page(totalPage, currPage, pageLink)
+
+     //- 侧边组件
+    .seo-main-sidebar
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

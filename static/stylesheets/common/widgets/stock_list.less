@@ -1,0 +1,30 @@
+.qn-widget-stock-header  {
+  background-color: #f9f9f9;
+  color: @gray;
+}
+
+.qn-widget-stock-header,
+.qn-widget-stock-main {
+  padding: 0 25px;
+
+  .row + .row {
+    margin-top: 0px;
+    border-top:1px solid @border-default-color;
+  }
+
+  .row {
+    margin-right: -5px;
+    margin-left: -5px;
+
+    [class^='col-xs-'] {
+      padding: 10px 5px;
+
+      a {
+        color: @gray-dark;
+
+        &:hover,
+        &:focus { color: @brand-info; }
+      }
+    }
+  }
+}

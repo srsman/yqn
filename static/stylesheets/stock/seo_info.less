@@ -1,0 +1,128 @@
+.qn-seo-stock-info-box {
+  padding: 20px 0 20px 20px;
+
+  dt.stock-title {
+    padding-bottom: 10px;
+    font-size: 24px;
+    color: @gray-dark;
+
+    i {
+      display: inline-block;
+      padding-left: 10px;
+      font-size: @font-size-base;
+      font-style: normal;
+      color: @gray-light;
+    }
+  }
+
+  .stock-time-info,
+  .stock-ipo-info,
+  .stock-time-details,
+  .stock-ipo-details { float: left; }
+
+  // 股票分时信息
+  .stock-time-info,
+  .stock-ipo-info {
+    width: 280px;
+    border-right: 1px dotted @background-default-color;
+
+    li {
+      float: left;
+      font-size: 16px;
+    }
+
+    i.update-time {
+      display: block;
+      margin-top: 5px;
+      font-size: @font-size-small;
+      font-style: normal;
+      color: @gray-light;
+    }
+
+    .stock-estimate-info {
+      li { width: 50%; }
+    }
+  }
+
+  .stock-ipo-info { width: 200px; }
+
+  .stock-now-info {
+    margin-bottom: 10px;
+
+    &.up { color: #f00; }
+    &.down { color: #10bd4b; }
+
+    h3,
+    ul { float: left; }
+
+    h3 {
+      position: relative;
+      padding-right: 20px;
+      font-size: 48px;
+
+      .fa {
+        position: absolute;
+        right: 0;
+        bottom: 6px;
+        font-size: 18px;
+      }
+    }
+
+    ul {
+      margin-top: 5px;
+      margin-left: 20px;
+
+      li {
+        float: none !important;
+        font-weight: 500;
+      }
+    }
+  }
+
+  // 股票分时详情
+  .stock-time-details,
+  .stock-ipo-details {
+    margin: 0 10px;
+    width: 480px;
+
+    tr + tr {
+      td { padding-top: 8px; }
+    }
+
+    td {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 0;
+      width: 160px;
+    }
+
+    td i {
+      font-style: normal;
+      color: @gray-light;
+    }
+
+    td i.qn-stock-price {
+      color: @gray-dark;
+
+      &.up { color: #f00; }
+
+      &.down { color: #10bd4b; }
+    }
+  }
+
+  .stock-ipo-details {
+    width: 560px;
+
+    td { width: 186px; }
+  }
+}
+
+// 股票相关信息
+.qn-seo-stock-relevant-info-box {
+  .qn-tab-label { margin: 0 75px; }
+
+  #stock-news:checked ~ .qn-tab-innerbox .items-stock-news,
+  #stock-notice:checked ~ .qn-tab-innerbox .items-stock-notice,
+  #stock-question:checked ~ .qn-tab-innerbox .items-stock-question,
+  #stock-viewpoint:checked ~ .qn-tab-innerbox .items-stock-viewpoint { display: block; }
+}

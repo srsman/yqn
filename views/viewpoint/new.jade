@@ -1,0 +1,40 @@
+extends ../common/layout
+
+block header
+  +he()
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/viewpoint_index.css')
+
+block main_content
+  .new-wrap#newWrap(style="visibility:hidden;")
+
+    //- 面包屑
+    .qn-breadcrumbs
+      a(href='/viewpoint/list') 返回
+      i.fa &gt;
+      span 发布新观点
+
+    //- 头
+    .new-head.row
+      .col-xs-6
+        input.qn-form-control#vTitle(placeholder='标题', style="width:100%;")
+      .col-xs-6
+
+    //- 编辑区
+    .new-article.row
+      .col-xs-12(style="min-height: 430px;")
+        form(method='post')
+          textarea#vContent(style="border: 0 none; background: #fff;")
+
+    #firstImgUrl(style='display:none')
+
+    //- 底部操作区
+    .new-foot.qn-row.row
+      .col-xs-8
+      .col-xs-4.text-right
+        a.qn-btn.primary#vSubmitBtn 发布
+
+append foot_scripts
+  script(data-main='/javascripts/viewpoint/new.js' src='/javascripts/lib/requirejs/require.js')

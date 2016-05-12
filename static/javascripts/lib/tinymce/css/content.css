@@ -1,0 +1,9 @@
+/*默认字体*/
+
+body, td, pre {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+.mce-content-body {
+  min-height: 312px;
+}

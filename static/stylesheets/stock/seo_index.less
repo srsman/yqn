@@ -1,0 +1,32 @@
+/* 股票 */
+
+// 公共样式
+@import '../common/common';
+
+@import 'seo_info'; // 股票详情
+
+// 模块
+@import '../viewpoint/seo_list_main'; // 观点列表
+@import '../question/seo_list_main'; // 问答列表
+@import '../news/seo_list_main'; // 新闻列表
+
+// 股票列表
+.seo-stock-list-table {
+  // 单元格
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: @table-cell-padding 10px;
+      }
+
+      > th:first-child,
+      > td:first-child { padding-left: 20px; }
+
+      > th:last-child,
+      > td:last-child { padding-right: 20px; }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+// 固定页面宽度，不做响应式
+.container { width: 1170px !important; }
+
+body.seo-body {
+  .main {
+    padding: 0;
+
+    .container { padding: 30px 0; }
+  }
+}
+
+.main {
+  padding: 30px 0;
+
+  .main-container { display: table; }
+}
+
+.main-sidebar,
+.main-content,
+.seo-main-content,
+.seo-main-sidebar {
+  display: table-cell;
+  vertical-align: top;
+}
+
+// 左侧导航模块布局
+.main-sidebar {
+  padding-right: 15px;
+  width: 235px;
+  border-right: 1px solid @border-default-color;
+}
+
+.seo-main-sidebar {
+  padding-left: 15px;
+  width: 325px;
+}
+
+// 主内容模块布局
+.main-content {
+  padding-left: 15px;
+  width: 905px;
+}
+
+.seo-main-content {
+  padding-right: 15px;
+  width: 815px;
+}
+
+// 小模块布局
+.qn-section + .qn-section { margin-top: 40px; }
+
+.seo-body {
+  .qn-section {
+    position: relative;
+
+    > .row {
+      margin-top: 20px;
+      margin-right: -5px;
+      margin-left: -5px;
+
+      [class^='col-xs-'] {
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+    }
+
+    > .row + .row { margin-top: 10px; }
+
+
+    // 标题
+    h3.qn-section-title {
+      display: block;
+      padding-left: 10px;
+      width: 50%;
+      border-left: 3px solid @brand-primary;
+      color: @gray-dark;
+      font-size: 20px;
+    }
+
+
+    // 更多
+    .qn-section-more {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      color: @gray-light;
+
+      &:hover,
+      &:focus { color: @brand-info; }
+
+      .fa-angle-right { margin-left: 5px; }
+
+      .fa-refresh {
+        margin-right: 5px;
+        color: @brand-info;
+      }
+    }
+
+    // 主体
+    .qn-section-main {
+      background-color: #fff;
+      border: 1px solid @border-default-color;
+      border-radius: @border-radius-base;
+
+      // 主体内包含的标题
+      h3.qn-section-title {
+        margin: 20px;
+      }
+    }
+
+    h3.qn-section-title + .qn-section-main { margin-top: 20px; }
+
+    .qn-section-more + .qn-section-main { margin-top: 20px; }
+  }
+}
+
+// 二级标题
+h4.qn-section-second-title {
+
+  border-bottom: 1px solid @border-default-color;
+
+  span {
+    display: inline-block;
+    margin-bottom: -1px;
+    padding-bottom: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-bottom: 2px solid @brand-primary;
+  }
+}
+
+// 行
+.qn-row + .qn-row,
+.row + .row { margin-top: 15px; }
+

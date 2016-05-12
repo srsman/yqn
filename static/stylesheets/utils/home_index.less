@@ -1,0 +1,182 @@
+/* 首页 */
+
+// 公共样式
+@import '../common/common';
+
+// 模块
+@import '../viewpoint/seo_list_main'; // 观点列表
+@import '../question/seo_list_main'; // 问答列表
+
+/* 首页总览信息 */
+.home-overview-info {
+  padding: 20px;
+  text-align: center;
+
+  h3 {
+    font-size: 20px;
+  }
+
+  table {
+    margin: 20px 0 10px 0;
+    width: 100%;
+    max-width: 100%;
+
+    thead th {
+      width: 25%;
+      font-size: @font-size-small;
+      font-weight: normal;
+      text-align: center;
+      color: @gray-light;
+    }
+
+    tbody td {
+      font-size: 24px;
+      text-align: center;
+
+      &.active { color: @brand-primary; }
+    }
+  }
+
+  .qn-btn { display: block; }
+}
+
+/* 推荐投顾 */
+.home-adviser-section {
+  .row { margin-top: 20px !important; }
+}
+
+.home-rcmd-adviser {
+  padding: 17px 20px 27px 20px;
+
+  .qn-avatar {
+    margin-bottom: 10px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .rcmd-adviser-avatar,
+  .rcmd-adviser-info { float: left; }
+
+  .rcmd-adviser-avatar {
+    width: 60px;
+
+    .qn-btn {
+      padding: 3px 0;
+      width: 52px;
+      font-size: @font-size-base;
+      border-radius: @border-radius-base;
+    }
+  }
+
+  .rcmd-adviser-info {
+    width: 157px;
+    height: 95px;
+
+    dt {
+      padding-bottom: 10px;
+      border-bottom: 1px dashed @border-default-color;
+
+      a {
+        display: block;
+        font-size: 18px;
+        color: @gray-dark;
+      }
+
+      i {
+        font-style: normal;
+        font-size: @font-size-small;
+        color: @gray-light;
+      }
+    }
+
+    dd {
+      padding-top: 7px;
+      color: @gray;
+    }
+  }
+}
+
+/* 投资组合 */
+.home-portfolio {
+  padding: 20px;
+
+  .home-portfolio-header {
+    padding-bottom: 15px;
+    border-bottom: 1px dashed @border-default-color;
+
+    .qn-avatar {
+      padding: 0;
+      width: 50px;
+      height: 50px;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    ul {
+      margin-top: 1px;
+      margin-left: 10px;
+      font-size: @font-size-small;
+      color: @gray-light;
+
+      li + li { padding-top: 5px; }
+
+      a,
+      i { color: @gray-dark; }
+
+      a {
+        cursor: default; // 有链接时删除
+      }
+
+      i { font-style: normal; }
+    }
+  }
+
+  .home-portfolio-main {
+    padding-top: 10px;
+
+    table {
+      margin-top: 7px;
+      width: 100%;
+      max-width: 100%;
+
+      thead th {
+        width: 25%;
+        font-size: @font-size-small;
+        font-weight: normal;
+        text-align: center;
+        color: @gray-light;
+      }
+
+      tbody td {
+        width: 25%;
+        font-size: 20px;
+        text-align: center;
+
+        &.up { color: #f00; }
+
+        &.down { color: #10bd4b; }
+
+        i {
+          font-style: normal;
+          font-size: @font-size-small;
+        }
+      }
+    }
+  }
+}
+
+// 滑块下载按钮
+#home-slide-download-btn {
+  margin-top: 180px;
+  padding: 15px 60px;
+  border: 1px solid @brand-primary;
+}

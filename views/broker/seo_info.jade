@@ -1,0 +1,103 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/broker/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content.qn-section
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/quanshang') 券商开户
+        i.fa.fa-angle-right
+        span #{broker[0].fullName}
+      .qn-section
+        .qn-section-main
+          .qn-section-content
+            .broker-top
+              .broker-top-left
+                img(src="#{broker[0].companyLogo}", alt="")
+              .broker-top-right
+                h3 #{broker[0].fullName}
+                p #{broker[0].introduce}
+            .broker-middle
+              ul
+                li
+                  h5 公司名称：
+                  p #{broker[0].brokerName}
+                li
+                  h5 公司地址：
+                  p#mapAddress #{broker[0].addres}
+                li
+                  h5 开户时间：
+                  p #{broker[0].openAccTime}
+                li
+                  h5 服务区域：
+                  p #{broker[0].serviceArea}
+                li
+                  h5 业务范围：
+                  p #{broker[0].busSphere}
+            .broker-bottom
+              h4.qn-section-second-title
+                span 营业部地图
+              #allmap(mapData=broker[0].busDeptMap)
+
+    .seo-main-sidebar
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')
+  script(type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4Z0rdhEM38GfOAsr8DGgMoLO")
+
+  script.
+    // 百度地图API功能
+    var map = new BMap.Map("allmap"),
+        mapData = document.getElementById('allmap').getAttribute('mapData'),
+        mapPoint = [];
+
+    //- 如果后台返回经纬度
+    if(mapData) {
+      mapPoint = mapData.split(',');
+      map.centerAndZoom(new BMap.Point(mapPoint[0], mapPoint[1]),18);
+      map.enableScrollWheelZoom(true);
+
+      // 用经纬度设置地图中心点
+      map.clearOverlays();
+      var new_point = new BMap.Point(mapPoint[0], mapPoint[1]);
+      var marker = new BMap.Marker(new_point);  // 创建标注
+      map.addOverlay(marker);              // 将标注添加到地图中
+      map.panTo(new_point);
+    }
+    //- 通过详情地址查找具体坐标
+    else {
+      var address = document.getElementById('mapAddress').innerHTML;
+      var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(address, function(point){
+          if (point) {
+            mapPoint[0] = point.lng + '';
+            mapPoint[1] = point.lat + '';
+          }
+          map.centerAndZoom(new BMap.Point(mapPoint[0], mapPoint[1]),18);
+          map.enableScrollWheelZoom(true);
+
+          // 用经纬度设置地图中心点
+          map.clearOverlays();
+          var new_point = new BMap.Point(mapPoint[0], mapPoint[1]);
+          var marker = new BMap.Marker(new_point);  // 创建标注
+          map.addOverlay(marker);              // 将标注添加到地图中
+          map.panTo(new_point);
+        });
+    }
+
+
+

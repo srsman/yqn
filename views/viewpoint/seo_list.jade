@@ -1,0 +1,60 @@
+extends ../common/seo_layout
+
+block header
+  +he('guandian')
+
+append css
+  link(rel='stylesheet', href='/stylesheets/viewpoint/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+      .qn-section
+        h3.qn-section-title 投资观点
+        .qn-section-main
+          .qn-tab-box
+            input#featured.qn-radio-btn(type="radio" name="viewpoint" checked=flag == 'hot' ? false : true )
+            label.qn-tab-label(for="featured") 精选
+
+            input#hot.qn-radio-btn(type="radio" name="viewpoint" checked=flag == 'hot' ? true : false )
+            label.qn-tab-label(for="hot") 人气
+            .qn-tab-innerbox
+              //- 精选观点
+              ul.qn-tab-items.items-featured.seo-viewpoint-list-main
+                if featuredVps.length > 0
+                  each item in featuredVps
+                    include ./seo_list_main
+                else
+                  .empty 数据为空
+                  //- 显示更多<i class="fa fa-angle-double-down"></i>
+                  //- <img src="/images/loading.gif">正在加载中，请稍候...
+                a.more-items#more-featuredVP-btn(href="javascript:;")
+                  span 显示更多&nbsp;
+                  i.fa.fa-angle-double-down
+
+              //- 人气观点
+              ul.qn-tab-items.items-hot.seo-viewpoint-list-main
+                if hotVps.length > 0
+                  each item in hotVps
+                    include ./seo_list_main
+                else
+                  .empty 数据为空
+                  //- <img src="/images/loading.gif">正在加载中，请稍候...
+                a.more-items#more-hotVP-btn(href="javascript:;")
+                  span 显示更多&nbsp;
+                  i.fa.fa-angle-double-down
+    .seo-main-sidebar
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/viewpoint/seo_list.js' src='/javascripts/lib/requirejs/require.js')

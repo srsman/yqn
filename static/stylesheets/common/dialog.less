@@ -1,0 +1,170 @@
+/* 提示框样式 */
+
+.qn-dialog-lock {
+  width: auto;
+  overflow: visible !important;
+
+  body { overflow: hidden !important; }
+}
+
+.qn-dialog-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('@{image-path}/popup_overlay.png');
+  z-index: 8000;
+}
+
+.qn-dialog-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px auto 0 -200px;
+  width: 400px;
+  background-color: #fff;
+  border: 1px solid @border-default-color;
+  box-shadow: 1px 1px 3px #333;
+  z-index: 9999;
+}
+
+.qn-dialog-content {
+  padding: 30px 15px;
+  min-height: 28px;
+  line-height: 28px;
+  font-size: @font-size-base;
+  border-bottom: 1px solid @border-default-color;
+  color: @gray;
+}
+
+.qn-dialog-action {
+  text-align: center;
+  font-size: 0;
+
+  .clearfix();
+
+  .col-1 {
+    width: 100%;
+  }
+
+  .col-2 {
+    float: left;
+    width: 50%;
+  }
+
+  .qn-dialog-btn {
+    font-size: @font-size-large;
+    display: block;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+      background: @border-default-color;
+    }
+
+    &.cancel {
+      color: @gray-light;
+    }
+
+    &.border {
+      border-right: 1px solid @border-default-color;
+    }
+  }
+}
+
+
+/*
+ * @qiulijun
+ */
+
+.qn-seo-dialog {
+  // display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  border-radius: 4px;
+  z-index: 501;
+
+  h2 {
+    padding: 28px 0;
+    font-size: 28px;
+    text-align: center;
+    background-color: #fbfbfb;
+  }
+
+  .margin0 { margin: 0 !important; }
+
+  .dialog-close {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: -24px;
+    right: -24px;
+    cursor: pointer;
+    background: url(/images/static/icon-close.png) center no-repeat;
+  }
+
+  &.adviser-dialog {
+    width: 550px;
+    height: 550px;
+    margin-left: -275px;
+    margin-top: -275px;
+
+    .dialog-content {
+      margin: 40px 80px 0;
+
+      .dialog-content-top {
+        margin-bottom: 35px;
+        padding: 0 20px 30px;
+        border-bottom: 1px solid @border-default-color;
+
+        .skilled-area {
+          position: relative;
+          margin-top: 13px;
+
+          dt {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 56px;
+            color: @gray-light;
+          }
+
+          dd { margin-left: 69px; }
+        }
+      }
+
+      .dialog-content-bottom {
+
+        .dialog-qrcode {
+          display: block;
+          width: 166px;
+          height: 166px;
+          margin: 0 auto;
+        }
+
+        p {
+          text-align: center;
+          color: @gray;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+.qn-seo-shadow {
+  position: fixed;
+  top: 0; left: 0;
+  bottom: 0; right: 0;
+  z-index: 500;
+  background: url(/images/static/shadow.png);
+  // display: none;
+}

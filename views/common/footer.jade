@@ -1,0 +1,96 @@
+//- 网站页脚
+footer.footer
+  .container.clearfix
+    //- 页脚主要部分
+    .footer-main
+      //- 页脚组件
+      .footer-widgets.clearfix
+        .footer-widget
+          h4
+            i.seo-icon-1.icon-footer-home
+            span 首页
+          ul
+            li
+              a(href='/static/hezuo') 平台合作
+            li
+              a(href='/static/gongzuo') 招贤纳士
+            li
+              a(href='/static/guanyu') 关于我们
+
+        .footer-widget
+          h4
+            i.seo-icon-1.icon-footer-question
+            span 问答
+          ul
+            li
+              a(href='/wenda') 最新问答
+            li
+              a(href='/wenda?flag=gp') A股问答
+            li
+              a(href='/wenda?flag=dp') 大盘问答
+
+        .footer-widget
+          h4
+            i.seo-icon-1.icon-footer-viewpoint
+            span 观点
+          ul
+            li
+              a(href='/guandian') 精选观点
+            li
+              a(href='/guandian?flag=hot') 人气观点
+
+        .footer-widget
+          h4
+            i.seo-icon-1.icon-footer-market
+            span 市场
+          ul
+            li
+              a(href='/gupiao') 股票排行
+            li
+              a(href='/xingu') 新股预告
+            li
+              a(href='/xinwen') 新闻直播
+
+        .footer-widget
+          h4
+            i.seo-icon-1.icon-footer-broker
+            span 券商开户
+          ul
+            li
+              a(href='/quanshang') 券商列表
+            li
+              a(href='/static/renzhen') 投顾认证
+            li
+              a(href='/static/xiazai') 下载APP
+
+      //- 页脚友情链接
+      //- .footer-friend-links.clearfix
+      //-   ul
+      //-     li
+      //-       a(href='#', target='_blank') 同花顺
+
+      //- 页脚联系地址
+      address.footer-address.clearfix
+        p.footer-company
+          i.seo-icon-1.icon-logo
+          span.company-name 深圳齐牛互联网金融服务有限公司
+        p.company-address 地址：深圳市南山区学府路95号怡化金融科技大厦601
+          br
+          | 邮箱：cs@yiqiniu.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：0755-26921766
+
+    //- 页脚次要部分
+    .footer-secondary
+      //- 页脚联系方式
+      .footer-contact
+        h3 客服热线
+        i （&nbsp;工作时间&nbsp;9&nbsp;:&nbsp;00&nbsp;-&nbsp;18&nbsp;:&nbsp;00&nbsp;）
+        strong 400-1515176
+
+
+  //- 页脚底部
+  .footer-bottom
+    .container
+      | Copyright &copy; All Rights Reserved&nbsp;
+      a(href='http://www.miitbeian.gov.cn', target='_blank') 粤ICP备14078038号-1
+      br
+      | 齐牛金融 版权所有

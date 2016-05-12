@@ -1,0 +1,46 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/stock/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      //- 新股预告
+      .qn-section
+        h3.qn-section-title 新股预告
+        a(href='/xingu', title='全部新股').qn-section-more 全部新股
+          i.fa.fa-angle-right
+
+        .qn-section-main
+          //- 新股列表详情
+          include ../stock/seo_new_stock_list_main
+
+      //- 股票排行
+      .qn-section
+        h3.qn-section-title 股票排行
+        a(href='/gupiao', title='全部股票').qn-section-more 全部股票
+          i.fa.fa-angle-right
+
+        .qn-section-main
+          //- 新股列表详情
+          include ../stock/seo_stock_list_main
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 热点新闻
+      include ../widgets/news
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

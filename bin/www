@@ -1,0 +1,106 @@
+/*
+ * 模块依赖
+ */
+var app = require('../app'),
+    debug = require('debug')('mobile:server'),
+    http = require('http'),
+    cfg = require('../yiqiniu_config');
+
+// 获取端口号
+var httpPort = getPort('http');
+
+// 创建http服务
+var server = http.createServer(app);
+
+/*
+ * 监听提供的端口号
+ */
+server.listen(httpPort, function() {
+  console.log('一起牛官网正在监听端口' + httpPort);
+});
+server.on('error', onError);
+server.on('listening', onListening);
+
+/*
+ * 获取端口号
+ * @type: 可传参数http,https; 默认http
+ */
+function getPort(type) {
+  var cfgPort;
+
+  if(cfg.env.development.status === true) {
+    switch(type) {
+      case 'http':
+        cfgPort = cfg.env.development.port.http;
+        break;
+      case 'https':
+        cfgPort = cfg.env.development.port.https;
+        break;
+      default:
+        cfgPort = cfg.env.development.port.http;
+    }
+  } else if(cfg.env.test.status === true) {
+    switch(type) {
+      case 'http':
+        cfgPort = cfg.env.test.port.http;
+        break;
+      case 'https':
+        cfgPort = cfg.env.test.port.https;
+        break;
+      default:
+        cfgPort = cfg.env.test.port.http;
+    }
+  } else if(cfg.env.production.status === true) {
+    switch(type) {
+      case 'http':
+        cfgPort = cfg.env.production.port.http;
+        break;
+      case 'https':
+        cfgPort = cfg.env.production.port.https;
+        break;
+      default:
+        cfgPort = cfg.env.production.port.http;
+    }
+  }
+
+  cfgPort = parseInt(cfgPort, 10);
+
+  return cfgPort;
+}
+
+/*
+ * 监听服务的"error"事件
+ */
+function onError(error) {
+  if(error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof httpPort === 'string'
+    ? 'Pipe: ' + httpPort
+    : 'Port: ' + httpPort;
+
+  // 处理特定的监听错误并输出错误信息
+  switch(error.code) {
+    case 'EACCES':
+      console.error(bind + ', 需要提升权限');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ', 已在使用中');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/*
+ * 监听服务的"listening"事件
+ */
+function onListening() {
+  var addr = server.address(),
+      bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+
+  debug('Listening on ' + bind);
+}

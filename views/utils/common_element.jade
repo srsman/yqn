@@ -1,0 +1,284 @@
+extends ../common/layout
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/utils/utils_index.css')
+
+block main_content
+  //- 模块的布局
+  .qn-section
+    .row
+      .col-xs-12 #{title}
+    .row
+      .col-xs-12 12个栅格宽
+    .row
+      .col-xs-8 8个栅格宽
+      .col-xs-4 4个栅格宽
+
+  //- 按钮模块
+  .qn-section
+    .row
+      .col-xs-12
+        blockquote
+          p 链接按钮
+        a.qn-btn(role='button', href='javascript:') 默认按钮
+        a.qn-btn.primary(role='button', href='javascript:') 首选按钮
+        a.qn-btn.success(role='button', href='javascript:') 成功按钮
+        a.qn-btn.info(role='button', href='javascript:') 一般信息按钮
+        a.qn-btn.warning(role='button', href='javascript:') 警告按钮
+        a.qn-btn.danger(role='button', href='javascript:') 危险按钮
+        a.qn-btn.disabled(role='button', href='javascript:') 禁用按钮
+        a.qn-btn.link(role='button', href='javascript:') 链接按钮
+    .row
+      .col-xs-12
+        blockquote
+          p 常规按钮
+        button.qn-btn 默认按钮
+        button.qn-btn.primary 首选按钮
+        button.qn-btn.success 成功按钮
+        button.qn-btn.info 一般信息按钮
+        button.qn-btn.warning 警告按钮
+        button.qn-btn.danger 危险按钮
+        button.qn-btn(disabled='disabled') 禁用按钮
+        button.qn-btn.link 链接按钮
+    .row
+      .col-xs-12
+        blockquote
+          p 按钮大小
+        button.qn-btn 默认大小按钮
+        button.qn-btn.lg 超大按钮
+        button.qn-btn.sm 小型按钮
+        button.qn-btn.xs 超小型按钮
+    .row
+      .col-xs-12
+        blockquote
+          p 全宽按钮
+        button.qn-btn.block 全宽按钮
+        button.qn-btn.block 全宽按钮
+
+  //- 表单模块
+  .qn-section
+    .row
+      .col-xs-12
+        blockquote
+          p 普通表单
+
+        .qn-form-group
+          label.qn-control-label 默认显示
+          .qn-form-control-box
+            p.qn-control-static 一些默认显示的内容
+
+        .qn-form-group
+          label.qn-control-label 禁用的
+          .qn-form-control-box
+            input.qn-form-control(type='text', value='禁用了哈', disabled)
+
+        .qn-form-group
+          label.qn-control-label(for='username1') 用户名
+            i *
+          .qn-form-control-box
+            input.qn-form-control#username1(type='text', name='username1', placeholder='请填写手机号', value='13973372993')
+
+        .qn-form-group
+          label.qn-control-label(for='password1') 密码
+          .qn-form-control-box
+            input.qn-form-control#password1(type='password', name='password1', placeholder='请填写密码')
+
+        .qn-form-group
+          label.qn-control-label(for='textarea1') 文本域
+          .qn-form-control-box
+            textarea.qn-form-control#textarea1(name='textarea1', placeholder='请填写密码')
+            .qn-form-control-word-count
+              i 0
+              | /150
+
+        .qn-form-group
+          label.qn-control-label(for='test-select1') 下拉框
+          .qn-form-control-box
+            select.qn-form-control#test-select1
+              option(value='') 请选择
+              option(value='选项一') 选项一
+              option(value='选项二') 选项二
+
+        .qn-form-group.special
+          label.qn-control-label(for='test-file1') 上传文件
+          .qn-form-control-box
+            input#test-file1(type='file')
+
+        .qn-form-group.special
+          label.qn-control-label 兴趣爱好
+          .qn-checkbox
+            input.icheck#basketball1(type='checkbox', checked)
+            label(for='basketball1') 篮球
+          .qn-checkbox
+            input.icheck#football1(type='checkbox')
+            label(for='football1', checked) 足球
+
+        .qn-form-group.special
+          label.qn-control-label 性别
+          .qn-radio
+            input.icheck#test-man1(type='radio', name='sex1', checked)
+            label(for='test-man1') 男
+          .qn-radio
+            input.icheck#test-woman1(type='radio', name='sex1')
+            label(for='test-woman1') 女
+    .row
+      .col-xs-12
+        blockquote
+          p 垂直表单
+
+        .qn-form-group.vertical
+          label.qn-control-label(for='username2') 用户名
+            i *
+          .qn-form-control-box
+            input.qn-form-control#username2(type='text', name='username2', placeholder='请填写手机号', value='13973372993')
+
+        .qn-form-group.vertical
+          label.qn-control-label(for='password2') 密码
+          .qn-form-control-box
+            input.qn-form-control#password2(type='password', name='password2', placeholder='请填写密码')
+
+        .qn-form-group.vertical
+          label.qn-control-label(for='test-select2') 下拉框
+          .qn-form-control-box
+            select.qn-form-control#test-select2
+              option(value='') 请选择
+              option(value='选项一') 选项一
+              option(value='选项二') 选项二
+
+        .qn-form-group.special.vertical
+          label.qn-control-label(for='test-file1') 上传文件
+          .qn-form-control-box
+            input#test-file1(type='file')
+
+        .qn-form-group.special.vertical
+          label.qn-control-label 兴趣爱好
+          .qn-checkbox
+            input.icheck#basketball2(type='checkbox', checked)
+            label(for='basketball2') 篮球
+          .qn-checkbox
+            input.icheck#football2(type='checkbox')
+            label(for='football2', checked) 足球
+
+        .qn-form-group.special.vertical
+          label.qn-control-label 性别
+          .qn-radio
+            input.icheck#test-man2(type='radio', name='sex2', checked)
+            label(for='test-man2') 男
+          .qn-radio
+            input.icheck#test-woman2(type='radio', name='sex2')
+            label(for='test-woman2') 女
+
+    .row
+      .col-xs-12
+        blockquote
+          p 内联表单
+
+        .qn-form-group.inline
+          label.qn-control-label(for='username3') 用户名
+          .qn-form-control-box
+            input.qn-form-control#username3(type='text', name='username3', placeholder='请填写手机号', value='13973372993')
+
+        .qn-form-group.inline
+          label.qn-control-label(for='password3') 密码
+          .qn-form-control-box
+            input.qn-form-control#password3(type='password', name='password3', placeholder='请填写密码')
+
+        .qn-form-group.inline
+          label.qn-control-label(for='test-select3') 下拉框
+          .qn-form-control-box
+            select.qn-form-control#test-select3
+              option(value='') 请选择
+              option(value='选项一') 选项一
+              option(value='选项二') 选项二
+    .row
+      .col-xs-12
+        .qn-form-group.special.inline
+          label.qn-control-label(for='test-file1') 上传文件
+          .qn-form-control-box
+            input#test-file1(type='file')
+
+        .qn-form-group.special.inline
+          label.qn-control-label 兴趣爱好
+          .qn-checkbox
+            input.icheck#basketball3(type='checkbox', checked)
+            label(for='basketball3') 篮球
+          .qn-checkbox
+            input.icheck#football3(type='checkbox')
+            label(for='football3', checked) 足球
+
+        .qn-form-group.special.inline
+          label.qn-control-label 性别
+          .qn-radio
+            input.icheck#test-man3(type='radio', name='sex3', checked)
+            label(for='test-man3') 男
+          .qn-radio
+            input.icheck#test-woman3(type='radio', name='sex3')
+            label(for='test-woman3') 女
+
+  //- 标题模块
+  .qn-section
+    .row
+      .col-xs-12
+        blockquote
+          p 标题模块
+        h1 这是标题
+          small 这是小标题
+        h2 这是标题
+          small 这是小标题
+        h3 这是标题
+          small 这是小标题
+        h4 这是标题
+          small 这是小标题
+        h5 这是标题
+          small 这是小标题
+        h6 这是标题
+          small 这是小标题
+
+  //- 提示模块
+  .qn-section
+    .row
+      .col-xs-12
+        blockquote
+          p 提示模块
+    .row
+      .col-xs-12
+        .qn-alert.success
+          i.fa.fa-check
+          | 成功
+          ul
+            li 一条信息
+            li 两条信息
+            li 三条信息
+        .qn-alert.info
+          i.fa.fa-info
+          | 普通信息
+        .qn-alert.warning
+          i.fa.fa-warning
+          | 警告
+        .qn-alert.danger
+          i.fa.fa-times
+          | 危险
+
+  //- tab模块
+  .qn-section
+    .row
+      .col-xs-12
+        blockquote
+          p Tab模块
+
+    .row
+      .col-xs-12
+        .qn-tab
+          ul.qn-tab-card
+            li 标签一
+            li 标签二
+            li 标签三
+
+          .qn-tab-paper
+            .paper-item 内容一
+            .paper-item 内容二
+            .paper-item 内容三
+
+append foot_scripts
+  script(data-main='/javascripts/common.js' src='/javascripts/lib/requirejs/require.js')

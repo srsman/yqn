@@ -1,0 +1,29 @@
+//- 热门股票
+.qn-section
+  h3.qn-section-title 热门股票
+  a(href='/gupiao', title='全部股票').qn-section-more 全部股票
+    i.fa.fa-angle-right
+  .qn-section-main
+    .qn-widget-stock-header
+      .row
+        .col-xs-4 股票名称
+        .col-xs-3.text-right 最新价
+        .col-xs-5.text-right 涨跌幅
+
+    .qn-widget-stock-main
+      each item in widgetStocks
+        - pct = item.changePct * 100
+        - price = item.price
+        - if(pct > 0) {
+          - price = utils.formatNum(price, 1)
+        - } else if(pct < 0) {
+          - price = utils.formatNum(price, 2)
+        - } else {
+          - price = utils.formatNum(price, 3)
+        - }
+
+        .row
+          .col-xs-4
+            a(href='/gupiao/' + item.assetId, title=item.stkName) #{item.stkName}
+          .col-xs-3.text-right !{price}
+          .col-xs-5.text-right !{utils.formatPct(item.changePct, 1)}

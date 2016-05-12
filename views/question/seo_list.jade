@@ -1,0 +1,69 @@
+extends ../common/seo_layout
+
+block header
+  +he('wenda')
+
+append css
+  link(rel='stylesheet', href='/stylesheets/question/seo_index.css')
+
+block main_content
+  //- 全宽滑块
+  .full-container
+    .qn-slider.auto
+      ul.qn-slides
+        li.qn-slide(style='background-image: url("/images/banner/banner_question.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+
+  .container.main-container
+    .seo-main-content
+      .qn-section
+        h3.qn-section-title 股票问答
+        .qn-section-main
+          .qn-tab-box
+            input#zuixin.qn-radio-btn(type="radio" name="viewpoint" checked=flag ? false : true)
+            label.qn-tab-label(for="zuixin") 最新
+            input#gupiao.qn-radio-btn(type="radio" name="viewpoint" checked=flag == 'gp' ? true : false)
+            label.qn-tab-label(for="gupiao") 股票问题
+            input#dapan.qn-radio-btn(type="radio" name="viewpoint" checked=flag == 'dp' ? true : false)
+            label.qn-tab-label(for="dapan") 大盘问题
+            .qn-tab-innerbox
+              //- 最新问题
+              ul.qn-tab-items.items-zuixin.seo-questions-list-main
+                each item in ZXquestions
+                  include ../question/seo_list_main
+                  //- 显示更多<i class="fa fa-angle-double-down"></i>
+                  //- <img src="/images/loading.gif">正在加载中，请稍候...
+                a.more-items#more-zuixin-btn(href="javascript:;")
+                  span 显示更多&nbsp;
+                  i.fa.fa-angle-double-down
+
+              //- 股票问题
+              ul.qn-tab-items.items-gupiao.seo-questions-list-main
+                each item in GPquestions
+                  include ../question/seo_list_main
+                a.more-items#more-gupiao-btn(href="javascript:;")
+                  span 显示更多&nbsp;
+                  i.fa.fa-angle-double-down
+
+              //- 大盘问题
+              ul.qn-tab-items.items-dapan.seo-questions-list-main
+                each item in DPquestions
+                  include ../question/seo_list_main
+                a.more-items#more-dapan-btn(href="javascript:;")
+                  span 显示更多&nbsp;
+                  i.fa.fa-angle-double-down
+    .seo-main-sidebar
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/question/seo_list.js' src='/javascripts/lib/requirejs/require.js')

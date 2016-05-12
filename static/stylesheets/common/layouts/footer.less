@@ -1,0 +1,119 @@
+.footer {
+  background-color: @gray;
+}
+
+.footer-main,
+.footer-secondary {
+  float: left;
+  padding: 40px 0 20px 0;
+}
+
+/* 页脚主要部分 */
+.footer-main {
+  padding-bottom: 0;
+  width: 800px;
+}
+
+/* 页脚次要部分 */
+.footer-secondary { width: 340px; }
+
+/* 页脚组件 */
+.footer-widget {
+  float: left;
+  width: 110px;
+
+  h4 {
+    color: #fff;
+    font-size: @font-size-h4;
+
+    & > span {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+  }
+
+  ul {
+    margin-top: 5px;
+
+    li { padding-top: 10px; }
+
+    a { color: #bdbdbd; }
+  }
+}
+
+.footer-widget + .footer-widget { margin-left: 20px; }
+
+/* 页脚友情链接 */
+.footer-friend-links {
+  margin-top: 40px;
+  width: 630px;
+
+  li {
+    float: left;
+
+    a { color: #fff; }
+  }
+
+  li + li { margin-left: 15px; }
+}
+
+/* 页脚联系方式 */
+.footer-contact {
+  padding: 20px;
+  border: 1px solid #858585;
+  text-align: center;
+  color: #fff;
+
+  h3 { font-size: 22px; }
+
+  i {
+    display: block;
+    padding-top: 5px;
+    font-style: normal;
+    color: #bdbdbd;
+  }
+
+  strong { font-size: 30px; }
+}
+
+/* 页脚联系地址 */
+.footer-address {
+  margin-top: 37px;
+  margin-bottom: 0;
+  color: #bdbdbd;
+
+  p {
+    float: left;
+  }
+
+  .footer-company {
+    width: 250px;
+    margin-right: 30px;
+  }
+
+  .company-address {
+    font-size: 12px;
+  }
+
+  span.company-name { vertical-align: middle; }
+
+  i.icon-logo { margin-right: 10px; }
+
+}
+
+/* 页脚底部 */
+.footer-bottom {
+  padding: 20px 0;
+  text-align: center;
+  font-size: @font-size-small;
+  color: #898989;
+
+  a {
+    color: #898989;
+
+    &:hover {
+      color: #bdbdbd;
+    }
+  }
+}

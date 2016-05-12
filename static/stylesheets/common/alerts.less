@@ -1,0 +1,43 @@
+/* 提示警告 */
+
+.qn-alert {
+  padding: @alert-padding;
+  border: 1px solid transparent;
+  border-radius: @alert-border-radius;
+
+  h4 {
+    margin-top: 0;
+    color: inherit;
+  }
+
+  .alert-link { font-weight: @alert-link-font-weight; }
+
+  > p,
+  > ul { margin-bottom: 0; }
+
+  > p + p { margin-top: 5px; }
+
+  // 成功
+  &.success {
+    .alert-variant(@alert-success-bg; @alert-success-border; @alert-success-text);
+  }
+
+  // 普通信息
+  &.info {
+    .alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
+  }
+
+  // 警告
+  &.warning {
+    .alert-variant(@alert-warning-bg; @alert-warning-border; @alert-warning-text);
+  }
+
+  // 危险
+  &.danger {
+    .alert-variant(@alert-danger-bg; @alert-danger-border; @alert-danger-text);
+  }
+
+  .fa { margin-right: 5px; }
+}
+
+.qn-alert + .qn-alert { margin-top: 15px; }

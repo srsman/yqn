@@ -1,0 +1,30 @@
+//- 通用布局模板
+doctype html
+html(lang='zh-CN')
+  //- head部分
+  include head
+  body.seo-body
+    //- 页面包装
+    .wrapper
+      //- 页眉
+      include header
+
+      block header
+
+      //- 主体
+      .main
+        block main_content
+
+      //- 页脚
+      include footer
+
+      //- 全局聊天模块
+      if user
+        include pager
+
+      //- 回到顶部
+      include go_to_top
+
+    include common_script
+
+    block foot_scripts

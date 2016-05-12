@@ -1,0 +1,66 @@
+.sidebar-user-wrap {
+  padding-bottom: 15px;
+  border-bottom: 1px solid @border-default-color;
+}
+
+.sidebar-user-avatar {
+  position: relative;
+  margin-left: 51px;
+  padding: 4px;
+  display: block;
+  width: 118px;
+  height: 118px;
+
+  img {
+    width: 110px;
+    height: 110px;
+    cursor: pointer;
+  }
+}
+
+.sidebar-user-desc {
+  text-align: center;
+
+  h1.sidebar-username {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  .sidebar-user-intro { color: @gray-light; }
+}
+
+// 侧边的导航
+.sidebar-menu-wrap {
+  .sidebar-menu-item + .sidebar-menu-item {
+    border-top: 1px solid @border-default-color;
+  }
+
+  li.menu-item {
+    &.active a { color: @brand-primary; }
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    color: @text-color;
+
+    &:hover {
+      color: @brand-primary;
+      text-decoration: none;
+    }
+
+    &:active,
+    &:focus {
+      color: @text-color;
+      text-decoration: none;
+    }
+
+    .qn-badge {
+      position: absolute;
+      top: 8px;
+      right: 5px;
+      z-index: 2;
+    }
+  }
+}

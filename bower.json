@@ -1,0 +1,59 @@
+{
+  "name": "yiqiniu",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Devin Yuan"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.3",
+    "bootstrap": "~3.3.5",
+    "requirejs": "~2.1.20",
+    "iCheck": "~1.0.2",
+    "font-awesome": "fontawesome#~4.4.0",
+    "jquery-validation": "~1.14.0",
+    "jquery.cookie": "jquery-cookie#~1.4.1",
+    "bootstrap-switch": "~3.3.2",
+    "jquery-easing": "*"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "js": "dist/js/bootstrap.min.js",
+      "css": "dist/css/bootstrap.min.css",
+      "fonts": "dist/fonts"
+    },
+    "font-awesome": {
+      "css": "css/font-awesome.min.css"
+    },
+    "iCheck": {
+      "css": "skins",
+      "": "icheck.min.js"
+    },
+    "tinymce": {
+      "plugins": "plugins",
+      "skins": "skins",
+      "themes": "themes",
+      "": "tinymce.min.js"
+    },
+    "jquery-validation": {
+      "": "dist/jquery.validate.min.js"
+    },
+    "bootstrap-switch": {
+      "": "dist/js/bootstrap-switch.min.js",
+      "css": "dist/css/bootstrap2/bootstrap-switch.min.css"
+    },
+    "jquery-easing": {
+      "": "jquery.easing.min.js"
+    }
+  }
+}

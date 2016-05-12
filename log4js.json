@@ -1,0 +1,43 @@
+{
+  "appenders": [
+    {
+      "type": "file",
+      "filename": "./logs/app.log",
+      "category": "app",
+      "maxLogSize": 1048576,
+      "backups": 20
+    },
+    {
+      "type": "file",
+      "filename": "./logs/http.log",
+      "category": "http",
+      "maxLogSize": 1048576,
+      "backups": 20
+    },
+    {
+      "type": "file",
+      "filename": "./logs/router.log",
+      "category": "router",
+      "maxLogSize": 1048576,
+      "backups": 20
+    },
+    {
+      "type": "file",
+      "filename": "./logs/request.log",
+      "category": "request",
+      "maxLogSize": 1048576,
+      "backups": 20
+    },
+    {
+      "type": "file",
+      "filename": "./logs/redis.log",
+      "category": "redis",
+      "maxLogSize": 1048576,
+      "backups": 20
+    }
+  ],
+  "levels": [{
+    "router": "INFO",
+    "request": "INFO"
+  }]
+}

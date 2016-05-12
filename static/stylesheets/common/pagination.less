@@ -1,0 +1,24 @@
+.qn-pagination {
+  margin:28px 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+
+    &.active a {
+      border: 1px solid @brand-primary;
+      background-color: @brand-primary;
+      color: #fff;
+    }
+
+    a {
+      display: block;
+      width: 28px;
+      height: 28px;
+      border: 1px solid @border-default-color;
+      color: @gray;
+      line-height: 26px;
+    }
+  }
+}

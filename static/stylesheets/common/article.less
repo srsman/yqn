@@ -1,0 +1,68 @@
+/*
+ * 文章详情
+ * #qiulijun
+ */
+
+.qn-article {
+  padding: 40px 40px 0px;
+
+  .qn-article-title {
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .qn-article-content {
+    margin-top: 14px;
+    padding: 28px 0;
+    text-indent: 2em;
+    line-height: 1.8;
+    border-top: 1px solid @border-default-color;
+    word-break:break-all;
+
+    img {
+      max-width: 700px;
+    }
+  }
+
+  .qn-article-share {
+    padding: 14px 0;
+    border-top: 1px solid @border-default-color;
+  }
+}
+
+
+
+.qn-meta-panel {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1;
+
+  &:after {
+    content:'';
+    display: block;
+    clear: both;
+  }
+
+  .qn-meta-createTs, .qn-meta-stocks, .qn-meta-reference { float: left; }
+
+  .qn-meta-createTs { color: @gray-light; }
+
+  .qn-meta-reference {
+    margin-left: 11px;
+    color: @gray-light;
+  }
+  .qn-meta-stocks {
+    display: inline-block;
+    margin-left: 10px;
+
+    a { margin-left: 4px; }
+  }
+
+  .qn-meta-readNums {
+    float: right;
+    color: @gray-light;
+
+    span.times { color: @gray; }
+  }
+}

@@ -1,0 +1,95 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/broker/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        span 券商开户
+      .qn-section
+        .qn-section-main
+          .qn-section-content
+
+            //- 筛选部分
+            .selector
+
+              //- 区域筛选部分
+              .selector-line#area-line
+                h3.qn-section-title 区域
+                a.option-all(href="javascript:;", data-id=0, class={active: tag.area == 0}) 全部
+                ul#brokerArea.clearfix(class={closed: brokerInfo && brokerInfo.areas && brokerInfo.areas.length > 40 })
+                  if brokerInfo && brokerInfo.areas
+                    each item in brokerInfo.areas
+                      li(class={active: item.areaId == tag.area})
+                        a(href="javascript:;", data-id="#{item.areaId}") #{item.areaName}
+                if brokerInfo && brokerInfo.areas && brokerInfo.areas.length > 40
+                  span(data-id="brokerArea", data-opened="false").option-expand 展开&nbsp;
+                    i.fa.fa-chevron-down
+
+              //- 券商筛选部分
+              .selector-line#broker-line.clearfix
+                h3.qn-section-title 券商
+                a.option-all(href="javascript:;", data-id=0, class={active: tag.broker == 0}) 全部
+                ul#brokerName.clearfix(class={closed: brokerInfo && brokerInfo.brokers && brokerInfo.brokers.length > 24 })
+                  if brokerInfo && brokerInfo.brokers
+                    each b in brokerInfo.brokers
+                      li(class={active: b.brokerId == tag.broker})
+                        a(href="javascript:;", data-id="#{b.brokerId}") #{b.brokerName}
+                if brokerInfo && brokerInfo.brokers && brokerInfo.brokers.length > 24
+                  span(href="javascript:;", data-id="brokerName", data-opened="false").option-expand 展开&nbsp;
+                    i.fa.fa-chevron-down
+
+            //- 券商列表
+            ul.broker-list
+              if brokerInfo && brokerInfo.busDepts
+                if brokerInfo.busDepts.length > 0
+                  each i in brokerInfo.busDepts
+                    li.broker-item.clearfix
+                      .item-left
+                        a.broker-img(href="/quanshang/#{i.areaId}/#{i.brokerId}/#{i.busDeptId}")
+                          img(src="#{i.companyLogo}", alt="#{i.fullName}")
+                        a.broker-info(href="/quanshang/#{i.areaId}/#{i.brokerId}/#{i.busDeptId}") #{i.brokerType} #{i.busAddress}
+                      .item-right
+                        ul
+                          li
+                            h5 名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：
+                            p #{i.fullName}
+                          li
+                            h5 券商类型：
+                            p #{i.brokerType}
+                          li
+                            h5 开户地区：
+                            p #{i.openAccArea}
+                          li
+                            h5 业务范围：
+                            p #{i.busSphere}
+                          li
+                            h5 地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：
+                            p.bus-address #{i.busAddress}
+                else
+                  p 没有更多数据
+
+            //- 分页
+            - var currPage = brokerInfo.page.currPage
+            - var totalPage = brokerInfo.page.totalPage
+            - var pageLink = '/quanshang?area=' + tag.area + '&broker=' + tag.broker+'&page='
+            include ../common/pagination
+            +page(totalPage, currPage, pageLink)
+
+    .seo-main-sidebar
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/broker/seo_list.js' src='/javascripts/lib/requirejs/require.js')

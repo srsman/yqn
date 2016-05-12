@@ -1,0 +1,111 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/static/seo_index.css')
+
+block main_content
+  //- 全宽滑块
+  .full-container
+    .qn-slider.auto
+      ul.qn-slides
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/banner_aboutus.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+
+
+  .container.main-container
+    .qn-section-static.clearfix
+
+      .qn-static-row.row-aboutus
+        .static-header
+          h2 公司简介
+          p Company introduction
+        img(src="/images/static/logo.jpg", alt="一起牛 LOGO")
+        dl.company
+          dt 深圳齐牛互联网金融服务有限公司
+          dd
+            p 2014年7月份成立于深圳前海，是深圳首批获准“可利用互联网技术，从事金融信息中介服务”的创新型互联网金融<br>服务公司。已获得腾讯联合创始人千万级别的天使投资，我们致力于给客户提供全球资产配置的财富管理服务。
+            p 2015年3月，公司正式加入中国证券基金业协会互联网金融专业委员会。
+
+      .qn-static-row.row-aboutus
+        .static-header
+          h2 天使投资人
+          p Investors introduction
+        img(src="/images/static/avatar-aboutus-1.jpg", alt="天使投资人 曾李青")
+        dl.person-info
+          dt 曾李青
+          dd.margin35
+            p 2007年5月至今任德迅投资有限公司董事长。<br>腾讯公司创始人之一，在腾讯科技(深圳)有限公司任高级执行副总裁及COO首席运营官，负责腾讯公司<br>的市场营销体系部署、战略研究部门以及众多业务产品的支持，为腾讯公司的发展做出了卓越的贡献。
+          dt 主要社会职务：
+          dd
+            p 中欧国际工商学院深圳校友会理事；<br>腾讯科技(深圳)有限公司慈善基金会理事。<br>曾先生于1993年在西安电子科技大学获得计算机通信学士学位，2005年获得中欧国际工商学院高级工商<br>管理硕士学位，并任中欧国际工商学院深圳校友会理事。
+
+      .qn-static-row.row-aboutus
+        .static-header
+          h2 创始人
+          p Founder introduction
+        img(src="/images/static/avatar-aboutus-2.jpg", alt="创始人 杨纲" class="margin15")
+        dl.person-info
+          dt 杨纲
+          dd
+            p 杨纲，齐牛金融CEO，上海高级金融学院SAIF 工商管理硕士，中国证券基金行业协会互联网金融委员会专家委员，具有超过16年互联网与金融信息技术的工作经验。在创办齐牛金融前担任汇添富基金管理股份有限公司电子金融总部总监，负责基金电子商务业务，凭借在货币基金上的业务创新获得2012年度上海市政府”金融创新“一等奖。在进入基金业之前，杨纲曾任职于中国银行、腾讯。1999年毕业于湖北工业大学，获得计算机学士学位。
+
+      .qn-static-row.row-aboutus.clearfix
+        .static-header
+          h2 企业文化
+          p Corporation Culture
+        .aboutus-culture-box.info
+          h3 正直
+          span INTEGRITY
+          h4 碳（C6）
+          p 碳对于现有已知的所有生命系统都是不可或缺的，<br>没有它，生命不可能存在。<br>而金刚石是最为坚固的碳结构，<br>它坚硬、纯净，被当做永恒和忠诚的象征。<br>正直是齐牛的最不可或缺的第一价值观，<br>正直意味着内心如金刚石般纯净，有勇气坚持自己的信念；<br>志毋虚邪，行必正直，才有内心的快乐和满足。
+        .aboutus-culture-box.warning
+          h3 创新
+          span INNOVATION
+          h4 硅（Si 14）
+          p 硅在地表的含量仅次于氧，是最普通不过的元素；<br>却同时也是最富有创新能量的元素；<br>半导体材料创造了整个电子时代，<br>金属陶瓷、光导纤维、有机硅改变了航空、通信、医疗业。<br>“不创新、毋宁死”<br>跟一群平凡的伙伴共同实现不平凡的梦想，<br>是齐牛的快乐所在。
+        .aboutus-culture-box.success
+          h3 分享
+          span SHARING
+          h4 氢（H1）
+          p 氢是宇宙中最轻的元素；<br>氢原子只有一个电子，无法在自然界中生存；<br>当两个氢原子相遇时，它们会各自贡献出仅有的电子，<br>这样每个氢原子都有了两个电子，形成了稳定的分子结构。<br>分享是互相的，是最简单的、最快速的使快乐翻倍的方式。
+        .aboutus-culture-box.danger
+          h3 快乐
+          span OPTIMISM
+          h4 镁（Mg 12）
+          p 镁化学性质活泼，能与酸反应生成氢气，<br>在空气中燃烧时会发出炫目的光芒。<br>“做人嘛，最重要的是开心”；<br>做自己所爱的事，爱自己所做的事，<br>让自己充满快乐的正能量，才能让身边的人快乐；<br>任何时候，我们都是“快乐的齐牛人”。
+
+
+      .qn-static-row.row-cooperation
+        h3.second-title 合作单位
+        ul.clearfix
+          +hz('gx.png','国信证券')
+          +hz('dycy.png','第一创业证券', 'l')
+          +hz('ax.png','安信证券')
+          +hz('dg.png','东莞证券')
+          +hz('gd.png','光大证券')
+          +hz('gj.png','国金证券')
+          +hz('ha.png','华安证券')
+          +hz('hl.png','华林证券')
+          +hz('hx.png','华西证券')
+          +hz('gtja.png','国泰君安证券', 'l')
+          +hz('ky.png','开源证券')
+          +hz('wl.png','万联证券')
+          +hz('zt.png','中泰证券')
+
+      //- 合作单位
+      mixin hz(img, name, flag)
+        li
+          if flag
+            a.long(href="javascripts:;")
+              img(src='/images/static/broker/'+img, alt=name)
+              span=name
+          else
+            a(href="javascripts:;")
+              img(src='/images/static/broker/'+img, alt=name)
+              span=name
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

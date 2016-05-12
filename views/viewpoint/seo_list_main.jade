@@ -1,0 +1,48 @@
+//- 观点列表主体部分
+li.seo-viewpoint-list-item.viewpoint-item(data-mid="#{item.viewpointId}").item
+  //- 项目页眉
+  .seo-viewpoint-header.clearfix
+    if item.uImg
+      .qn-avatar.disable.small
+        img(src=item.uImg, alt=item.uName)
+        .qn-vip
+    else
+      .qn-avatar.disable.small
+        img(src='/images/default_avatar_man.jpg', alt=item.uName)
+        .qn-vip
+
+    ul.viewpoint-author-info
+      li
+        a(href='javascripts:', title=item.uName) #{item.uName}
+      if item.adviserOrg
+        li #{item.adviserOrg}
+          | （#{item.adviserType}）
+      else
+        li #{item.adviserType}
+
+  //- 项目主体
+  dl.seo-viewpoint-main
+    dt
+      a.qn-post-title-link(href='/guandian/' + item.viewpointId, title=item.title) !{item.title}
+
+    dd
+      p !{item.summary}
+      if item.firstImg
+        div.post-thumbnail
+          img(src=item.firstImg, alt=item.title)
+
+  .seo-viewpoint-footer.clearfix
+    //- 时间
+    .date #{utils.timeDifference(item.viewpointTs)}
+
+    //- 相关股票
+    if item.stkLables
+      ul
+        li 相关股票
+        //- li #{item.stkLables}
+        each stk in item.stkLables
+          li
+            a(href='/gupiao/' + stk.value, title=stk.name) #{stk.name}
+
+    span.readed-times 阅读
+      i #{item.readNum}

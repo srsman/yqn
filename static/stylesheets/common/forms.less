@@ -1,0 +1,301 @@
+label {
+  margin-bottom: 0;
+  font-size: @font-size-base;
+  font-weight: normal;
+  color: @label-color;
+}
+
+.qn-form-group {
+  .clearfix();
+
+  &.offset-label { padding-left: (@label-width + 15px); }
+
+  // 特殊的
+  &.special {
+    .qn-control-label { padding-top: 0; }
+  }
+
+  // 获得焦点
+  &.focus {
+    .qn-control-label { color: @input-border-focus; }
+    .qn-form-control { border-color: @input-border-focus; }
+  }
+
+  // 内联
+  &.inline {
+    display: inline-block;
+
+    &.qn-form-group + &.qn-form-group { margin-left: 15px; }
+
+    // 文本框后跟着按钮的话就要有间隔
+    .qn-form-control-box + .qn-btn { margin-left: 15px; }
+  }
+
+  // 内联与垂直
+  &.vertical,
+  &.inline {
+    position: relative;
+
+    .qn-control-label {
+      float: none;
+      position: absolute;
+      top: 7px;
+      left: 12px;
+      z-index: 2;
+      margin: 0;
+      padding: 0 3px;
+      width: auto;
+      text-align: left;
+      color: @input-color-placeholder;
+      cursor: text;
+    }
+
+    &.special {
+      .qn-control-label { display: none; }
+    }
+
+    .qn-form-control {
+      .placeholder(#fff);
+    }
+
+    &.active,
+    &.focus {
+      .qn-control-label {
+        top: -7px;
+        font-size: @font-size-small;
+        color: @label-color;
+        background-color: #fff;
+      }
+
+      .qn-form-control { .placeholder() !important; }
+
+      // 包含了select
+      &.has-select {
+        .qn-control-label { color: @label-color; }
+      }
+    }
+
+    &.focus {
+      .qn-control-label { color: @input-border-focus !important; }
+    }
+
+    // 包含了select
+    &.has-select {
+      .qn-control-label { color: transparent; }
+    }
+  }
+
+  // 提示信息
+  &.offset-label,
+  &.vertical,
+  &.inline {
+    .qn-form-group-tip { padding-left: 0; }
+  }
+}
+
+// 并列文本区
+.qn-form-group + .qn-form-group { margin-top: 15px; }
+
+.qn-control-label,
+.qn-form-control-box,
+.qn-form-control { float: left; }
+
+.qn-control-label {
+  margin: 0 15px 0 0;
+  padding-top: 7px;
+  width: @label-width;
+  text-align: right;
+  .transition(all .2s linear);
+
+  i {
+    color: @brand-danger !important;
+    font-style: normal;
+  }
+}
+
+.qn-form-control-box {
+  position: relative;
+  .clearfix();
+
+  .qn-form-control + .qn-btn {
+    float: left;
+    margin-left: 15px;
+  }
+
+  .qn-form-control-word-count {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: @font-size-small;
+    color: @input-color-placeholder;
+
+    i { font-style: normal; }
+  }
+}
+
+// 输入框
+.qn-form-control {
+  .input-style();
+  .input-size(@input-width-base; @input-height-base; @padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @input-border-radius);
+  .input-focus();
+  .transition(border-color .2s linear);
+
+  // 小号
+  &.sm {
+    .input-size(@input-width-base; @input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @input-border-radius-small);
+  }
+
+  // 大号
+  &.lg {
+    .input-size(@input-width-base; @input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @input-border-radius-large);
+  }
+
+  &[disabled],
+  &[readonly] {
+    background-color: @input-bg-disabled;
+    opacity: 1;
+  }
+
+  &[disabled] { cursor: @cursor-disabled; }
+
+  textarea& {
+    min-height: 150px;
+    resize: none;
+  }
+}
+
+// 追加在输入框后的扩展文字
+span.qn-form-control-ext-txt {
+  margin-top: 7px;
+  padding: 0 10px;
+  display: inline-block;
+
+  i {
+    color: @gray-light;
+    font-style: normal;
+  }
+}
+
+// 纯文字显示
+.qn-control-static {
+  margin-bottom: 0;
+  padding-top: (@padding-base-vertical + 1);
+  padding-bottom: (@padding-base-vertical + 1);
+  min-height: (@line-height-computed + @font-size-base);
+
+  &.lg,
+  &.sm {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// 单、多选框
+.qn-checkbox,
+.qn-radio {
+  float: left;
+
+  label { margin-left: 5px; }
+}
+
+.qn-checkbox + .qn-checkbox,
+.qn-radio + .qn-radio { margin-left: 15px; }
+
+// 垂直的单、多选框
+.qn-form-control-box {
+  .qn-checkbox,
+  .qn-radio { float: none; }
+
+  .qn-checkbox + .qn-checkbox,
+  .qn-radio + .qn-radio {
+    margin-top: 5px;
+    margin-left: 0;
+  }
+}
+
+// 表单提示信息
+.qn-form-group-tip {
+  display: block;
+  padding-top: 5px;
+  padding-left: @label-width + 15px;
+  color: @brand-danger;
+  font-size: @font-size-small;
+  clear: both;
+
+  .fa { margin-right: 5px; }
+}
+
+.qn-form-group {
+  .qn-alert { width: @input-width-base; }
+}
+
+/* 表单块 */
+.qn-form-section {
+  position: relative;
+  padding: 30px 0;
+  border-top: 1px solid @border-default-color;
+  .clearfix();
+
+  .qn-form-section-title {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    padding-right: 11px;
+    color: darken(@border-default-color, 40%);;
+    background-color: #fff;
+    z-index: 2;
+  }
+}
+
+/* 回复组件 */
+.qn-comment-form {
+
+  .qn-comment-form-textarea {
+    position: relative;
+    margin-bottom: 10px;
+
+    .clearfix();
+
+    textarea.qn-form-control {
+      width: 100%;
+      min-height: 34px;
+      height: 34px;
+      overflow: hidden;
+    }
+
+    pre {
+      position: absolute;
+      display: block;
+      padding: 0 12px !important;
+      width: 100%;
+      opacity: 0 !important;
+      z-index: -1 !important;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    em.limit-num {
+      display: block;
+      position: absolute;
+      right: 5px;
+      bottom: 0;
+      font-style: normal;
+      font-size: 12px;
+      color: @gray-light;
+
+      &.warning {
+        color: @brand-danger;
+      }
+    }
+  }
+
+  .qn-comment-form-actions {
+    .clearfix();
+
+    .qn-btn {
+      float: right;
+      width: @btn-fixed-width-small;
+    }
+  }
+}

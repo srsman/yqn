@@ -1,0 +1,80 @@
+/* 基础样式 */
+
+// 重置box-sizing
+* {
+  outline: none;
+  .box-sizing(border-box);
+
+  &:before,
+  &:after {
+    .box-sizing(border-box);
+  }
+}
+
+// 重置body
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @text-color;
+  background-color: #fff;
+
+  &.seo-body { background-color: @body-bg; }
+}
+
+// 重置表单元素的文字属性
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// 超链接
+a {
+  color: @link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+    text-decoration: @link-hover-decoration;
+  }
+
+  &:focus { outline: none; }
+}
+
+// 图片
+img { vertical-align: middle; }
+
+// 扮演按钮的元素
+[role="button"] { cursor: pointer; }
+
+// 列表
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// dl dt dd
+dl {
+  margin: 0;
+
+  dt { font-weight: normal }
+}
+
+// 选中文本
+::selection {
+  background: lighten(@brand-primary, 30%);
+  color: #fff;
+  text-shadow: none;
+}

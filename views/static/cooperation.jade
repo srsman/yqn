@@ -1,0 +1,110 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/static/seo_index.css')
+
+block main_content
+  //- 全宽滑块
+  .full-container
+    .qn-slider.auto
+      ul.qn-slides
+        li.qn-slide.bg-dark(style='background-image: url("/images/banner/banner_cooperation.jpg");')
+          .container.clearfix(style='min-height: 340px;')
+
+
+  .container.main-container
+    .qn-section-static.clearfix
+
+
+      .qn-static-row
+        ul.pthz-subTitle-list.clearfix
+          li
+            .pthz-subTitle.subTitle-1th
+              h2 招牛人
+              p 组合交易领袖 海量粉丝等你指点
+          li
+            .pthz-subTitle.subTitle-2th
+              h2 揽私募
+              p 私募梦工厂 孵化器助力成长
+          li
+            .pthz-subTitle.subTitle-3th
+              h2 拓商务
+              p 财富管理平台 异业合作资源共享
+
+
+
+      .qn-static-row.row-pthz
+        h2.qn-static-txtC 牛人招募
+        p.gray6 你是操盘牛人，身边好友都想把钱交给你打理，管不过来怎么办？
+        p.gray6 你是财经大V，分享市场观点，实践投资逻辑，想看粉丝是否跟随操作？
+        p.gray6 一起牛，为你提供更多更全的工具支持 。
+        p.gray6 入驻平台，拓展影响力，维护粉丝团
+        ul.nrzm.clearfix
+          li
+            img(src="/images/static/avatar-pthz-1.png", alt="杨磊")
+            h4 杨磊
+            p.gray9 前公募基金经理
+          li
+            img(src="/images/static/avatar-pthz-2.png", alt="")
+            h4 宋明青
+            p.gray9 财经网络大V<br>（三朝元老）
+          li
+            img(src="/images/static/avatar-pthz-3.png", alt="")
+            h4 Eric
+            p.gray9 南极圈创始人
+          li
+            img(src="/images/static/avatar-pthz-4.png", alt="")
+            h4 王红兵
+            p.gray9 券商金融工程首席
+          li.margin0
+            img(src="/images/static/avatar-pthz-5.png", alt="")
+            h4.gray9 等你...
+        .pthz-contact.borderA
+          .pthz-tel 咨询热线： 400-1515-176
+          .pthz-email 邮箱：vip@yiqiniu.com
+
+
+
+      .qn-static-row.row-pthz
+        h2.qn-static-txtC 私募招募
+        p.gray6 你已私募备案，却还未发行产品？你的产品收益稳健，却无处展示？
+        p.gray6 只要简单填写调查表，产品孵化助力成长。
+
+        ul.thick-border.clearfix
+          li
+            img(src="/images/portal/com-logo-1.png", alt="巨杉资产")
+          li
+            img(src="/images/portal/com-logo-2.png", alt="恒锐资本")
+          li
+            img(src="/images/portal/com-logo-3.png", alt="前海方舟资本")
+          li.border0.padding0
+            img(src="/images/portal/cop-add-btn-2.jpg", alt="等你加盟")
+
+        .pthz-contact.styleA
+          .pthz-tel 咨询热线： 400-1515-176
+          .pthz-email 客服邮箱：vip@yiqiniu.com
+
+
+
+      .qn-static-row.row-pthz
+        h2.qn-static-txtC 商务合作
+        p.gray6 我们为合作伙伴输送高质量交易用户，现支持A股和场内ETP产品
+        p.gray6 未来还能做些什么？
+        p.gray6 公募，信托，保险等金融机构，或是互联网公司，谁知道呢？
+        p.gray6 有好的合作方案欢迎洽谈。
+
+        ul.thick-border.clearfix
+          li
+            img(src="/images/portal/com-logo-4.png", alt="国信证券")
+          li.border0.padding0
+            img(src="/images/portal/cop-add-btn.jpg", alt="等你加盟")
+
+        .pthz-contact.borderA.marginTop40
+          .pthz-tel 咨询热线： 400-1515-176
+          .pthz-email 客服邮箱：vip@yiqiniu.com
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

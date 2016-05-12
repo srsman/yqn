@@ -1,0 +1,81 @@
+// 列表
+.seo-questions-list-main {
+  padding: 0 20px;
+
+  li + li { border-top: 1px dashed @border-default-color; }
+}
+
+// 列表项
+.seo-questions-list-item {
+  padding: 20px 0;
+
+  .qn-stock-title-link {
+    margin-right: 9px;
+    font-size: 18px;
+    word-break: break-all;
+    color: #ff4e00;
+  }
+  dt,
+  dd {
+    position: relative;
+    padding-left: 30px;
+
+    .qn-font-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  dt .qn-font-icon { top: 3px; }
+
+  dd {
+    margin-top: 15px;
+
+    p {
+      margin-bottom: 0;
+      max-width: 640px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+    .post-more {
+      padding-left: 10px;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+
+  .post-meta {
+    position: relative;
+    margin-top: 20px;
+    padding-top: 5px;
+    font-size: @font-size-small;
+    color: @gray-light;
+
+    .author {
+      float: left;
+      padding-left: 35px;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        .user-select(none);
+      }
+
+      a {
+        color: @gray-dark;
+        cursor: default; // 有链接时删除
+      }
+    }
+
+    .date { float: right; }
+  }
+}

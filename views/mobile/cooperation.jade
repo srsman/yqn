@@ -1,0 +1,143 @@
+//
+   Created by ayou on 2016/1/23.
+
+doctype html
+html
+   head
+      meta(charset='utf-8')
+      meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+      meta(name='format-detection', content='telephone=no')
+      meta(name='apple-mobile-web-app-capable', content='yes')
+      meta(name='apple-mobile-web-app-status-bar-style', content='black')
+      link(rel='shortcut icon', href='favicon.ico', type='image/x-icon')
+      link(href='/stylesheets/mobile/cooperation_index.css?ver=20150624', rel='stylesheet')
+      title 平台合作|一起牛-齐牛金融-百姓身边的投资顾问
+   body
+      // 顶部
+      header
+         .nav-warp
+            // 头部工具栏
+            .nav-con
+               i.nav-menu-btn
+               h1.page-title 平台合作
+               .logo
+                  img(src='/images/mobile/logo.png?ver=20150624', alt='齐牛金融')
+            // 导航菜单
+            .nav-menu
+               ul.nav-menu-lists.clearfix
+                  li
+                     a(href='/mobile') 首页
+                  li
+                     a(href='/mobile/download') 下载
+                  li
+                     a.cur(href='javascript:void(0);') 合作
+                  li
+                     a(href='/mobile/jobs') 招聘
+                  li
+                     a(href='/mobile/about_us') 我们
+      .page
+         // banner
+         .page-banner
+            img(src='/images/mobile/coop-banner.jpg?ver=20150624', alt='平台合作')
+         // 牛人招募
+         .site-floor.bg-gray
+            .container
+               h1.title 牛人招募
+               h3.subtit
+                  | 你是操盘牛人，身边好友都想把钱交给你打理，管不过来怎么办？
+                  | 你是财经大V，分享市场观点，实践投资逻辑，想看粉丝是否跟随操作？
+               h3.subtit 一起牛，为你提供更多更全的工具支持。入驻平台，拓展影响力，维护粉丝团。
+               .person-box
+                  ul.box-con.clearfix
+                     li
+                        .user-img
+                           img(src='/images/mobile/person/pic_1.png?ver=20150624', alt='杨磊')
+                        p.user-name 杨磊
+                        p.user-intro 前公募基金经理
+                     li
+                        .user-img
+                           img(src='/images/mobile/person/pic_2.png?ver=20150624', alt='宋明青')
+                        p.user-name 宋明青
+                        p.user-intro 财经网络大V
+                        p.user-intro-sub （三朝元老）
+                     li
+                        .user-img
+                           img(src='/images/mobile/person/pic_3.png?ver=20150624', alt='Eric')
+                        p.user-name Eric
+                        p.user-intro 南极圈创始人
+                  ul.box-con.pdl53.clearfix
+                     li
+                        .user-img
+                           img(src='/images/mobile/person/pic_4.png?ver=20150624', alt='王红兵')
+                        p.user-name 王红兵
+                        p.user-intro 券商金融工程首席
+                     li
+                        .user-img
+                           a(href='mailto:vip@yiqiniu.com')
+                              img(src='/images/mobile/person/pic_5.png?ver=20150624', alt='等你')
+                        p.user-name 等你…
+               ul.links.clearfix
+                  li
+                     a(href='tel:400-1515-176') 咨询热线： 400-1515-176
+                  li.no-margin
+                     a(href='javascript:void(0);') 客服邮箱：vip@yiqiniu.com
+         // 私募招募
+         .site-floor
+            .container
+               h1.title 私募招募
+               h3.subtit 你已私募备案，却还未发行产品？你的产品收益稳健，却无处展示？只要简单填写调查表，产品孵化助力成长。
+               .companys.clearfix
+                  .com-item
+                     img(src='/images/mobile/c-logo-1.jpg?ver=20150624', alt='巨杉资产')
+                  .com-item.no-margin
+                     img(src='/images/mobile/c-logo-2.jpg?ver=20150624', alt='恒锐资本')
+                  .com-item
+                     img(src='/images/mobile/c-logo-3.jpg?ver=20150624', alt='前海方舟资本')
+                  .com-item.no-margin
+                     a(href='mailto:vip@yiqiniu.com')
+                        img(src='/images/mobile/c-logo-5.jpg?ver=20150624', alt='等你加入')
+               ul.links.clearfix
+                  li
+                     a(href='javascript:void(0);') 客服热线：400-1515-176
+                  li.no-margin
+                     a(href='mailto:vip@yiqiniu.com') 客服邮箱：vip@yiqiniu.com
+         // 平台合作
+         .site-floor.bg-gray
+            .container
+               h1.title 商务合作
+               h3.subtit 我们为合作伙伴输送高质量交易用户，现支持A股和场内ETP产品未来还能做些什么？公募，信托，保险等金融机构，或是互联网公司，谁知道呢？有好的合作方案欢迎洽谈。
+               .companys.clearfix
+                  .com-item
+                     img(src='/images/mobile/c-logo-4.jpg?ver=20150624', alt='国信证券')
+                  .com-item.no-margin
+                     a(href='mailto:vip@yiqiniu.com')
+                        img(src='/images/mobile/c-logo-5.jpg?ver=20150624', alt='等你加入')
+               ul.links.clearfix
+                  li
+                     a(href='javascript:void(0);') 咨询热线：400-1515-176
+                  li.no-margin
+                     a(href='mailto:vip@yiqiniu.com') 客服邮箱：vip@yiqiniu.com
+      // 底部
+      footer
+         .server-tel.clearfix
+            .icon-tel
+               img(src='/images/mobile/icon-tel.png?ver=20150624', alt='')
+            .server-info
+               a.tel(href='tel:400-1515-176') 客服电话: 400-1515-176
+               p.time 工作日 08:30 - 17:30
+         .address-info
+            p 地址：深圳市南山区学府路95号怡化金融科技大厦 601
+            p 邮箱：cs@yiqiniu.com
+            p 电话：0755-26921766
+         .copyright-wrap.clearfix
+            .logo
+               img(src='/images/mobile/logo.png?ver=20150624', alt='齐牛金融')
+            .copyright
+               p.company-name 深圳齐牛互联网金融服务有限公司
+               p.text Copyright © 2014-2015 齐牛金融 版权所有.
+               p.text 粤ICP备14078038号-1
+      // 回到顶部
+      .goto-top.hide 回到顶部
+      script(src="/javascripts/lib/jquery/jquery.js")
+      script(src='/javascripts/mobile/easing.js?ver=20150624')
+      script(src='/javascripts/mobile/common.js?ver=20150624')

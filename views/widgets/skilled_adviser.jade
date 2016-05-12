@@ -1,0 +1,26 @@
+//- 擅长投顾
+if widgetSkilledAdvisers.length > 0
+  .qn-section.qn-widget-skilled-advisers
+    h3.qn-section-title 擅长的投顾
+    .qn-section-main
+      ul.qn-widget-skilled-adviser-list
+        each item in widgetSkilledAdvisers
+          li
+            .qn-avatar-info
+              .qn-avatar.disable
+                img(src=item.userIcon, alt=item.nickname)
+                span.qn-vip
+
+              ul
+                li #{item.nickname}
+                if item.orgName
+                 li #{item.orgName}（#{item.adviserName}）
+                else
+                  li #{item.adviserName}
+            - var dialog = {};
+            - dialog.img = item.userIcon
+            - dialog.name = item.nickname
+            - dialog.orgName = item.orgName
+            - dialog.adviserName = item.adviserName
+            - sDialog = JSON.stringify(dialog)
+            a.adviser-quiz-btn.invokeDialog(href='javascript:', data-qrurl=item.shareUrl, data-adInfo=sDialog) 提问

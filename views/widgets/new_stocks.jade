@@ -1,0 +1,19 @@
+//- 新股预告
+.qn-section
+  h3.qn-section-title 新股预告
+  a(href='/xingu').qn-section-more 全部新股
+    i.fa.fa-angle-right
+  .qn-section-main
+    .qn-widget-stock-header
+      .row
+        .col-xs-4 股票名称
+        .col-xs-4.text-center 申购代码
+        .col-xs-4.text-center 申购日期
+
+    .qn-widget-stock-main
+      each item in widgetNewStocks
+        .row
+          .col-xs-4
+            a(href='/xingu/' + item.assetId, title=item.stkName) #{item.stkName}
+          .col-xs-4.text-center #{item.applyCode}
+          .col-xs-4.text-center #{item.onlineDate}

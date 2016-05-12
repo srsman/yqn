@@ -1,0 +1,39 @@
+extends ../common/seo_layout
+
+block header
+  +he()
+
+append css
+  link(rel='stylesheet', href='/stylesheets/news/seo_index.css')
+
+block main_content
+  .container.main-container
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/xinwen') 热点新闻
+        i.fa.fa-angle-right
+        span #{data.title}
+      .qn-section
+        .qn-section-main
+          .qn-article
+            h1.qn-article-title #{data.title}
+            .qn-meta-panel
+              .qn-meta-createTs 发布时间: #{moment(data.date).format('YYYY-MM-DD HH:mm:ss')}
+              .qn-meta-reference #{data.media}
+            .qn-article-content.noIndent !{data.content}
+            //- .qn-article-share 分享到wechat
+
+    .seo-main-sidebar
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

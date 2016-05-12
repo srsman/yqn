@@ -1,0 +1,23 @@
+//- 新闻列表主体部分
+li.seo-news-list-item.item(data-mid=item.artid)
+  dl
+    dt
+      if item.url
+        h3.qn-post-title #{item.title}
+      else
+        a.qn-post-title-link(href='/xinwen/' + item.artid, title=item.title) #{item.title}
+    dd
+      if item.content
+        p #{item.content}
+      else if item.url
+        p 公告文件：
+          a(href=item.url, title=item.title, target='_blank') #{item.url}
+
+      .seo-news-meta
+        if item.url
+          | #{moment(item.date).format('YYYY-MM-DD')}
+        else
+          | #{utils.timeDifference(item.date)}
+
+        if item.media
+          i #{item.media}

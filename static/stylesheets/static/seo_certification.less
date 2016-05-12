@@ -1,0 +1,156 @@
+
+.qn-static-row {
+
+  &.row-certification {
+    position: relative;
+    padding: 40px 137px 27px;
+    margin-bottom: 40px;
+
+    .right-side {
+      margin-left: 230px;
+
+      ul { width: 600px; }
+    }
+
+    .description {
+      margin:20px 0 0;
+    }
+
+    ul {
+      display: inline-block;
+      width: 680px;
+      margin: 15px 0 10px;
+
+      li {
+        margin-left: 25px;
+        line-height: 24px;
+        list-style-type: decimal;
+        color: @gray;
+      }
+    }
+
+    i {
+      display: block;
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      background-image: url(/images/seo-icon-2.png);
+      background-repeat: no-repeat;
+
+      &.green {
+        right: 137px + 40px;
+        top: 35px;
+        background-position: 0 0;
+      }
+
+      &.red {
+        left: 137px + 40px;
+        top: 28px;
+        background-position: -170px 0;
+      }
+
+      &.pupple {
+        right: 137px + 40px;
+        top: 28px;
+        background-position: -340px 0;
+      }
+    }
+  }
+
+  &.certification-bottom {
+    padding: 40px 137px;
+    text-align: center;
+
+    h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+      color: @brand-primary;
+    }
+
+    li {
+      display: inline-block;
+      color: @gray;
+      line-height: 24px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .middle {
+      padding: 0 80px;
+      margin: 0 80px;
+      border-left: 1px dashed @border-default-color;
+      border-right: 1px dashed @border-default-color;
+    }
+
+    .button-area {
+      margin: 30px 133px 0;
+
+      a {
+        width: 100%;
+        font-size: 16px;
+        padding: 11px 12px;
+        border: none;
+      }
+    }
+  }
+}
+
+.qn-seo-dialog {
+  display: none;
+
+  &.static-dialog {
+    width: 730px;
+    height: 635px;
+    margin-left: -345px;
+    margin-top: -317px;
+
+    .dialog-content {
+      padding: 40px 0 50px 70px;
+    }
+
+    .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: @brand-primary;
+      color: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      text-align: center;
+      line-height: 32px;
+      font-style: initial;
+    }
+
+    li {
+      position: relative;
+      margin-bottom: 40px;
+
+      p {
+        margin-left: 43px;
+        font-size: 16px;
+      }
+
+      .qrcode {
+        margin-left: 43px;
+        width: 120px;
+        height: 120px;
+      }
+
+      .process {
+        margin-left: 36px;
+      }
+
+      .success {
+        line-height: 32px;
+      }
+    }
+  }
+
+}
+
+.qn-seo-shadow {
+  display: none;
+}

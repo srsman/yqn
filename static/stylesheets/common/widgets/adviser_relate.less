@@ -1,0 +1,170 @@
+/*
+ * 投顾侧边栏
+ * #qiulijun
+ */
+
+
+.qn-widget-adviser {
+  padding: 15px;
+
+  .qn-widget-adInfo {
+
+    .qn-widget-adIcon, dl {
+      float: left;
+      position: relative;
+    }
+
+    dl { margin-left: 11px; }
+
+    .qn-widget-adIcon img:first-child {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+    }
+
+    .adSex { margin-left: 9px; }
+
+    .qn-icon-vip {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      bottom: 0;
+      right: 0;
+    }
+
+    .qn-widget-adName {
+      margin-top: 5px;
+      font-size: 18px;
+    }
+
+    .qn-widget-adOrg {
+      font-size: 12px;
+      margin-top: 4px;
+      color: @gray-light;
+    }
+
+  }
+
+
+
+  .qn-widget-adAdvantage {
+    position: relative;
+    margin-top: 13px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid @border-default-color;
+
+    dt {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 56px;
+      color: @gray-light;
+    }
+
+    dd { margin-left: 69px; }
+  }
+
+  .qn-widget-adAchievement {
+    padding-top: 20px;
+    text-align: center;
+
+    dt {
+      font-size: 12px;
+      color: @gray-light;
+      font-weight: normal;
+    }
+
+    .qn-widget-adBigFont {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: @gray;
+    }
+
+    .qn-widget-adPercentage { font-size: 18px; }
+    .percentage-symbol { font-size: 12px; }
+    .col-xs-4 { padding-right: 6px; padding-left: 6px;}
+    .earnings { color: @brand-danger; }
+    .loss { color: @brand-success; }
+  }
+
+  .qn-btn {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .qn-widget-adQA {
+
+    a {
+      word-break: break-all;
+    }
+
+    h2 {
+      margin-top: 23px;
+      font-size: 15px;
+      line-height: 1.5;
+      border-bottom: 1px solid @border-default-color;
+
+      &:after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 2px;
+        background-color: @brand-primary;
+      }
+    }
+
+    dt {
+      font-size: 16px;
+    }
+
+    dl.qn-widget-adAnswer {
+      border-bottom: 1px solid @border-default-color;
+
+      dt, dd {
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .primary, .info {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .info { top: 18px;}
+
+      p {
+        white-space: nowrap;
+        word-break: break-all;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 245px;
+      }
+    }
+
+    dl.qn-widget-adViewpoint {
+      dd {
+        width: 278px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    dt {
+      padding-top: 17px;
+      margin-bottom: 9px;
+    }
+    div + dt { border-top: 1px solid @border-default-color; }
+    dd { margin-bottom: 10px; }
+
+    .qn-meta-panel { margin-top: 0; margin-bottom: 14px; }
+    .icon-featured { margin-left: 4px; }
+
+    .qn-widget-adAnswerTs {
+      display: block;
+      font-size: 12px;
+      color: @gray-light;
+      margin-bottom: 14px;
+    }
+
+  }
+}

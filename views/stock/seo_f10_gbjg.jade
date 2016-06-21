@@ -1,0 +1,79 @@
+//- 股本结构
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('gbjg')
+
+block f10_content
+  if gbjgInfo.capFloatCon.length > 0 || gbjgInfo.capFloatDis.length > 0 || gbjgInfo.unforbid.length > 0 || gbjgInfo.hisCapChg.length > 0
+    if gbjgInfo.capFloatCon.length > 0 || gbjgInfo.capFloatDis.length > 0
+      h1.qn-table-title 股本结构
+      //- 股份流通情况表
+      if gbjgInfo.capFloatCon
+        table.qn-table.striped
+          thead
+            tr
+              th(width='40%') #{gbjgInfo.capFloatCon[0][0]}
+              th(width='30%') #{gbjgInfo.capFloatCon[0][1]}
+              th(width='30%') #{gbjgInfo.capFloatCon[0][2]}
+          tbody
+            - for(var i = 1; i < gbjgInfo.capFloatCon.length; i++) {
+              tr
+                td #{gbjgInfo.capFloatCon[i][0]}
+                td #{gbjgInfo.capFloatCon[i][1]}
+                td #{gbjgInfo.capFloatCon[i][2]}
+            - }
+
+      //- 流通股本分布表
+      if gbjgInfo.capFloatDis
+        table.qn-table.striped
+          thead
+            tr
+              th(width='40%') #{gbjgInfo.capFloatDis[0][0]}
+              th(width='30%') #{gbjgInfo.capFloatDis[0][1]}
+              th(width='30%') #{gbjgInfo.capFloatDis[0][2]}
+          tbody
+            - for(var i = 1; i < gbjgInfo.capFloatDis.length; i++) {
+              tr
+                td #{gbjgInfo.capFloatDis[i][0]}
+                td #{gbjgInfo.capFloatDis[i][1]}
+                td #{gbjgInfo.capFloatDis[i][2]}
+            - }
+
+    //- 限售解禁
+    if gbjgInfo.unforbid
+      h1.qn-table-title 限售解禁
+      table.qn-table.striped
+        thead
+          tr
+            th(width='25%') #{gbjgInfo.unforbid[0][0]}
+            th(width='25%') #{gbjgInfo.unforbid[0][1]}
+            th(width='25%') #{gbjgInfo.unforbid[0][2]}
+            th(width='25%') #{gbjgInfo.unforbid[0][3]}
+        tbody
+          - for(var i = 1; i < gbjgInfo.unforbid.length; i++) {
+            tr
+              td #{gbjgInfo.unforbid[i][0]}
+              td #{gbjgInfo.unforbid[i][1]}
+              td #{gbjgInfo.unforbid[i][2]}
+              td #{gbjgInfo.unforbid[i][3]}
+          - }
+
+    //- 历史股本变化
+    if gbjgInfo.hisCapChg
+      h1.qn-table-title 历史股本变化
+      table.qn-table.striped
+        thead
+          tr
+            - for(var j = 0; j < 6; j++) {
+                th #{gbjgInfo.hisCapChg[0][j]}
+            - }
+        tbody
+          - for(var i = 1; i < gbjgInfo.hisCapChg.length; i++) {
+            tr
+              - for(var j = 0; j < 6; j++) {
+                  td #{gbjgInfo.hisCapChg[i][j]}
+              - }
+          - }
+  else
+    p 暂无数据

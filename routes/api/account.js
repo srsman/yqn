@@ -8,7 +8,9 @@ var express = require('express'),
     ajax = require('../../utils/ajax'),
     utils = require('../../utils/utils'),
     crypto = require('crypto'),
-    config = require('../../yiqiniu_config'),
+    serverConfig = require('../../server_config'),
+    appConfig = require('../../app_config'),
+    _ = require('lodash');
     qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
     router = express.Router();
 
@@ -63,6 +65,23 @@ router.post('/register', function(req, res) {
 
 /* 登录 */
 router.post('/login', function(req, res) {
+  // 判断是否需要验证码
+  var needCaptcha = utils.needCaptcha(req);
+
+  if (needCaptcha) {
+    // 验证验证码
+    var captcha = req.body.params.captcha;
+    var sCaptcha = req.session.captcha;
+
+    if (!captcha || !sCaptcha || captcha.toLowerCase() !== req.session.captcha) {
+      res.status(200).json({
+        code: -1,
+        message: '验证码错误'
+      });
+      return;
+    }
+  }
+
   var url = '/user_api/user_login'; // 接口地址
 
   ajax.post(url, {
@@ -75,7 +94,7 @@ router.post('/login', function(req, res) {
       if(userData.uType === 2) {
         /* 如果是投顾，则登录成功 */
         var userId = new Buffer(userData.sessionUserId).toString('base64'),
-            configKey = config.env[qiniuEnv].secretKey,
+            configKey = serverConfig.env[qiniuEnv].secretKey,
             secretKey = userId + configKey,
             cipher = crypto.createCipher('aes-128-ecb', secretKey),
             secretData = cipher.update(userData.sessionUserId, 'utf8', 'hex') + cipher.final('hex'),
@@ -95,6 +114,21 @@ router.post('/login', function(req, res) {
         res.status(200).json(data);
       }
     } else {
+
+      // 登录失败，记录失败次数和过期时间
+      if (req.session.loginErr) {
+        req.session.loginErr += 1;
+      } else {
+        req.session.loginErr = 1;
+      }
+      var now = new Date().getTime();
+      req.session.loginErrExpires = now + appConfig.session.loginErrExpire;
+
+      // 失败了三次，第四次登录需要显示验证码
+      if (req.session.loginErr === 3) {
+        data = _.extend(data,{showCaptcha: true});
+      }
+
       res.status(200).json(data);
     }
   }, function(data) {

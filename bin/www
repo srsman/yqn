@@ -4,13 +4,28 @@
 var app = require('../app'),
     debug = require('debug')('mobile:server'),
     http = require('http'),
-    cfg = require('../yiqiniu_config');
+    serverConfig = require('../server_config'),
+    qiniuEnv = process.env.NODE_ENV,
+    currentConfig = serverConfig.env[qiniuEnv];
 
-// 获取端口号
-var httpPort = getPort('http');
+/*
+ * http重定向至https
+ */
+var redirectServer = http.createServer(function(req, res) {
+  if(req.method.toLowerCase() == 'head') {
+    // 针对阿里健康检查做的特殊处理
+    res.statusCode = 200;
+  } else {
+    res.statusCode = 302;
+    res.setHeader('Location', currentConfig.redirect.url + req.url);
+  }
 
-// 创建http服务
-var server = http.createServer(app);
+  res.end();
+});
+redirectServer.listen(currentConfig.redirect.port);
+
+var httpPort = getPort('http'), // 获取端口号
+    server = http.createServer(app); // 创建http服务
 
 /*
  * 监听提供的端口号
@@ -28,39 +43,15 @@ server.on('listening', onListening);
 function getPort(type) {
   var cfgPort;
 
-  if(cfg.env.development.status === true) {
-    switch(type) {
-      case 'http':
-        cfgPort = cfg.env.development.port.http;
-        break;
-      case 'https':
-        cfgPort = cfg.env.development.port.https;
-        break;
-      default:
-        cfgPort = cfg.env.development.port.http;
-    }
-  } else if(cfg.env.test.status === true) {
-    switch(type) {
-      case 'http':
-        cfgPort = cfg.env.test.port.http;
-        break;
-      case 'https':
-        cfgPort = cfg.env.test.port.https;
-        break;
-      default:
-        cfgPort = cfg.env.test.port.http;
-    }
-  } else if(cfg.env.production.status === true) {
-    switch(type) {
-      case 'http':
-        cfgPort = cfg.env.production.port.http;
-        break;
-      case 'https':
-        cfgPort = cfg.env.production.port.https;
-        break;
-      default:
-        cfgPort = cfg.env.production.port.http;
-    }
+  switch(type) {
+    case 'http':
+      cfgPort = currentConfig.port.http;
+      break;
+    case 'https':
+      cfgPort = currentConfig.port.https;
+      break;
+    default:
+      cfgPort = currentConfig.port.http;
   }
 
   cfgPort = parseInt(cfgPort, 10);

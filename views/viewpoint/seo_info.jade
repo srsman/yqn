@@ -32,15 +32,22 @@ block main_content
               .qn-meta-readNums 阅读&nbsp;
                 span.times #{data.readNum}
             .qn-article-content !{utils.formatStkUrl(data.content)}
-            //- .qn-article-share 分享到wechat
+
+            .qn-article-share.clearfix
+              i 分享到：
+              .bdsharebuttonbox.clearfix
+                a.bds_tsina(href='javascript:', data-cmd='tsina', title='分享到新浪微博')
+                a.bds_weixin(href='javascript:', data-cmd='weixin', title='分享到微信')
+                a.bds_qzone(href='javascript:', data-cmd='qzone', title='分享到QQ空间')
+                a.bds_more(href='javascript:' data-cmd='more')
 
     .seo-main-sidebar
       //- 顾问相关信息
       include ../widgets/adviser_relate
       +ADrelevant(adviserInfo, adQuestions, adViewpoints)
 
-      //- 新股预告
-      include ../widgets/new_stocks
+      //- 热门股票
+      include ../widgets/hot_stocks
 
       //- 券商开户
       include ../widgets/recommend_broker

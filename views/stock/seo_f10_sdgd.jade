@@ -1,0 +1,44 @@
+//- 十大股东
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('gdfx')
+
+block f10_content
+  if sdgdInfo.top10FloatHolder || sdgdInfo.top10Holder
+    //- 十大流动股东
+    if sdgdInfo.top10FloatHolder
+      h1.qn-table-title 十大流通股东
+      table.qn-table.striped
+        thead
+          tr
+            - for(var i = 0; i < sdgdInfo.top10FloatHolder[0].length; i++) {
+                th #{sdgdInfo.top10FloatHolder[0][i]}
+            - }
+        tbody
+          - for(var j = 1; j < sdgdInfo.top10FloatHolder.length; j++) {
+              tr
+                - for(var i = 0; i < sdgdInfo.top10FloatHolder[j].length; i++) {
+                    td #{sdgdInfo.top10FloatHolder[j][i]}
+                - }
+          - }
+
+    //- 十大股东
+    if sdgdInfo.top10Holder
+      h1.qn-table-title 十大股东
+      table.qn-table.striped
+        thead
+          tr
+            - for(var i = 0; i < sdgdInfo.top10Holder[0].length; i++) {
+                th #{sdgdInfo.top10Holder[0][i]}
+            - }
+        tbody
+          - for(var j = 1; j < sdgdInfo.top10Holder.length; j++) {
+              tr
+                - for(var i = 0; i < sdgdInfo.top10Holder[j].length; i++) {
+                    td #{sdgdInfo.top10Holder[j][i]}
+                - }
+          - }
+
+  else
+    p 暂无数据

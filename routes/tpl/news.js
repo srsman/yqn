@@ -13,7 +13,7 @@ var express = require('express'),
 /*
  * 新闻列表
  */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   var newStockUrl = '/mktinfo_api/fetch_ipo_list',
       newsListUrl = '/mktinfo_api/fetch_news_page_list',
       brokerUrl = '/seo_api/fetch_recommend_broker', // 券商开户
@@ -59,6 +59,29 @@ router.get('/', function(req, res, next) {
 
       seoMeta = utils.seoMeta('news', seoCustomMeta);
 
+      /* 判断文章类型 */
+      var curNewsType;
+
+      switch(newsListParams.params.type) {
+        case 6:
+          curNewsType = 'yaowen';
+          break;
+        case 7:
+          curNewsType = 'zhibo';
+          break;
+        case 1:
+          curNewsType = 'gupiao';
+          break;
+        default:
+          curNewsType = newsListParams.params.type;
+      }
+
+      if(!newsListData.result) {
+        newsListData.result = {};
+      }
+
+      newsListData.result.newsType = curNewsType;
+
       res.render('news/seo_list', {
         newsInfo: newsListData.result,
         widgetNewStocks: newStockData.result.stks,
@@ -79,19 +102,72 @@ router.get('/', function(req, res, next) {
 /*
  * 新闻详情
  */
-router.get('/:id', function(req, res, next) {
-  var mainContentUrl = '/mktinfo_api/fetch_news_detail',
+router.get('/:type/:id', function(req, res) {
+  var params = {};
+
+  params['type'] = req.params.type;
+  params['id'] = req.params.id;
+
+  getNewsInfo(req, res, params);
+});
+
+/*
+ * 兼容旧版新闻详情
+ */
+router.get('/:id', function(req, res) {
+  var params = {};
+
+  params['type'] = 1;
+  params['id'] = req.params.id;
+
+  getNewsInfo(req, res, params);
+});
+
+/*
+ * 获取新闻详情
+ */
+function getNewsInfo(req, res, params) {
+  var mainContentUrl = '/mktinfo_api/fetch_news_page_detail',
+      viewpointUrl = '/adviser/fetch_adviser_note_list', // 精选观点
+      questionUrl = '/adviser/latest_qa_list', // 最新问答
       newStockUrl = '/mktinfo_api/fetch_ipo_list',
       brokerUrl = '/seo_api/fetch_recommend_broker', // 券商开户
-      params = {},
+      newsParams = {},
+      viewpointParams = {},
+      questionParams = {},
       newStockParams = {},
       brokerParams = {};
 
   // 新闻详情请求参数
-  params['module'] = 'market';
-  params['params'] = {};
-  params['params']['artid'] = req.params.id;
-  params['params']['type'] = 7;
+  newsParams['module'] = 'market';
+  newsParams['params'] = {};
+
+  /* 判断文章类型 */
+  var curNewsType = params.type,
+      curNewsId = params.id;
+
+  switch(curNewsType) {
+    case 'yaowen':
+      curNewsType = 6;
+      break;
+    case 'zhibo':
+      curNewsType = 7;
+      break;
+    case 'gupiao':
+      curNewsType = 1;
+      break;
+  }
+
+  newsParams['params']['type'] = curNewsType;
+
+  if(curNewsType === 1) {
+    // 其他相关的新闻，现在只是股票相关
+    mainContentUrl = '/mktinfo_api/fetch_news_detail';
+
+    newsParams['params']['artid'] = curNewsId;
+  } else {
+    newsParams['params']['newsId'] = curNewsId;
+  }
 
   // 新股请求参数
   newStockParams['module'] = 'market';
@@ -102,35 +178,65 @@ router.get('/:id', function(req, res, next) {
   brokerParams['params'] = {};
   brokerParams['params']['brokerNum'] = 4;
 
+  // 问答请求参数
+  questionParams['module'] = 'adviser';
+  questionParams['params'] = {};
+  questionParams['params']['count'] = 3;
+
+  // 观点请求参数
+  viewpointParams['module'] = 'adviser';
+  viewpointParams['params'] = {};
+  viewpointParams['params']['count'] = 3;
+  viewpointParams['params']['readId'] = 0;
+
   ajax.map.post({
     url: mainContentUrl,
-    body: params
+    body: newsParams
   }, {
     url: newStockUrl,
     body: newStockParams
   }, {
     url: brokerUrl,
     body: brokerParams
+  }, {
+    url: questionUrl,
+    body: questionParams
+  }, {
+    url: viewpointUrl,
+    body: viewpointParams
   }).then(function(datas) {
     var mainContentData = datas[0],
         newStockData = datas[1],
-        brokerData = datas[2];
+        brokerData = datas[2],
+        questionData = datas[3],
+        viewpointsData = datas[4];
 
-    if(mainContentData.code === 0 && mainContentData.result !== 'undefined' && newStockData.code === 0 && brokerData.code === 0) {
-      var seoCustomMeta = {};
+    if(mainContentData.code === 0 && mainContentData.result !== 'undefined' && newStockData.code === 0 && brokerData.code === 0 && questionData.code === 0 && viewpointsData.code === 0) {
+      var seoCustomMeta = {},
+          seoCustomDescription = mainContentData.result.data.content;
 
-      seoCustomMeta['title'] = mainContentData.result.data.title;
+      seoCustomDescription = seoCustomDescription.replace('/<[^>]+>/', '');
+
+      seoCustomMeta['title'] = mainContentData.result.data.title + '_热点新闻_一起牛';
+      seoCustomMeta['keywords'] = mainContentData.result.data.title;
+      seoCustomMeta['description'] = seoCustomDescription.substring(0, 99);
+      seoCustomMeta['mixins'] = 1;
 
       seoMeta = utils.seoMeta('news', seoCustomMeta);
 
+      mainContentData.result.newsType = curNewsType;
+
       res.render('news/seo_info', {
-        id: req.params.id,
-        data: mainContentData.result.data,
+        id: curNewsId,
+        newsMain: mainContentData.result,
+        widgetViewpoints: viewpointsData.result.data, // 精选观点
+        widgetQuestions: questionData.result.qa, // 最新问答
         widgetNewStocks: newStockData.result.stks,
         widgetBrokers: brokerData.result.brokers,
         seoMeta: seoMeta,
         user: req.session.userInfo,
-        moment:moment
+        moment:moment,
+        utils: utils
       });
     } else {
       utils.errorHandler(res, datas);
@@ -138,6 +244,6 @@ router.get('/:id', function(req, res, next) {
   }, function(data) {
     utils.errorHandler(res, data);
   });
-});
+}
 
 module.exports = router;

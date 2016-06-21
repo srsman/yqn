@@ -6,7 +6,7 @@
 var express = require('express'),
     ajax = require('../../utils/ajax'),
     utils = require('../../utils/utils'),
-    config = require('../../yiqiniu_config'),
+    serverConfig = require('../../server_config'),
     seoMeta = utils.seoMeta(),
     moment =require('moment'),
     router = express.Router();
@@ -16,14 +16,16 @@ router.get('/', function(req, res, next) {
   var stockUrl = '/mktinfo_api/fetch_stk_list', // 股票列表
       newStockUrl = '/mktinfo_api/fetch_ipo_list', // 新股预告
       brokerUrl = '/seo_api/fetch_recommend_broker', // 券商开户
+      marketUrl = '/mktinfo_api/fetch_market_index', // 市场首页
       stockParams = {},
       newStockParams = {},
-      brokerParams = {};
+      brokerParams = {},
+      marketParams = {};
 
   // 新股请求参数
   newStockParams['module'] = 'market';
   newStockParams['params'] = {};
-  newStockParams['params']['pageSize'] = 20;
+  newStockParams['params']['pageSize'] = 30;
   newStockParams['params']['curPage'] = req.query.page || 1;
 
   // 股票列表请求参数
@@ -35,6 +37,11 @@ router.get('/', function(req, res, next) {
   brokerParams['params'] = {};
   brokerParams['params']['brokerNum'] = 4;
 
+  // 市场首页请求参数
+  marketParams['module'] = 'market';
+  marketParams['params'] = {};
+  marketParams['params']['flag'] = 1 << 0 | 1 << 3;
+
   ajax.map.post({
     url: newStockUrl,
     body: newStockParams
@@ -44,12 +51,16 @@ router.get('/', function(req, res, next) {
   }, {
     url: brokerUrl,
     body: brokerParams
+  }, {
+    url: marketUrl,
+    body: marketParams
   }).then(function(datas) {
     var newStockData = datas[0],
         stocksData = datas[1],
-        broderData = datas[2];
+        broderData = datas[2],
+        marketData= datas[3];
 
-    if(newStockData.code === 0 && stocksData.code === 0 && broderData.code === 0) {
+    if(newStockData.code === 0 && stocksData.code === 0 && broderData.code === 0 && marketData.code === 0) {
       var seoCustomMeta = {};
 
       seoCustomMeta['title'] = '新股预告';
@@ -60,6 +71,8 @@ router.get('/', function(req, res, next) {
         newStocks: newStockData.result, // 新股预告
         widgetStocks: stocksData.result.stks, // 热门股票
         widgetBrokers: broderData.result.brokers, // 推荐券商
+        widgetIdxs: marketData.result.idxs, // 大盘指数
+        widgetIndus: marketData.result.indus, // 领涨行业
         seoMeta: seoMeta,
         user: req.session.userInfo, // 用户Session信息
         utils: utils
@@ -115,11 +128,13 @@ router.get('/:id', function(req, res, next) {
    * 40: 市净率[17]
    * 41: 流通市值[18]
    * 42: 资产状态[19]
+   * 73: 行业编号[20]
+   * 74: 行业名称[21]
    */
   stockInfoParams['module'] = 'market';
   stockInfoParams['params'] = {};
   stockInfoParams['params']['assetIds'] = [assetId];
-  stockInfoParams['params']['fields'] = '0|1|2|3|4|5|6|7|8|9|10|13|14|15|37|38|39|40|41|42';
+  stockInfoParams['params']['fields'] = '0|1|2|3|4|5|6|7|8|9|10|13|14|15|37|38|39|40|41|42|73|74';
 
   // 热门股票列表
   hotStockParams['module'] = 'market';
@@ -210,7 +225,7 @@ router.get('/:id', function(req, res, next) {
               thisUid = item.userId,
               thisUrl,
               qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
-              shareUrl = config.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
+              shareUrl = serverConfig.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
 
           thisUrl = shareUrl + '/webstatic/register/card.html?userId=' + thisUid;
 
@@ -266,9 +281,11 @@ router.get('/:id', function(req, res, next) {
 
             seoMeta = utils.seoMeta('newStock', seoCustomMeta);
 
+            stockNewsData.result.newsType = 'gupiao';
+
             res.render('stock/seo_stock_info', {
               stockInfo: data.result, // 股票信息
-              stockNews: stockNewsData.result.data, // 股票相关新闻
+              stockNews: stockNewsData.result, // 股票相关新闻
               stockNotice: stockNoticeData.result.data, // 股票相关公告
               stockQuestion: stockQuestionData.result.qa, // 股票相关问答
               stockViewpoint: stockViewpointData.result.data, // 股票相关观点

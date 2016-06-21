@@ -1,0 +1,15 @@
+//- 通用Demo布局模板
+doctype html
+html(lang='zh-CN')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+    meta(name='renderer', content='webkit')
+    if demoTitle
+      title #{demoTitle}
+    else
+      title 通用模块演示
+    block css
+      link(rel='stylesheet', href='/javascripts/lib/bootstrap/css/bootstrap.min.css')
+  body
+    block main_content

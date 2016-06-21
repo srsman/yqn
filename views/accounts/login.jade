@@ -22,21 +22,29 @@ block main_content
         //- 注册的主体
         .accounts-operate-main
           .accounts-operate-content
-            form#login-form(action='/account/login', method='post')
+            //form#login-form(action='/account/login', method='post')
+            form#login-form(action='javascript:void(0);', method='post')
               .qn-form-group
                 label.qn-control-label(for='username') 手机号
-                .qn-form-control-box
+                .qn-form-control-box.controls-wrap
                   input.qn-form-control#username(type='text', name='username', placeholder='请填写用户名', tabindex='1')
+                  .clearfix
 
               .qn-form-group
                 label.qn-control-label(for='password') 密码
-                .qn-form-control-box
+                .qn-form-control-box.controls-wrap
                   input.qn-form-control#password(type='password', name='password', placeholder='请填写密码', tabindex='2')
+                  .clearfix
 
-              //- .qn-form-group.special.offset-label.agreement-box
-              //-   .qn-checkbox
-              //-     input#remember.icheck(type='checkbox', checked, tabindex='3')
-              //-     label(for='remember') 两周内自动登录
+              .qn-form-group
+                #capContainer
+                  if needCaptcha
+                    label.qn-control-label(for='inputCaptcha') 验证码
+                    .qn-form-control-box.controls-wrap.captcha-control-box
+                      input.qn-form-control.qn-form-captcha#inputCaptcha(type='text', name='captcha', placeholder='请填写验证码', tabindex='3')
+                      img#captcha.captcha.m-l-5(src="/captcha")
+                      a#updateCap.link-blue.m-l-5(href='javascript:void(0);') 换一张
+                      .clearfix
 
               .qn-form-group.offset-label#login-form-submit-box
                 button.qn-btn.primary(type='submit') 登录

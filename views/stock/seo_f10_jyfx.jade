@@ -1,0 +1,126 @@
+//- 经营分析
+//- 主要指标
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('jyfx')
+
+block f10_content
+  if jyfxInfo && jyfxInfo.length > 0
+    ul.seo-stock-f10-second-menu
+      - for(var j = 0; j < 5; j++) {
+          if jyfxInfo[j].date == dateItem
+            li.active
+              a(href='/gupiao/#{stockInfo[0]}/JYFX/#{jyfxInfo[j].date}', title='#{jyfxInfo[j].finPeriod}') #{jyfxInfo[j].date}
+          else
+            li
+              a(href='/gupiao/#{stockInfo[0]}/JYFX/#{jyfxInfo[j].date}', title='#{jyfxInfo[j].finPeriod}') #{jyfxInfo[j].date}
+      - }
+
+    if !dateItem
+      - for(var j = 0; j < 1; j++) {
+          h1.qn-table-title #{jyfxInfo[j].finPeriod}
+
+          //- 行业表
+          if jyfxInfo[j].indus
+            table.qn-table.striped
+              thead
+                tr
+                  - for(var i = 0; i < jyfxInfo[j].indus[0].length; i++) {
+                      th #{jyfxInfo[j].indus[0][i]}
+                  - }
+              tbody
+                - for(var r = 1; r < jyfxInfo[j].indus.length; r++) {
+                    tr
+                      - for(var i = 0; i < jyfxInfo[j].indus[r].length; i++) {
+                          td #{jyfxInfo[j].indus[r][i]}
+                      - }
+                - }
+
+          //- 产品表
+          if jyfxInfo[j].product
+            table.qn-table.striped
+              thead
+                tr
+                  - for(var i = 0; i < jyfxInfo[j].product[0].length; i++) {
+                      th #{jyfxInfo[j].product[0][i]}
+                  - }
+              tbody
+                - for(var r = 1; r < jyfxInfo[j].product.length; r++) {
+                    tr
+                      - for(var i = 0; i < jyfxInfo[j].product[r].length; i++) {
+                          td #{jyfxInfo[j].product[r][i]}
+                      - }
+                - }
+
+          //- 地区表
+          if jyfxInfo[j].areasList
+            table.qn-table.striped
+              thead
+                tr
+                  - for(var i = 0; i < jyfxInfo[j].areasList[0].length; i++) {
+                      th #{jyfxInfo[j].areasList[0][i]}
+                  - }
+              tbody
+                - for(var r = 1; r < jyfxInfo[j].areasList.length; r++) {
+                    tr
+                      - for(var i = 0; i < jyfxInfo[j].areasList[r].length; i++) {
+                          td #{jyfxInfo[j].areasList[r][i]}
+                      - }
+                - }
+      - }
+    else
+      - for(var j = 0; j < jyfxInfo.length; j++) {
+          if jyfxInfo[j].date == dateItem
+            h1.qn-table-title #{jyfxInfo[j].finPeriod}
+
+            //- 行业表
+            if jyfxInfo[j].indus
+              table.qn-table.striped
+                thead
+                  tr
+                    - for(var i = 0; i < jyfxInfo[j].indus[0].length; i++) {
+                        th #{jyfxInfo[j].indus[0][i]}
+                    - }
+                tbody
+                  - for(var r = 1; r < jyfxInfo[j].indus.length; r++) {
+                      tr
+                        - for(var i = 0; i < jyfxInfo[j].indus[r].length; i++) {
+                            td #{jyfxInfo[j].indus[r][i]}
+                        - }
+                  - }
+
+            //- 产品表
+            if jyfxInfo[j].product
+              table.qn-table.striped
+                thead
+                  tr
+                    - for(var i = 0; i < jyfxInfo[j].product[0].length; i++) {
+                        th #{jyfxInfo[j].product[0][i]}
+                    - }
+                tbody
+                  - for(var r = 1; r < jyfxInfo[j].product.length; r++) {
+                      tr
+                        - for(var i = 0; i < jyfxInfo[j].product[r].length; i++) {
+                            td #{jyfxInfo[j].product[r][i]}
+                        - }
+                  - }
+
+            //- 地区表
+            if jyfxInfo[j].areasList
+              table.qn-table.striped
+                thead
+                  tr
+                    - for(var i = 0; i < jyfxInfo[j].areasList[0].length; i++) {
+                        th #{jyfxInfo[j].areasList[0][i]}
+                    - }
+                tbody
+                  - for(var r = 1; r < jyfxInfo[j].areasList.length; r++) {
+                      tr
+                        - for(var i = 0; i < jyfxInfo[j].areasList[r].length; i++) {
+                            td #{jyfxInfo[j].areasList[r][i]}
+                        - }
+                  - }
+      - }
+  else
+    p 暂无资料

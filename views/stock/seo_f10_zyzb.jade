@@ -1,0 +1,38 @@
+//- 主要指标
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('zyzb')
+
+block f10_content
+  ul.seo-stock-f10-second-menu
+    li.active
+      a(href='/gupiao/#{stockInfo[0]}/ZYZB', title='主要指标') 主要指标
+    li
+      a(href='/gupiao/#{stockInfo[0]}/LRB', title='利润表') 利润表
+    li
+      a(href='/gupiao/#{stockInfo[0]}/ZCFZB', title='资产负债表') 资产负债表
+    li
+      a(href='/gupiao/#{stockInfo[0]}/XJLLB', title='现金流量表') 现金流量表
+
+  if zyzbInfo && zyzbInfo.length > 0
+    - for(var j = 0; j < zyzbInfo.length; j++) {
+        table.qn-table.striped
+          thead
+            tr
+              - for(var i = 0; i < 6; i++) {
+                  if i === 0
+                    th #{zyzbInfo[j][0][i]}
+                  else
+                    th(width='150') #{zyzbInfo[j][0][i]}
+              - }
+          tbody
+            - for(var r = 1; r < zyzbInfo[j].length; r++) {
+                tr
+                  - for(var i = 0; i < 6; i++) {
+                      td #{zyzbInfo[j][r][i]}
+                  - }
+            - }
+    - }
+  else
+    p 暂无数据

@@ -1,0 +1,18 @@
+mixin f10Menu(index)
+  ul.seo-stock-f10-menu.clearfix
+    li(class={active: index == 'gszl'})
+      a(href='/gupiao/#{stockInfo[0]}/GSZL', title='公司资料') 公司资料
+    li(class={active: index == 'dstx'})
+      a(href='/gupiao/#{stockInfo[0]}/DSTX', title='大事提醒') 大事提醒
+    li(class={active: index == 'zyzb'})
+      a(href='/gupiao/#{stockInfo[0]}/ZYZB', title='财务分析') 财务分析
+    li(class={active: index == 'jyfx'})
+      a(href='/gupiao/#{stockInfo[0]}/JYFX', title='经营分析') 经营分析
+    li(class={active: index == 'fhrz'})
+      a(href='/gupiao/#{stockInfo[0]}/FHRZ', title='分红融资') 分红融资
+    li(class={active: index == 'gdfx'})
+      a(href='/gupiao/#{stockInfo[0]}/GDFX', title='股东分析') 股东分析
+    li(class={active: index == 'gbjg'})
+      a(href='/gupiao/#{stockInfo[0]}/GBJG', title='股本结构') 股本结构
+    li(class={active: index == 'thbj'})
+      a(href='/gupiao/#{stockInfo[0]}/THBJ', title='同行比较') 同行比较

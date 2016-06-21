@@ -1,0 +1,80 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/industry/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        a(href='/hangye') 行业
+        i.fa.fa-angle-right
+        span #{industryDetail.induName}
+
+      //- 行业详情
+      include seo_info_main
+
+      //- 行业事件
+      if events.length > 0
+        .qn-section
+          h3.qn-section-title 行业事件
+          a.qn-section-more(href='/hangye/#{industryId}/xinwen', title='更多行业事件') 更多
+            i.fa.fa-angle-right
+
+          .qn-section-main
+            ul.seo-news-list-main
+              each item in events
+                li.seo-news-list-item
+                  dl
+                    dt
+                      a.qn-post-title-link(href='/hangye/#{industryId}/xinwen/#{item.newsId}', title='#{item.title}') #{item.title}
+                    dd
+                      .seo-news-meta
+                        | #{moment(Number(item.date)).format('MM月DD日 HH:mm:ss')}
+
+      //- 成分股
+      .qn-section
+        h3.qn-section-title 成分股
+        .qn-section-main
+          table.qn-table.striped.hover
+            thead
+              tr
+                th 股票名
+                th 最新价
+                th 涨跌幅
+                th 总市值
+                th 市盈率
+                th 市净率
+            tbody
+              each item in stks
+                tr
+                  td
+                    a(href='/gupiao/#{item.assetId}', title='#{item.stkName}') #{item.stkName}
+                  td #{item.price}
+                  td !{utils.formatPct(item.stkChgPct, 1)}
+                  td #{utils.formatNumVal(item.mktVal, 3)}
+                  td #{item.pe}
+                  td #{item.pb}
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 领涨行业
+      include ../widgets/led_industry
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

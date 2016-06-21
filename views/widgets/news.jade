@@ -8,7 +8,7 @@
   //- 主体部分
   .qn-section-main
     ul.qn-weiget-list.qn-weiget-news
-      each item in widgetNews
+      each item in widgetNews.data
         li
-          a.qn-post-title-link.small(href='/xinwen/' + item.newsId, title=item.title) #{item.title}
-          .post-meta #{moment(item.date).format('MM月DD日 HH:mm:ss')}
+          a.qn-post-title-link.small(href='/xinwen/#{widgetNews.newsType}/#{item.newsId}', title=item.title) #{item.title}
+          .post-meta #{moment(Number(item.date)).format('MM月DD日 HH:mm:ss')}

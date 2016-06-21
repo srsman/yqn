@@ -8,7 +8,6 @@ li.seo-questions-list-item(data-mid="#{item.aId}").item
         a.qn-stock-title-link(href="/gupiao/#{item.assetId}") #{item.assetName}
       a.qn-post-title-link(href='/wenda/' + item.qId, title=item.qContent) #{item.qContent}
 
-
     //- 回答
     dd
       i.qn-font-icon.primary 答
@@ -26,5 +25,4 @@ li.seo-questions-list-item(data-mid="#{item.aId}").item
       a(href='javascripts:' title=item.aName) #{item.orgName}#{item.aName} &nbsp;
       | 解答
 
-    //- .date #{moment(item.aTime).format('MM月DD日 hh:mm')}
     .date #{utils.timeDifference(item.aTime)}

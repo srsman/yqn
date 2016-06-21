@@ -1,0 +1,9 @@
+//- 精选观点
+.qn-section
+  h3.qn-section-title 精选观点
+  a(href='/guandian').qn-section-more 全部观点
+    i.fa.fa-angle-right
+  .qn-section-main.qn-widgets-section-main
+    ul.seo-viewpoint-list-main
+      each item in widgetViewpoints
+        include ../viewpoint/seo_list_main

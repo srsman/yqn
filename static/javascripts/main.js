@@ -23,10 +23,12 @@ var require = {
     niuimage: 'plugins/niuimage/niuimage',
     niustock: 'plugins/niustock/niustock',
     template: 'template',
-    qrcode: 'lib/jquery.qrcode.min'
+    qrcode: 'lib/jquery.qrcode.min',
+    sui: 'lib/sui/sui.yiqiniu.min'
   },
   shim: {
     'cookie': ['jquery'],
+    'sui': ['jquery'],
     'easing': ['jquery'],
     'iCheck': ['jquery'],
     'formValidation': ['jquery'],
@@ -37,7 +39,7 @@ var require = {
     'easemobConfig': ['easemob'],
     'functions': ['jquery', 'easing', 'emoji'],
     'dialog' : ['jquery'],
-    'pager': ['jquery', 'formValidation', 'easemob', 'easemobConfig', 'functions'],
+    'pager': ['jquery', 'easemob', 'easemobConfig', 'functions'],
     'push' : ['jquery', 'socket', 'functions'],
     'common': ['jquery', 'functions', 'iCheck'],
     'niustock': ['tinymce'],

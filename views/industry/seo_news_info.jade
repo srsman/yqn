@@ -1,0 +1,68 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/industry/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        a(href='/hangye') 行业
+        i.fa.fa-angle-right
+        a(href='/hangye/#{industryId}') #{industryDetail.induName}
+        i.fa.fa-angle-right
+        a(href='/hangye/#{industryId}/xinwen') 行业事件
+        i.fa.fa-angle-right
+        span #{utils.limitText(detail.data.title, 16)}
+
+      //- 行业详情
+      include seo_info_main
+
+      //- 文章详情
+      .qn-section
+        .qn-section-main
+          .qn-article
+            h1.qn-article-title #{detail.data.title}
+            .qn-meta-panel
+              .qn-meta-createTs 发布时间: #{moment(Number(detail.data.date)).format('YYYY-MM-DD HH:mm:ss')}
+              .qn-meta-reference #{detail.data.media}
+              if detail.data.stks && detail.data.stks.length > 0
+                .qn-meta-stocks 相关股票：
+                  each item in detail.data.stks
+                    a(href='/gupiao/#{item.assetId}', title=item.stkName) #{item.stkName}
+            .qn-article-content.noIndent !{detail.data.content}
+
+            .qn-article-share.clearfix
+              i 分享到：
+              .bdsharebuttonbox.clearfix
+                a.bds_tsina(href='javascript:', data-cmd='tsina', title='分享到新浪微博')
+                a.bds_weixin(href='javascript:', data-cmd='weixin', title='分享到微信')
+                a.bds_qzone(href='javascript:', data-cmd='qzone', title='分享到QQ空间')
+                a.bds_more(href='javascript:' data-cmd='more')
+
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

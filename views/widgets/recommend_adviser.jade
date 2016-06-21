@@ -1,0 +1,32 @@
+//- 推荐投顾
+if widgetRcmdAdviser.length > 0
+  .qn-section.qn-widget-skilled-advisers
+    h3.qn-section-title 推荐投顾
+    .qn-section-main
+      ul.qn-widget-skilled-adviser-list
+        - var ral = widgetRcmdAdviser.length > 3 ? 3 : widgetRcmdAdviser.length
+
+        - for(var i = 0; i < ral; i ++) {
+            li
+              .qn-avatar-info
+                .qn-avatar.disable
+                  if widgetRcmdAdviser[i].uImg
+                    img(src=widgetRcmdAdviser[i].uImg, alt=widgetRcmdAdviser[i].uName)
+                  else
+                    img(src='/images/default_avatar_man.jpg', alt=widgetRcmdAdviser[i].uName)
+                  span.qn-vip
+
+                ul
+                  li #{widgetRcmdAdviser[i].uName}
+                  if widgetRcmdAdviser[i].orgName
+                   li #{widgetRcmdAdviser[i].orgName}（#{widgetRcmdAdviser[i].adviserName}）
+                  else
+                    li #{widgetRcmdAdviser[i].adviserName}
+              - var dialog = {};
+              - dialog.img = widgetRcmdAdviser[i].uImg
+              - dialog.name = widgetRcmdAdviser[i].uName
+              - dialog.orgName = widgetRcmdAdviser[i].orgName
+              - dialog.adviserName = widgetRcmdAdviser[i].adviserName
+              - sDialog = JSON.stringify(dialog)
+              a.adviser-quiz-btn.invokeDialog(href='javascript:', data-qrurl=widgetRcmdAdviser[i].shareUrl, data-adInfo=sDialog) 提问
+        - }

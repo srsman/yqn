@@ -1,0 +1,17 @@
+//- 大事提醒
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('dstx')
+
+block f10_content
+  if dstxInfo && dstxInfo.length > 0
+    table.qn-table.striped.bordered.odd
+      tbody
+        - for(var i = 0; i < dstxInfo.length; i++) {
+            tr
+              th(width='200') #{dstxInfo[i][0]}
+              td #{dstxInfo[i][1]}
+        - }
+  else
+    p 暂无资料

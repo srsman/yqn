@@ -1,0 +1,27 @@
+//- 行业详情
+.qn-section
+  .qn-section-main.qn-seo-industry-info-box.clearfix
+    dl
+      dt
+        a(href='/hangye/#{industryId}', title='#{industryDetail.induName}') #{industryDetail.induName}
+        input#industry-id(type='hidden', value='#{industryId}')
+
+      if industryDetail.induChgPct > 0
+        dd.up #{utils.formatNumVal(industryDetail.induChgPct, 2)}
+          i %
+      else if industryDetail.induChgPct < 0
+        dd.down #{utils.formatNumVal(industryDetail.induChgPct, 2)}
+          i %
+      else
+        dd #{utils.formatNumVal(industryDetail.induChgPct, 2)}
+          i %
+
+    ul
+      li 领涨个股：
+        a(href='/gupiao/#{industryDetail.stk.assetId}') #{industryDetail.stk.stkName}
+      li 涨跌个数：
+        i.up #{industryDetail.upNums}
+        | /
+        i.down #{industryDetail.downNums}
+
+    i.update-time 更新时间：#{moment(Number(industryDetail.ts)).format('YYYY年MM月DD日 HH:mm:ss')}

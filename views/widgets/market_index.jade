@@ -1,0 +1,38 @@
+//- 大盘指数
+.qn-section
+  h3.qn-section-title 大盘指数
+
+  .widgets-market-index-box.clearfix
+    each item in widgetIdxs
+      - var bbb = utils.formatNumVal(item[3], 1)
+
+      if item[3] > 0
+        .widgets-market-index-item.up
+          dl
+            dt
+              h3 #{item[1]}
+              i #{item[2]}
+            dd
+              - var aaa = item[3] > 0 ? '+' + bbb : bbb
+              i #{aaa}
+              i #{utils.formatPct(item[4])}
+      else if item[3] < 0
+        .widgets-market-index-item.down
+          dl
+            dt
+              h3 #{item[1]}
+              i #{item[2]}
+            dd
+              - var aaa = item[3] > 0 ? '+' + bbb : bbb
+              i #{aaa}
+              i #{utils.formatPct(item[4])}
+      else
+        .widgets-market-index-item
+          dl
+            dt
+              h3 #{item[1]}
+              i #{item[2]}
+            dd
+              - var aaa = item[3] > 0 ? '+' + bbb : bbb
+              i #{aaa}
+              i #{utils.formatPct(item[4])}

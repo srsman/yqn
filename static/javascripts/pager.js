@@ -5,9 +5,8 @@
 
 require([
   'jquery',
-  'template',
   'formValidation'
-], function($, template) {
+], function($) {
   'use strict';
 
   var userType = $('#header-user-avatar-box').data('type'), // 用户类型
@@ -26,11 +25,25 @@ require([
       everyMinute, // 每分钟时间
       deleteMemberArray = [], // 删除群成员时的数组
       addMemberArray = [], // 邀请新成员时的数组
+      // $pagerMinimize = $('#qn-pager-minimize'), // 消息最小化
+      // $('#qn-pager-recent-box') = $('#qn-pager-recent-box'), // 最近联系人列表盒子
+      // $contactsBox = $('#qn-pager-contacts-box'), // 联系人列表盒子
+      // $chatBox = $('.qn-pager-chat-box'), // 聊天窗口的盒子
+      $groupItem, // 分组项
+      $contactsItem, // 联系人项
       $recentItem, // 最近会话项
       $fuzzyQueryResult, // 模糊查询结果集
+      $chatWindow, // 聊天窗口
+      $chatWindowOwnRoomOperate, // 群主视角聊天窗口操作
+      $chatWindowRoomOperate, // 聊天窗口群操作
       $msgContainer, // 消息容器
       $msgSys, // 系统消息
+      $msgTime, // 消息时间
       $msgBasis, // 普通消息项
+      $msgImg, // 图片消息项
+      $msgCustom, // 自定义消息项
+      $msgReward, // 红包消息项
+      $msgRewardInfo, // 红包详情
       $textSendHint, // 输入提示
       $badgeHtml, // 消息打点
       $getMoreMsgBtn, // 拉取更多聊天记录按钮
@@ -46,6 +59,25 @@ require([
       $roomPriceInfo, // 群消息价格设置
       $roomPriceSettings, // 群信息价格设置
       $logoutRoom; // 退出直播群按钮
+
+  // 分组项
+  $groupItem = $('<div class="qn-pager-contacts-group">' +
+              '<div class="group-title">' +
+              '<i class="fa fa-caret-right"></i>' +
+              '</div>' +
+              '<ul class="qn-pager-contacts-list">' +
+              '</ul>' +
+              '</div>');
+
+  // 联系人项
+  $contactsItem = $('<li class="contacts-item">' +
+              '<a href="javascript:">' +
+              '<div class="qn-avatar">' +
+              '<img src="" width="36" height="36">' +
+              '</div>' +
+              '<h5 class="contacts-title"></h5>' +
+              '</a>' +
+              '</li>');
 
   // 最近会话项
   $recentItem = $('<li class="contacts-item">' +
@@ -65,6 +97,62 @@ require([
                   '</ul>' +
                   '</div>');
 
+  // 聊天窗口
+  $chatWindow = $('<div class="qn-pager-chat-item">' +
+              '<div class="chat-header">' +
+              '<span class="chat-title"></span>' +
+              '</div>' +
+              '<div class="chat-main">' +
+              '<a href="javascript:" class="btn-chat-more">点击查看更多</a>' +
+              '<ul class="chat-content">' +
+              '</ul>' +
+              '</div>' +
+              '<div class="chat-footer">' +
+              '<ul class="chat-msg-input-toolbar">' +
+              // '<li>' +
+              // '<a class="show-emotion-icon" href="javascript:"><i class="fa fa-smile-o"></i></a>' +
+              // '<div class="chat-msg-input-toolbar-box hide">' +
+              // '<div class="content">' +
+              // '<ul class="chat-emotion-ul"></ul>' +
+              // '<div class="arrow-box"><i></i><em></em></div>' +
+              // '</div>' +
+              // '</div>' +
+              // '</li>' +
+              // '<li>' +
+              // '<a href="javascript:"><i class="fa fa-picture-o"></i></a>' +
+              // '</li>' +
+              '</ul>' +
+              '<textarea class="chat-msg-input"></textarea>' +
+              '<div class="chat-msg-submit">' +
+              '<i>Ctrl&nbsp;+&nbsp;Enter换行</i>' +
+              '<a href="javascript:" class="qn-btn primary xs chat-msg-submit-btn disabled">发送</a>' +
+              '</div>' +
+              '</div>' +
+              '</div>');
+
+  // 群主视角聊天窗口群操作
+  $chatWindowOwnRoomOperate = $('<ul class="chat-header-secondary">' +
+                        '<li>' +
+                        '<a href="javascript:" class="show-manage-btn" title="群成员管理" data-mark="member-list" data-owner="1">' +
+                        '<i class="fa fa-user-plus"></i>' +
+                        '</a>' +
+                        '</li>' +
+                        '<li>' +
+                        '<a href="javascript:" class="show-manage-btn" title="群信息设置" data-mark="room-info" data-owner="1">' +
+                        '<i class="fa fa-cog"></i>' +
+                        '</a>' +
+                        '</li>' +
+                        '</ul>');
+
+  // 聊天窗口群操作
+  $chatWindowRoomOperate = $('<ul class="chat-header-secondary">' +
+                        '<li>' +
+                        '<a href="javascript:" class="show-manage-btn" title="查看群信息" data-mark="room-info" data-owner="0">' +
+                        '<i class="fa fa-search"></i>' +
+                        '</a>' +
+                        '</li>' +
+                        '</ul>');
+
   // 消息容器
   $msgContainer = $('<li>' +
               '<div class="qn-avatar">' +
@@ -79,10 +167,61 @@ require([
           '<span></span>' +
           '</li>');
 
+  // 消息时间
+  $msgTime = $('<div class="sys-time">' +
+          '<em class="line-left"></em>' +
+          '<span class="time"></span>' +
+          '<em class="line-right"></em>' +
+          '</div>');
+
   // 普通消息项
   $msgBasis = $('<div class="msg-box">' +
           '<span class="msg-arrow"><i></i><em></em></span>' +
           '</div>');
+
+  // 图片消息项
+  $msgImg = $('<div class="msg-box img">' +
+        '<span class="msg-arrow"><i></i><em></em></span>' +
+        '</div>');
+
+  // 自定义消息项
+  $msgCustom = $('<div class="msg-box custom">' +
+                '<span class="msg-arrow"><i></i><em></em></span>' +
+                '<div class="msg-custom-main">' +
+                '<h5></h5>' +
+                '<div class="msg-custom-content">' +
+                '<div class="custom-content-icon">' +
+                '<img src="" width="63" height="63">' +
+                '</div>' +
+                '<div class="custom-content"></div>' +
+                '</div>' +
+                '</div>' +
+                '</div>');
+
+  // 红包消息项
+  $msgReward = $('<div class="msg-box reward qn-reward-token">' +
+                '<span class="msg-arrow"><i></i><em></em></span>' +
+                '<div class="msg-reward-main">' +
+                '<span class="reward-icon"></span>' +
+                '</div>' +
+                '<div class="msg-reward-footer">一起牛红包</div>' +
+                '</div>');
+
+  // 红包详情
+  $msgRewardInfo = $('<div class="qn-popup-overlay">' +
+                '<div class="qn-reward-info-box qn-reward-token">' +
+                '<div class="qn-reward-info-header">' +
+                '<span class="qn-avatar disable">' +
+                '<img src="">' +
+                '</span>' +
+                '<h4 class="nickname"></h4>' +
+                '</div>' +
+                '<div class="qn-reward-info-main">' +
+                '<p>群主辛劳人缘好，这个红包是<i class="nickname"></i>对群主的赞赏哦<p>' +
+                '<span><i>元</i></span>' +
+                '</div>' +
+                '</div>' +
+                '</div>');
 
   // 输入超限提示
   $textSendHint = $('<span class="chat-msg-submit-hint">' +
@@ -340,9 +479,6 @@ require([
 
   /* 将方法划分为不同模块进行编写 */
   var SEMICOLON = SEMICOLON || {};
-
-  // 环信定时登录，在登录失败时使用
-  var easemobTimedLogin;
 
   /*
    * 初始化
@@ -693,7 +829,7 @@ require([
                 type = 'R',
                 isOpen = 1;
 
-            $groupClone = $(SEMICOLON.contacts.createGroup(type, titleContent, isOpen, 1, count));
+            $groupClone = SEMICOLON.contacts.createGroup(type, titleContent, isOpen, 1, count);
 
             // 添加直播群项
             $.each(rooms, function(i) {
@@ -968,27 +1104,29 @@ require([
      * @id: 分组ID
      */
     createGroup: function(type, name, open, use, count, id) {
-      var info = {},
-          $newGroupItem;
+      var $groupClone = $groupItem.clone(),
+          $thisTitle = $groupClone.children('.group-title');
 
-      info['type'] = type;
-      info['name'] = name;
-      info['use'] = use;
-      info['open'] = open;
-      info['version'] = 0; // 增量拉取版本号
-      info['been'] = 0; // 分组下已加载项的数量
+      $thisTitle.append(name);
+      $groupClone.data('type', type);
+      $groupClone.data('use', use);
+      $groupClone.data('version', 0); // 增量拉取版本号
+      $groupClone.data('been', 0); // 分组下已加载项的数量
 
       if(count) {
-        info['count'] = count;
+        $groupClone.data('count', count);
       }
 
       if(id) {
-        info['id'] = id;
+        $groupClone.data('id', id);
       }
 
-      $newGroupItem = template('pager/group_item', info);
+      if(open === 1) {
+        $thisTitle.find('.fa').removeClass('fa-caret-right').addClass('fa-caret-down');
+        $groupClone.addClass('open');
+      }
 
-      return $newGroupItem;
+      return $groupClone;
     },
 
     /*
@@ -1009,22 +1147,73 @@ require([
      * * @inGroup: 是否在该直播群中, 0: 不在, 1: 在
      */
     createContacts: function(data) {
-      var $newContacts = $(template('pager/contacts_item', data)),
+      var $contactsClone = $contactsItem.clone(),
           type = data.type,
+          icon = data.icon,
+          name = data.name,
+          imId = data.imId,
           uId = data.uId,
+          charge = data.charge,
+          owner = data.owner,
+          ownerImId = data.ownerImId,
           inGroup = data.inGroup;
 
       if(type !== 'E' && type !== 'N') {
-        if(inGroup !== undefined) {
-          if(addMemberArray.indexOf(uId) >= 0) {
-            $newContacts.addClass('selected-member');
+        $contactsClone.addClass('contacts-item-' + imId);
 
-            $newContacts.find('a').find('.fa').removeClass('fa-plus').addClass('fa-check');
+        switch(type) {
+          case 'Q':
+            $contactsClone.addClass('contacts-item-query');
+            break;
+          case 'R':
+            $contactsClone.data('charge', charge);
+            $contactsClone.data('owner', owner);
+            $contactsClone.data('owner_imid', ownerImId);
+            break;
+        }
+
+        $contactsClone.find('.qn-avatar img').attr('src', icon);
+        $contactsClone.find('.contacts-title').html(name);
+        $contactsClone.data('imid', imId);
+        $contactsClone.data('uid', uId);
+        $contactsClone.data('type', type);
+
+        if(inGroup !== undefined) {
+          $contactsClone.addClass('add-member');
+
+          switch(inGroup) {
+            case 0:
+              $contactsClone.find('a').append('<i class="fa fa-plus"></i>');
+              break;
+            case 1:
+              $contactsClone.addClass('in-group');
+
+              $contactsClone.find('a').append('<i class="fa fa-check"></i>');
+              break;
           }
+
+          if(addMemberArray.indexOf(uId) >= 0) {
+            $contactsClone.addClass('selected-member');
+
+            $contactsClone.find('a').find('.fa').removeClass('fa-plus').addClass('fa-check');
+          }
+        }
+      } else {
+        $contactsClone.addClass('error');
+
+        switch(type) {
+          case 'E':
+            var errorContent = '加载失败，<a href="javascript:">点击重试</a>';
+
+            $contactsClone.html(errorContent);
+            break;
+          case 'N':
+            $contactsClone.html('没有结果');
+            break;
         }
       }
 
-      return $newContacts;
+      return $contactsClone;
     },
 
     /*
@@ -1388,24 +1577,12 @@ require([
       if(easemobConn.isOpened()) {
         easemobConn.heartBeat(easemobConn);
       }
-
-      clearInterval(easemobTimedLogin);
     },
 
     /* 连接关闭后的处理方法 */
     handleClosed: function() {
-      // 不注销，重新登录
-      easemobTimedLogin = setInterval(function() {
-        easemobConn.open({
-          apiUrl: Easemob.im.config.apiURL,
-          user: imId,
-          pwd: imToken,
-          appKey: Easemob.im.config.appkey
-        });
-      }, 10000);
-
       // 注销齐牛登录
-      // window.location.href = '/zhuxiao';
+      window.location.href = '/zhuxiao';
     },
 
     /* 异常时的处理方法 */
@@ -1650,53 +1827,53 @@ require([
       SEMICOLON.chat.handleRewardMsg();
     },
 
-    // /* 切换聊天表情按钮 */
-    // chooseEmotionDialog: function() {
-    //   $(document).on('click', '.show-emotion-icon', function() {
-    //     var $e = $(this);
+    /* 切换聊天表情按钮 */
+    chooseEmotionDialog: function() {
+      $(document).on('click', '.show-emotion-icon', function() {
+        var $e = $(this);
 
-    //     if($e.siblings('.chat-msg-input-toolbar-box').hasClass('hide')) {
-    //       SEMICOLON.chat.showEmotionDialog($e.siblings('.chat-msg-input-toolbar-box'));
-    //     } else {
-    //       $e.siblings('.chat-msg-input-toolbar-box').addClass('hide');
-    //     }
-    //   });
-    // },
+        if($e.siblings('.chat-msg-input-toolbar-box').hasClass('hide')) {
+          SEMICOLON.chat.showEmotionDialog($e.siblings('.chat-msg-input-toolbar-box'));
+        } else {
+          $e.siblings('.chat-msg-input-toolbar-box').addClass('hide');
+        }
+      });
+    },
 
-    // /*
-    //  * 打开聊天表情窗口
-    //  */
-    // showEmotionDialog: function($el) {
-    //   $el.removeClass('hide');
+    /*
+     * 打开聊天表情窗口
+     */
+    showEmotionDialog: function($el) {
+      $el.removeClass('hide');
 
-    //   if($el.find('.chat-emotion-ul li').length === 0) {
-    //     var sjson = Easemob.im.Helper.EmotionPicData;
+      if($el.find('.chat-emotion-ul li').length === 0) {
+        var sjson = Easemob.im.Helper.EmotionPicData;
 
-    //     // -start
-    //     // jshint报错 @qiulijun
-    //     // 代码待优化 -fixed
-    //     for(var key in sjson) {
-    //       var emotions = $('<img>').attr({
-    //         'id' : key,
-    //         'src' : sjson[key],
-    //         'style' : 'cursor: pointer;'
-    //       }).click(function() {
-    //         SEMICOLON.chat.selectEmotionImg(this);
-    //       });
+        // -start
+        // jshint报错 @qiulijun
+        // 代码待优化 -fixed
+        for(var key in sjson) {
+          var emotions = $('<img>').attr({
+            'id' : key,
+            'src' : sjson[key],
+            'style' : 'cursor: pointer;'
+          }).click(function() {
+            SEMICOLON.chat.selectEmotionImg(this);
+          });
 
-    //       $('<li>').append(emotions).appendTo($el.find('.chat-emotion-ul'));
-    //     }
-    //     // -end
-    //   }
-    // },
+          $('<li>').append(emotions).appendTo($el.find('.chat-emotion-ul'));
+        }
+        // -end
+      }
+    },
 
-    // /* 选择聊天表情 */
-    // selectEmotionImg: function(selImg) {
-    //   var $txt = $(selImg).closest('.qn-pager-chat-item').find('.chat-msg-input');
+    /* 选择聊天表情 */
+    selectEmotionImg: function(selImg) {
+      var $txt = $(selImg).closest('.qn-pager-chat-item').find('.chat-msg-input');
 
-    //   $txt.val($txt.val() + selImg.id);
-    //   $txt.focus();
-    // },
+      $txt.val($txt.val() + selImg.id);
+      $txt.focus();
+    },
 
     /*
      * 获取本地当前时间
@@ -1850,21 +2027,66 @@ require([
      * * @ownerImId: 群主环信ID
      */
     createChatWindow: function(createChatData) {
-      var info = createChatData,
-          $newChatWindow = template('pager/chat_window', info),
+      var $chatWindowClone = $chatWindow.clone(),
+          info = createChatData,
           getHistoryData = {}; // 拉取历史消息对象
 
-      $('.qn-pager-chat-box').append($newChatWindow);
+      // 设置窗口属性
+      $chatWindowClone.find('.chat-title').html(info.name);
 
-      /* 初始化聊天记录 */
+      // 如果是群，则加入群操作图标
       if(info.type === 'R') {
+        // 添加收费标记
+        if(info.charge === 'Y') {
+          $chatWindowClone.find('.chat-title').append('<i>收费</i>');
+        }
+
+        // 设置拉取消息记录按钮
+        $chatWindowClone.find('.btn-chat-more').data('type', 'G');
+
         getHistoryData['chatType'] = 'G';
+
+        // 设置操作按钮
+        var $roomOperate;
+
+        switch(info.owner) {
+          case 1:
+            // 群主视角
+            $roomOperate = $chatWindowOwnRoomOperate.clone();
+            break;
+          default:
+            // 非群主视角
+            $roomOperate = $chatWindowRoomOperate.clone();
+        }
+
+        $roomOperate.find('.show-manage-btn').data('id', info.id);
+        $roomOperate.find('.show-manage-btn').data('owner', info.owner);
+        $roomOperate.find('.show-manage-btn').data('charge', info.charge);
+
+        $chatWindowClone.find('.chat-header').append($roomOperate);
       } else {
+        // 设置拉取消息记录按钮
+        $chatWindowClone.find('.btn-chat-more').data('type', 'C');
+
         getHistoryData['chatType'] = 'C';
       }
 
+      // 设置拉取消息记录按钮
+      $chatWindowClone.find('.btn-chat-more').data('id', info.id);
+
       getHistoryData['imId'] = info.id;
 
+      // 设置窗口属性
+      $chatWindowClone.data('id', info.id);
+      $chatWindowClone.data('charge', info.charge);
+      $chatWindowClone.data('owner', info.owner);
+      $chatWindowClone.data('owner_imid', info.ownerImId);
+
+      // 添加窗口
+      $chatWindowClone.addClass('qn-pager-chat-item-' + info.id);
+      $('.qn-pager-chat-box').append($chatWindowClone);
+
+      // 初始化历史消息
       SEMICOLON.chat.getHistoryMsg(info.id, getHistoryData);
     },
 
@@ -2330,11 +2552,11 @@ require([
      * @$msgContainer: 消息容器
      */
     appendMsgTime: function(time, $msgContainer) {
-      var info = {};
+      var $sysTimeClone = $msgTime.clone();
 
-      info['time'] = time;
+      $sysTimeClone.find('.time').html(time);
 
-      $msgContainer.prepend(template('pager/msg_time', info));
+      $msgContainer.prepend($sysTimeClone);
 
       // 更新下次要显示的时间对比项
       everyMinute = time;
@@ -2390,18 +2612,17 @@ require([
      * @$img: 图片元素
      */
     createImgMsg: function($img, isHistoryMsg) {
-      var $newImgMsg,
-          newImgData = {};
+      var $msgImgClone = $msgImg.clone();
 
       if(!isHistoryMsg) {
-        newImgData['img'] = $img;
+        $msgImgClone.append($img);
       } else {
-        newImgData['img'] = '<img src="' + $img + '" width="250">';
+        var $newImg = $('<img src="' + $img + '" width="250">');
+
+        $msgImgClone.append($newImg);
       }
 
-      $newImgMsg = template('pager/image_message', newImgData);
-
-      return $newImgMsg;
+      return $msgImgClone;
     },
 
     /*
@@ -2411,69 +2632,81 @@ require([
      * @disable: 是否可以打开连接, 0: 不能, 1: 能
      */
     createCustomMsg: function(type, message, disable) {
-      var $newCustomMsg,
-          customMsgData = {};
+      var $msgCustomClone = $msgCustom.clone(),
+          icon,
+          title,
+          content,
+          url = '';
 
       switch(type) {
         case 4:
           /* 分享组合 */
-          customMsgData['icon'] = '/images/pager/msg_ext_4.png';
-          customMsgData['title'] = $.limitText(message.ptfName, 15);
-          customMsgData['content'] = '日收益：' + message.tdYield + '<br>' +
-            '总收益：' + message.tYield + '<br>' +
-            message.time;
+          icon = '/images/pager/msg_ext_4.png';
+          title = $.limitText(message.ptfName, 15);
+          content = '日收益：' + message.tdYield + '<br>' +
+                  '总收益：' + message.tYield + '<br>' +
+                  message.time;
           break;
         case 5:
           /* 股票消息 */
-          customMsgData['icon'] = '/images/pager/msg_ext_5.png';
-          customMsgData['title'] = message.name + '(' +
-            message.market +
-            message.code + ')';
-          customMsgData['content'] = '最新价：' + message.price + '<br>' +
-            '日涨跌：' + message.changePercent + '<br>' +
-            message.time;
+          icon = '/images/pager/msg_ext_5.png';
+          title = message.name + '(' +
+                message.market +
+                message.code + ')';
+          content = '最新价：' + message.price + '<br>' +
+                  '日涨跌：' + message.changePercent + '<br>' +
+                  message.time;
           break;
         case 6:
           /* 分享资讯 */
-          customMsgData['icon'] = '/images/pager/msg_ext_6.png';
-          customMsgData['title'] = $.limitText(message.title, 15);
-          customMsgData['content'] = $.limitText(message.content, 30);
+          icon = '/images/pager/msg_ext_6.png';
+          title = $.limitText(message.title, 15);
+          content = $.limitText(message.content, 30);
 
           if(disable === 1) {
-            customMsgData['url'] = 'https://api.yiqiniu.com:9003/webstatic/news/news.html?type=' + message.type + '&artid=' + message.newsId;
+            url = 'https://api.yiqiniu.com:9003/webstatic/news/news.html?type=' + message.type + '&artid=' + message.newsId;
           }
           break;
         case 7:
           /* 开户服务 */
-          customMsgData['icon'] = message.iconUrl;
-          customMsgData['title'] = $.limitText('“' + message.name + '”向您提供开户服务', 15);
-          customMsgData['content'] = $.limitText(message.content, 30);
+          icon = message.iconUrl;
+          title = $.limitText('“' + message.name + '”向您提供开户服务', 15);
+          content = $.limitText(message.content, 30);
 
           if(disable === 1) {
-            customMsgData['url'] = message.detailUrl;
+            url = message.detailUrl;
           }
           break;
         case 8:
           /* 分享投资圈动态 */
-          customMsgData['icon'] = message.userIcon;
-          customMsgData['title'] = $.limitText(message.title, 15);
-          customMsgData['content'] = $.limitText(message.desc, 30);
+          icon = message.userIcon;
+          title = $.limitText(message.title, 15);
+          content = $.limitText(message.desc, 30);
           break;
         case 9:
           /* 分享观点 */
-          customMsgData['icon'] = '/images/pager/msg_ext_9.png';
-          customMsgData['title'] = $.limitText(message.viewpointTitle, 15);
-          customMsgData['content'] = $.limitText(message.viewpointContent, 30);
+          icon = '/images/pager/msg_ext_9.png';
+          title = $.limitText(message.viewpointTitle, 15);
+          content = $.limitText(message.viewpointContent, 30);
 
           if(disable === 1) {
-            customMsgData['url'] = message.viewpointUrl;
+            url = message.viewpointUrl;
           }
           break;
       }
 
-      $newCustomMsg = template('pager/custom_message', customMsgData);
+      if(disable === 1) {
+        $msgCustomClone.data('url', url);
+      } else {
+        $msgCustomClone.addClass('disable');
+        $msgCustomClone.append('<div class="msg-custom-footer">暂时只能在一起牛APP中打开</div>');
+      }
 
-      return $newCustomMsg;
+      $msgCustomClone.find('.msg-custom-main h5').html(title);
+      $msgCustomClone.find('.custom-content-icon img').attr('src', icon);
+      $msgCustomClone.find('.custom-content').html(content);
+
+      return $msgCustomClone;
     },
 
     /*
@@ -2481,21 +2714,24 @@ require([
      * @info: 红包信息
      */
     createRewardMsg: function(info) {
-      var $newRewardMsg,
-          rewardInfoData = {};
+      var $msgRewardClone = $msgReward.clone(),
+          from = info.fromImId,
+          to = info.toUserId,
+          icon = $.checkUserIcon(),
+          nickname = info.fromNickname,
+          simple = info.simpleContent,
+          amount = info.amount;
 
-      rewardInfoData['icon'] = $.checkUserIcon();
-      rewardInfoData['nickname'] = info.fromNickname;
-      rewardInfoData['content'] = info.simpleContent;
+      $msgRewardClone.find('.msg-reward-main').append(simple);
+      $msgRewardClone.data('icon', icon);
+      $msgRewardClone.data('nickname', nickname);
 
       // 如果当前用户是发送人或者是群主则可以看到金额
-      if(info.fromImId === curUserId || info.toUserId === $('#header-user-avatar-box').data('id')) {
-        rewardInfoData['amount'] = info.amount;
+      if(from === curUserId || to === $('#header-user-avatar-box').data('id')) {
+        $msgRewardClone.data('amount', amount);
       }
 
-      $newRewardMsg = template('pager/reward_message', rewardInfoData);
-
-      return $newRewardMsg;
+      return $msgRewardClone;
     },
 
     /* 打开自定义消息 */
@@ -2518,17 +2754,20 @@ require([
         var $el = $(this);
 
         if($el.hasClass('reward')) {
-          var $rewardInfo,
-              rewardData = {};
+          var $rewardInfo = $msgRewardInfo.clone(),
+              icon = $el.data('icon'),
+              nickname = $el.data('nickname'),
+              amount = $el.data('amount');
 
-          rewardData['icon'] = $el.data('icon');
-          rewardData['nickname'] = $el.data('nickname');
+          $rewardInfo.find('span.qn-avatar img').attr('src', icon);
+          $rewardInfo.find('h4.nickname').html(nickname);
+          $rewardInfo.find('.qn-reward-info-main').find('i.nickname').html(nickname);
 
-          if($el.data('amount')) {
-            rewardData['amount'] = $el.data('amount');
+          if(amount) {
+            $rewardInfo.find('.qn-reward-info-main span').prepend(amount);
+          } else {
+            $rewardInfo.find('.qn-reward-info-main span').remove();
           }
-
-          $rewardInfo = template('pager/reward_info', rewardData);
 
           $('html').addClass('qn-popup-lock');
           $('body').append($rewardInfo);

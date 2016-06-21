@@ -12,27 +12,10 @@ require([
   /* 将方法划分为不同模块进行编写 */
   var SEMICOLON = SEMICOLON || {};
 
-  var indexParams = {
-    area : 0,
-    broker : 0
-  };
-
   SEMICOLON.initialize = {
-
     init: function() {
-      SEMICOLON.initialize.UrlParse();
       SEMICOLON.initialize.handleSelectorLink();
       SEMICOLON.initialize.handleExpandBtn();
-    },
-
-    UrlParse:function() {
-      var url = window.location.href;
-
-      url.replace(/\??(\w+)\=(\w+)/g, function(match, key, val) {
-        if(typeof indexParams[key] !== 'undefined') {
-          indexParams[key] = val;
-        }
-      });
     },
 
     handleSelectorLink: function() {
@@ -40,24 +23,21 @@ require([
           brokerSelector = $('#broker-line');
 
       areaSelector.on('click', 'a', function() {
-        indexParams.area = $(this).data('id');
+        $('#cur-area').val($(this).data('id'));
         SEMICOLON.initialize.redirect();
       });
 
       brokerSelector.on('click', 'a', function() {
-        indexParams.broker = $(this).data('id');
+        $('#cur-broker').val($(this).data('id'));
         SEMICOLON.initialize.redirect();
       });
     },
 
     redirect: function() {
-      var urlParams = '';
-      indexParams.page = 1;
-      for( var i in indexParams) {
-        urlParams +=
-                  ( urlParams === '' ? '?' : '&' ) + i + '=' + indexParams[i];
-      }
-      window.location.href = '/quanshang' + urlParams;
+      var curArea = $('#cur-area').val(),
+          curBroker = $('#cur-broker').val();
+
+      window.location.href = '/quanshang/' + curArea + '/' + curBroker;
     },
 
     handleExpandBtn: function() {

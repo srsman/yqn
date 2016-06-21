@@ -1,0 +1,32 @@
+//- 领涨行业
+.qn-section
+  h3.qn-section-title 领涨行业
+  a(href='/hangye', title='全部行业').qn-section-more 全部行业
+    i.fa.fa-angle-right
+
+  .qn-section-main.widgets-led-industry-box.clearfix
+    each item in widgetIndus
+      .widgets-led-industry-item
+        ul
+          li
+            a.indus-title(href='/hangye/#{item[0]}' title='#{item[1]}') #{item[1]}
+          if item[2] > 0
+            li.qn-stock-price.up #{utils.formatPct(item[2])}
+          else if item[2] < 0
+            li.qn-stock-price.down #{utils.formatPct(item[2])}
+          else
+            li.qn-stock-price #{utils.formatPct(item[2])}
+          li
+            a.stk-title(href='/gupiao/#{item[4]}', title='#{item[3]}') #{item[3]}
+          if item[5] > 0
+            li.qn-stock-price.up
+              i #{item[6]}
+              i #{utils.formatPct(item[5])}
+          else if item[5] < 0
+            li.qn-stock-price.down
+              i #{item[6]}
+              i #{utils.formatPct(item[5])}
+          else
+            li.qn-stock-price
+              i #{item[6]}
+              i #{utils.formatPct(item[5])}

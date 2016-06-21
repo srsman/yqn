@@ -1,0 +1,42 @@
+//- 资产负债表
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('zyzb')
+
+block f10_content
+  ul.seo-stock-f10-second-menu
+    li
+      a(href='/gupiao/#{stockInfo[0]}/ZYZB', title='主要指标') 主要指标
+    li
+      a(href='/gupiao/#{stockInfo[0]}/LRB', title='利润表') 利润表
+    li
+      a(href='/gupiao/#{stockInfo[0]}/ZCFZB', title='资产负债表') 资产负债表
+    li.active
+      a(href='/gupiao/#{stockInfo[0]}/XJLLB', title='现金流量表') 现金流量表
+
+  if xjllbInfo.data && xjllbInfo.data.length > 0
+    table.qn-table.striped
+      thead
+        tr
+          - for(var i = 0; i < 6; i++) {
+              if i === 0
+                th #{xjllbInfo.data[0][i]}
+              else
+                th(width='150') #{xjllbInfo.data[0][i]}
+          - }
+      tbody
+          - for(var r = 1; r < xjllbInfo.data.length; r++) {
+              if xjllbInfo.highlight.indexOf(r) != -1
+                tr.highlight
+                  - for(var i = 0; i < 6; i++) {
+                      td #{xjllbInfo.data[r][i]}
+                  - }
+              else
+                tr
+                  - for(var i = 0; i < 6; i++) {
+                      td #{xjllbInfo.data[r][i]}
+                  - }
+          - }
+  else
+    p 暂无数据

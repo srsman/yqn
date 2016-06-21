@@ -5,13 +5,16 @@
 
 require([
   'jquery',
-  'common',
-  'formValidation'
+  'sui',
+  'functions'
 ], function($) {
   'use strict';
 
   /* 将方法划分为不同模块进行编写 */
   var SEMICOLON = SEMICOLON || {};
+  var validCapUrl = '/account/valid_captcha';
+  var resetPwdUrl = '/account/reset_password';
+
 
   /*
    * 初始化
@@ -22,8 +25,9 @@ require([
    */
   SEMICOLON.initialize = {
     init: function() {
-      SEMICOLON.initialize.getCaptcha();
-      SEMICOLON.initialize.verifyPhone();
+      this.getCaptcha();
+      this.validatePhone()
+      //SEMICOLON.initialize.verifyPhone();
     },
 
     /* 获取注册的手机验证码 */
@@ -91,11 +95,216 @@ require([
     },
 
     /* 验证账号 */
+    validatePhone: function() {
+      // 验证手机是否合法
+      $.validate.setRule('isUsername', function(value, element) {
+        var isCellphone = /^0?(13[0-9]|15[0-9]|177|18[0-9]|14[57])[0-9]{8}$/;
+        return isCellphone.test(value);
+      }, '手机号码不合法');
+
+      $('#verify-form').validate({
+        rules: {
+          username: {
+            required: true,
+            isUsername: true
+          },
+          captcha: {
+            required: true
+          }
+        },
+        success: function () {
+          var $submitBox = $('#valid-form-submit-box'),
+            $submitBtn = $submitBox.find('button[type="submit"]'),
+            $form = $('#verify-form'),
+            url = validCapUrl,
+            type = $form.attr('method').toUpperCase(),
+            formData = $.serializeFormObject('#verify-form'),
+            params = {},
+            param = {};
+
+          var username = formData.username,
+            captcha = formData.captcha,
+            eventId = formData.event_id;
+
+          param['phoneNum'] = username;
+          param['captcha'] = captcha;
+          param['evenId'] = parseInt(eventId);
+
+          params['params'] = param;
+
+          $.ajax({
+            type: type,
+            url: url,
+            data: JSON.stringify(params),
+            dataType: 'json',
+            contentType: 'application/json',
+            beforeSend: function() {
+              // 删除表单中所有的提示
+              if($form.find('.qn-alert').length) {
+                $.each($form.find('.qn-alert'), function() {
+                  $(this).parent().remove();
+                });
+              }
+
+              // 禁用登录按钮
+              $submitBtn.attr({'disabled': 'disabled'});
+            }
+          }).done(function(data) {
+            $submitBtn.removeAttr('disabled');
+
+            var alertHtml = '<div class="qn-form-group special offset-label">';
+
+            if(data.code === 0) {
+              if(data.result.isReg === 'Y') {
+                var newFormHtml = '<form id="reset-form" action="javascript:;" method="post">' +
+                  '<div class="qn-form-group">' +
+                  '<label class="qn-control-label" for="new-password">新密码</label>' +
+                  '<div class="qn-form-control-box">' +
+                  '<input type="password" id="new-password" class="qn-form-control" name="new_password" placeholder="请填写新密码" tabindex="1">' +
+                  '<div class="clearfix"></div>' +
+                  '</div>' +
+                  '</div>' +
+                  '<div class="qn-form-group">' +
+                  '<label class="qn-control-label" for="repeat-password">重复密码</label>' +
+                  '<div class="qn-form-control-box">' +
+                  '<input type="password" id="repeat-password" class="qn-form-control" name="repeat_password" placeholder="请重复输入密码" tabindex="2">' +
+                  '<div class="clearfix"></div>' +
+                  '<input type="hidden" name="username" value="' + username + '">' +
+                  '<input type="hidden" name="captcha" value="' + captcha + '">' +
+                  '<input type="hidden" name="event_id" value="' + eventId + '">' +
+                  '</div>' +
+                  '</div>' +
+                  '<div class="qn-form-group offset-label" id="reset-form-submit-box">' +
+                  '<button type="submit" class="qn-btn primary">确认</button>' +
+                  '</div>' +
+                  '</form>';
+
+                $form.after(newFormHtml);
+                $form.remove();
+
+                SEMICOLON.initialize.resetPwd();
+              } else {
+                alertHtml += $.customAlert(4, '验证失败，请重试') + '</div>';
+
+                $submitBox.before(alertHtml);
+              }
+            } else {
+              alertHtml += $.customAlert(4, data.message) + '</div>';
+
+              $submitBox.before(alertHtml);
+            }
+          }).fail(function(data) {
+            $submitBtn.removeAttr('disabled');
+
+            var alertHtml = '<div class="qn-form-group special offset-label">';
+
+            alertHtml += $.customAlert(4, data.message) + '</div>';
+
+            $submitBox.before(alertHtml);
+          });
+          return false;
+        }
+      });
+    },
+
+    /* 重置密码 */
+    resetPwd: function() {
+      // 验证密码是否合法
+      $.validate.setRule('isPassword', function(value, element) {
+        var isPwd = /^\S{6,18}$/;
+        return isPwd.test(value);
+      }, '密码由6-18位字母、数字和特殊字符组成');
+
+      $('#reset-form').validate({
+        rules: {
+          new_password: {
+            required: true,
+            isPassword: true
+          },
+          repeat_password: {
+            required: true,
+            match: 'new_password'
+          }
+        },
+        messages: {
+          repeat_password: ['请填写','两次输入密码不一致']
+        },
+        success: function () {
+          var $submitBox = $('#reset-form-submit-box'),
+            $submitBtn = $submitBox.find('button[type="submit"]'),
+            $form = $('#reset-form'),
+            url = resetPwdUrl,
+            type = $form.attr('method').toUpperCase(),
+            formData = $.serializeFormObject('#reset-form'),
+            params = {},
+            param = {};
+
+          param['phoneNum'] = formData.username;
+          param['captcha'] = formData.captcha;
+          param['eventId'] = formData.event_id;
+          param['newPwd'] = formData.new_password;
+
+          params['params'] = param;
+
+          $.ajax({
+            type: type,
+            url: url,
+            data: JSON.stringify(params),
+            dataType: 'json',
+            contentType: 'application/json',
+            beforeSend: function() {
+              // 删除表单中所有的提示
+              if($form.find('.qn-alert').length) {
+                $.each($form.find('.qn-alert'), function() {
+                  $(this).parent().remove();
+                });
+              }
+
+              // 禁用登录按钮
+              $submitBtn.attr({'disabled': 'disabled'});
+            }
+          }).done(function(data) {
+            $submitBtn.removeAttr('disabled');
+
+            var alertHtml = '<div class="qn-form-group special offset-label">';
+
+            if(data.code === 0) {
+              var message = '修改成功，立即<a href="/denglu">登录</a>';
+
+              alertHtml += $.customAlert(1, message) + '</div>';
+
+              $form.before(alertHtml);
+              $form.remove();
+            } else {
+              alertHtml += $.customAlert(4, data.message) + '</div>';
+
+              $submitBox.before(alertHtml);
+
+              // 清空表单
+              $('#reset-form')[0].reset();
+            }
+          }).fail(function(data) {
+            $submitBtn.removeAttr('disabled');
+
+            var alertHtml = '<div class="qn-form-group special offset-label">';
+
+            alertHtml += $.customAlert(4, data.message) + '</div>';
+
+            $submitBox.before(alertHtml);
+
+            // 清空表单
+            $('#reset-form')[0].reset();
+          });
+          return false;
+        }
+      });
+    },
+
+    /* 验证账号 */
     verifyPhone: function() {
       // 验证手机是否合法
       $.validator.addMethod('isUsername', function(value, element) {
         var isCellphone = /^0?(13[0-9]|15[0-9]|177|18[0-9]|14[57])[0-9]{8}$/;
-
         return this.optional(element) || isCellphone.test(value);
       }, '<i class="fa fa-times"></i>手机号码不合法');
 
@@ -156,7 +365,7 @@ require([
 
               if(data.code === 0) {
                 if(data.result.isReg === 'Y') {
-                  var newFormHtml = '<form id="reset-form" action="/account/reset_password" method="post">' +
+                  var newFormHtml = '<form id="reset-form" action="javascript:;" method="post">' +
                       '<div class="qn-form-group">' +
                       '<label class="qn-control-label" for="new-password">新密码</label>' +
                       '<div class="qn-form-control-box">' +

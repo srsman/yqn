@@ -7,6 +7,8 @@ template.helper('dateFormate', function(timestamps) {
     return num;
   }
 
+  timestamps = Number(timestamps);
+
   var originalTime = new Date(timestamps),
       currentTime = (new Date()).getTime(),
       interval = currentTime - timestamps,
@@ -62,6 +64,8 @@ template.helper('dateFormate', function(timestamps) {
 });
 
 template.helper('dateFormate1', function (date, format) {
+  data = Number(date);
+
   date = new Date(date);
 
   var map = {

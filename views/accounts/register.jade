@@ -22,28 +22,32 @@ block main_content
         //- 注册的主体
         .accounts-operate-main
           .accounts-operate-content
-            form#reg-form(action='/account/register', method='post')
+            form#reg-form(action='javascript:void(0);', method='post')
               .qn-form-group
                 label.qn-control-label(for='username') 手机号
                 .qn-form-control-box
                   input.qn-form-control#username(type='text', name='username', placeholder='请填写手机号', tabindex='1')
+                  .clearfix
 
               .qn-form-group.captcha-section
                 label.qn-control-label(for='captcha') 验证码
                 .qn-form-control-box
                   input.qn-form-control#captcha(type='text', name='captcha', placeholder='请填写验证码', tabindex='2')
                   a.qn-btn.primary#get-captcha(href='javascript:') 获取验证码
+                  .clearfix
                 input.hide#event-id(type='hidden', name='event_id')
 
               .qn-form-group
                 label.qn-control-label(for='nickname') 昵称
                 .qn-form-control-box
                   input.qn-form-control#nickname(type='text', name='nickname', placeholder='请填写昵称', tabindex='3')
+                  .clearfix
 
               .qn-form-group
                 label.qn-control-label(for='password') 密码
                 .qn-form-control-box
                   input.qn-form-control#password(type='password', name='password', placeholder='请填写密码', tabindex='4')
+                  .clearfix
 
               .qn-form-group.special.offset-label.agreement-box
                 .qn-checkbox

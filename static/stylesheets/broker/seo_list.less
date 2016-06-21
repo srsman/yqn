@@ -34,9 +34,12 @@
         background-color: @color-blue;
       }
     }
+
+    .hot a { color: #f00; }
+
     .active {
       background-color: @color-blue;
-      color: #fff;
+      color: #fff !important;
     }
 
     a:hover {
@@ -75,7 +78,7 @@
   }
 
   ul.closed {
-    height: 140px;
+    height: 130px;
     overflow: hidden;
   }
 }
@@ -146,4 +149,33 @@
 
 .qn-section-content {
   padding-bottom: 0 !important;
+}
+
+.hot-broker-area-list {
+  padding: 15px 20px;
+
+  li {
+    display: inline-block;
+
+    a {
+      padding: 5px 42px;
+      color: @gray-dark;
+      display: block;
+
+      &:hover,
+      &:focus { color: @brand-info; }
+    }
+
+    &:nth-child(1),
+    &:nth-child(6),
+    &:nth-child(11) {
+      a { padding-left: 0; }
+    }
+
+    &:nth-child(5),
+    &:nth-child(10),
+    &:nth-child(15) {
+      a {padding-right: 0; }
+    }
+  }
 }

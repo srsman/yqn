@@ -185,7 +185,8 @@ mixin ptfItem(item)
           li 创建人：
             a(href='javascript:', title=item.uName) #{item.uName}
             | &nbsp;&nbsp;&nbsp;&nbsp;创建时间：
-            i #{moment(item.createTime).format('YYYY.MM.DD')}
+            - var ptfCreateTime = Number(item.createTime);
+            i #{moment(ptfCreateTime).format('YYYY.MM.DD')}
       .home-portfolio-main
         table
           thead

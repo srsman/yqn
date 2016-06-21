@@ -1,0 +1,63 @@
+//- 分红融资
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('fhrz')
+
+block f10_content
+  if fhrzInfo.div.length > 0 || fhrzInfo.divHis.length > 0 || fhrzInfo.allots.length > 0 || fhrzInfo.issues.length > 0
+    //- 最新分配方案
+    if fhrzInfo.div.length > 0
+      h1.qn-table-title 最新分配方案
+      table.qn-table.striped.bordered.odd
+        tbody
+          - for(var i = 0; i < fhrzInfo.div.length; i++) {
+              tr
+                th(width='150') #{fhrzInfo.div[i][0]}
+                td #{fhrzInfo.div[i][1]}
+          - }
+
+    //- 历史分配方案
+    if fhrzInfo.divHis.length > 0
+      h1.qn-table-title 历史分配方案
+      table.qn-table.striped
+        thead
+          tr
+            th(width='30%') #{fhrzInfo.divHis[0][0]}
+            th(width='30%') #{fhrzInfo.divHis[0][1]}
+            th(width='40%') #{fhrzInfo.divHis[0][2]}
+        tbody
+          - for(var i = 1; i < fhrzInfo.divHis.length; i++) {
+              tr
+                td #{fhrzInfo.divHis[i][0]}
+                td #{fhrzInfo.divHis[i][1]}
+                td #{fhrzInfo.divHis[i][2]}
+          - }
+
+    //- 配股明细
+    if fhrzInfo.allots.length > 0
+      h1.qn-table-title 配股明细
+      - for(var j = 0; j < fhrzInfo.allots.length; j++) {
+          table.qn-table.striped.bordered.odd
+            tbody
+              - for(var i = 0; i < fhrzInfo.allots[j].length; i++) {
+                  tr
+                    th(width='150') #{fhrzInfo.allots[j][i][0]}
+                    td #{fhrzInfo.allots[j][i][1]}
+              - }
+      - }
+
+    //- 增发明细
+    if fhrzInfo.issues.length > 0
+      h1.qn-table-title 增发明细
+      - for(var j = 0; j < fhrzInfo.issues.length; j++) {
+          table.qn-table.striped.bordered.odd
+            tbody
+              - for(var i = 0; i < fhrzInfo.issues[j].length; i++) {
+                  tr
+                    th(width='150') #{fhrzInfo.issues[j][i][0]}
+                    td #{fhrzInfo.issues[j][i][1]}
+              - }
+      - }
+  else
+    p 暂无数据

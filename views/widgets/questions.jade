@@ -1,0 +1,9 @@
+//- 最新问答
+.qn-section
+  h3.qn-section-title 最新问答
+  a(href='/wenda').qn-section-more 全部问答
+    i.fa.fa-angle-right
+  .qn-section-main.qn-widgets-section-main
+    ul.seo-questions-list-main
+      each item in widgetQuestions
+        include ../question/seo_list_main

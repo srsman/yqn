@@ -8,12 +8,12 @@ var express = require('express'),
     ajax = require('../../utils/ajax'),
     utils = require('../../utils/utils'),
     seoMeta = utils.seoMeta(),
-    config = require('../../yiqiniu_config'),
+    serverConfig = require('../../server_config'),
     path = require('path'),
     router = express.Router();
 
 /* 首页 */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   var stockUrl = '/mktinfo_api/fetch_stk_list', // 热门股票
       viewpointUrl = '/adviser/fetch_adviser_note_list', // 精选观点
       newStockUrl = '/mktinfo_api/fetch_ipo_list', // 新股预告
@@ -123,7 +123,7 @@ router.get('/', function(req, res, next) {
               thisUid = item.uId,
               thisUrl,
               qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
-              shareUrl = config.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
+              shareUrl = serverConfig.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
 
           thisUrl = shareUrl + '/webstatic/register/card.html?userId=' + thisUid;
 
@@ -133,6 +133,22 @@ router.get('/', function(req, res, next) {
         adviserData.result.niuRcmd = {};
       }
 
+      /* 判断文章类型 */
+      var curNewsType;
+
+      switch(newsParams.params.type) {
+        case 6:
+          curNewsType = 'yaowen';
+          break;
+        case 7:
+          curNewsType = 'zhibo';
+          break;
+        default:
+          curNewsType = newsParams.params.type;
+      }
+
+      newsData.result.newsType = curNewsType;
+
       res.render('utils/home', {
         overview: adviserData.result, // 首页总览信息
         adviser: adviserData.result.niuRcmd, // 推荐投顾
@@ -141,7 +157,7 @@ router.get('/', function(req, res, next) {
         questions: questionData.result.qa, // 最新问答
         widgetStocks: stocksData.result.stks, // 热门股票
         widgetNewStocks: newStockData.result.stks, // 新股预告
-        widgetNews: newsData.result.data, // 热点新闻
+        widgetNews: newsData.result, // 热点新闻
         widgetBrokers: brokerData.result.brokers, // 推荐券商
         user: req.session.userInfo, // 用户Session信息
         moment: moment, // 格式化时间中间件
@@ -156,7 +172,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* 注册 */
-router.get('/zhuce', utils.isLogged, function(req, res, next) {
+router.get('/zhuce', utils.isLogged, function(req, res) {
   seoMeta = utils.seoMeta('account');
 
   res.render('accounts/register', {
@@ -165,16 +181,19 @@ router.get('/zhuce', utils.isLogged, function(req, res, next) {
 });
 
 /* 登录 */
-router.get('/denglu', utils.isLogged, function(req, res, next) {
+router.get('/denglu', utils.isLogged, function(req, res) {
+
+  var needCaptcha = utils.needCaptcha(req);
   seoMeta = utils.seoMeta('account');
 
   res.render('accounts/login', {
-    seoMeta: seoMeta
+    seoMeta: seoMeta,
+    needCaptcha: needCaptcha
   });
 });
 
 /* 找回密码 */
-router.get('/zhaohuimima', utils.isLogged, function(req, res, next) {
+router.get('/zhaohuimima', utils.isLogged, function(req, res) {
   seoMeta = utils.seoMeta('account');
 
   res.render('accounts/reset_password', {
@@ -183,27 +202,23 @@ router.get('/zhaohuimima', utils.isLogged, function(req, res, next) {
 });
 
 /* 注销 */
-router.get('/zhuxiao', function(req, res, next) {
-  // 删除浏览器cookie
-  res.clearCookie('connect.sid', {maxAge: 0});
-  res.redirect('/denglu');
-  //req.session.regenerate(function() {
-  //  req.session.userToken = null;
-  //  req.session.userInfo = null;
-  //  req.session.save();
-  //  res.redirect('/accounts/login');
-  //});
+router.get('/zhuxiao', function(req, res) {
+  req.session.destroy(function(err) {
+    if(!err) {
+      res.redirect('/denglu');
+    }
+  });
 });
 
 /* 监控服务 */
-router.all('/monitor', function(req, res, next) {
+router.all('/monitor', function(req, res) {
   res.status(200).json({'normal': true});
 });
 
 /* 只在开发和测试环境下可以通过浏览器访问 */
 if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   /* 公共元素文档 */
-  router.get('/common_element', function(req, res, next) {
+  router.get('/common_element', function(req, res) {
     res.render('utils/common_element', {
       title: '公共元素文档',
       user: req.session.userInfo

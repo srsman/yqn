@@ -99,11 +99,11 @@ block main_content
       mixin hz(img, name, flag)
         li
           if flag
-            a.long(href="javascripts:;")
+            a.long(href="javascript:")
               img(src='/images/static/broker/'+img, alt=name)
               span=name
           else
-            a(href="javascripts:;")
+            a(href="javascript:")
               img(src='/images/static/broker/'+img, alt=name)
               span=name
 

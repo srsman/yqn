@@ -5,8 +5,6 @@ var express = require('express'),
     log4js = require('log4js'),
     fs = require('fs'),
     path = require('path'),
-    config = require('../yiqiniu_config'),
-    qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
     router = express.Router();
 
 /*

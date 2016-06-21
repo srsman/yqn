@@ -7,6 +7,8 @@ var express = require('express'),
     ajax = require('../utils/ajax'),
     utils = require('../utils/utils'),
     log4js = require('log4js'),
+    serverConfig = require('../server_config'),
+    qiniuEnv = process.env.NODE_ENV,
     router = express.Router();
 
 var requestLog = log4js.getLogger('request');
@@ -15,7 +17,7 @@ var requestLog = log4js.getLogger('request');
 router.get('/list', utils.session, function(req, res) {
   var username = req.session.userToken,
       password = req.session.pwd,
-      oldPtfUrl = 'http://192.168.1.180:9300/crm/all?a=' + username + '&b=' + password;
+      oldPtfUrl = serverConfig.env[qiniuEnv].oldWeb + '/crm/all?a=' + username + '&b=' + password;
 
   requestLog.info('跳转页面成功：【' + oldPtfUrl + '】');
 

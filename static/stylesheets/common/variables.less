@@ -107,13 +107,17 @@
 @border-radius-small: 3px;
 
 /* 表格 */
-@table-cell-padding: 8px;
-@table-condensed-cell-padding: 5px; // 紧凑的
-@table-bg: transparent;
-@table-bg-accent: #fef9f6; // 隔行换的色
-@table-bg-hover: #e9f4ff;
+@table-cell-padding-vertical: 12px;
+@table-cell-padding-horizontal: 20px;
+@table-condensed-cell-padding-vertical: 6px; // 紧凑的
+@table-condensed-cell-padding-horizontal: 10px;
+@table-bg: transparent; // 表格背景色
+@table-bg-head: #f2f2f2; // 表头颜色
+@table-bg-accent: #f7f7f7; // 隔行换的色
+@table-bg-hover: #e9e8e8; // 鼠标悬停色
 @table-bg-active: @table-bg-hover;
-@table-border-color: @border-default-color;
+@table-border-color: #fff; // 边框颜色
+@table-head-color: @gray; // 表头字体颜色
 
 /* 按钮 */
 @btn-font-weight: normal;

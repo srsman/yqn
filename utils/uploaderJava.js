@@ -5,9 +5,9 @@ var uploaderJava = module.exports = {},
   formidable = require('formidable'),
   request = require("request"),
   fs = require('fs'),
-  config = require('../yiqiniu_config'),
+  serverConfig = require('../server_config'),
   qiniuEnv = process.env.NODE_ENV; // 当前的项目环境
-  imgUpload = config.env[qiniuEnv].target.h5 + '/common_api/upload_image'; // 图片上传
+  imgUpload = serverConfig.env[qiniuEnv].target.h5 + '/common_api/upload_image'; // 图片上传
 
 // 上传进度
 uploaderJava.progress = {};

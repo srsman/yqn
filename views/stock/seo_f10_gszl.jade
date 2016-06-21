@@ -1,0 +1,17 @@
+//- 公司资料
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('gszl')
+
+block f10_content
+  if gszlInfo || gszlInfo.length > 0
+    table.qn-table.striped.bordered.odd
+      tbody
+        - for(var i = 0; i < gszlInfo.length; i++) {
+            tr
+              th(width='150') #{gszlInfo[i][0]}
+              td #{gszlInfo[i][1]}
+        - }
+  else
+    p 暂无资料

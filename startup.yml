@@ -1,0 +1,11 @@
+apps:
+  name: yiqiniu # 项目名
+  script: bin/www # 启动文件
+  instances: 0 # 启动核数，0为全部
+  exec_mode: cluster # 执行模式，cluster为多核
+  log_date_format: 'YYYY-MM-DD HH:mm:ss' # 格式化日志时间
+  error_file: ./pm2_logs/error.log # 错误日志
+  out_file: ./pm2_logs/out.log # 输入日志
+  pid_file: ./pm2_logs/pid.log # 进程日志
+  source_map_support: true # 如果有错误会打印堆栈信息
+  max_memory_restart: '1G' # 进程内容超过1G则重启

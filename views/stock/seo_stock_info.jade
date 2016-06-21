@@ -34,7 +34,7 @@ block main_content
                   .stock-now-info.clearfix.up
                     h3 未上市
 
-                  i.update-time 更新时间：#{moment(stockInfo.ts).format('YYYY年MM月DD日')}
+                  i.update-time 更新时间：#{moment(Number(stockInfo.ts)).format('YYYY年MM月DD日')}
 
                 //- 发行详情
                 table.stock-ipo-details
@@ -84,94 +84,14 @@ block main_content
                           | -
 
       else
+        include seo_stock_info_main
+
         .qn-section
           .qn-section-main
-            input.hidden#stock-id(value="#{stockInfo[0]}")
-            dl.qn-seo-stock-info-box
-              dt.stock-title #{stockInfo[1]}
-                i (#{stockInfo[0]})
-              dd.clearfix
-                //- 分时信息
-                .stock-time-info
-                  if stockInfo[10] > 0
-                    .stock-now-info.clearfix.up
-                      +stockNowInfo(stockInfo, 'up')
-                  else if stockInfo[10] < 0
-                    .stock-now-info.clearfix.down
-                      +stockNowInfo(stockInfo, 'down')
-                  else
-                    .stock-now-info.clearfix
-                      +stockNowInfo(stockInfo)
-
-                  ul.stock-estimate-info.clearfix
-                    li 涨停：
-                      i.qn-stock-price.up #{stockInfo[11]}
-                    li 跌停：
-                      i.qn-stock-price.down #{stockInfo[12]}
-
-                  i.update-time 更新时间：#{moment(stockInfo[13]).format('YYYY年MM月DD日 HH:mm:ss')}
-
-                //- 分时详情
-                table.stock-time-details
-                  tbody
-                    tr
-                      td
-                        i 今&nbsp;&nbsp;&nbsp;&nbsp;开：
-                        if stockInfo[5] > stockInfo[6]
-                          i.qn-stock-price.up #{stockInfo[5]}
-                        else if stockInfo[5] < stockInfo[6]
-                          i.qn-stock-price.down #{stockInfo[5]}
-                        else if stockInfo[5] == '0.00' || stockInfo[5] == 0
-                          i.qn-stock-price #{stockInfo[5]}
-                        else
-                          i.qn-stock-price #{stockInfo[5]}
-                      td
-                        i 最&nbsp;&nbsp;&nbsp;&nbsp;高：
-                        if stockInfo[3] > stockInfo[6]
-                          i.qn-stock-price.up #{stockInfo[3]}
-                        else if stockInfo[3] < stockInfo[6]
-                          i.qn-stock-price.down #{stockInfo[3]}
-                        else if stockInfo[3] == '0.00' || stockInfo[3] == 0
-                          i.qn-stock-price #{stockInfo[3]}
-                        else
-                          i.qn-stock-price #{stockInfo[3]}
-                      td
-                        i 成交量：
-                        | #{utils.formatNumVal(stockInfo[8], 3)}
-                    tr
-                      td
-                        i 昨&nbsp;&nbsp;&nbsp;&nbsp;收：
-                        | #{stockInfo[6]}
-                      td
-                        i 最&nbsp;&nbsp;&nbsp;&nbsp;低：
-                        if stockInfo[4] > stockInfo[6]
-                          i.qn-stock-price.up #{stockInfo[4]}
-                        else if stockInfo[4] < stockInfo[6]
-                          i.qn-stock-price.down #{stockInfo[4]}
-                        else if stockInfo[4] == '0.00' || stockInfo[4] == 0
-                          i.qn-stock-price #{stockInfo[4]}
-                        else
-                          i.qn-stock-price #{stockInfo[4]}
-                      td
-                        i 成交额：
-                        | #{utils.formatNumVal(stockInfo[7], 3)}
-                    tr
-                      td
-                        i 总市值：
-                        | #{utils.formatNumVal(stockInfo[15], 3)}
-                      td
-                        i 市盈率：
-                        | #{stockInfo[16]}
-                      td
-                        i 换手率：
-                        | #{utils.formatNumVal(stockInfo[14], 2)}%
-                    tr
-                      td
-                        i 流通市值：
-                        | #{utils.formatNumVal(stockInfo[18], 3)}
-                      td
-                        i 市净率：
-                        | #{stockInfo[17]}
+            .qn-section-main-title-box
+              h3.qn-section-title F10相关资料
+              a.qn-section-more(href='/gupiao/#{stockInfo[0]}/GSZL', title='F10相关资料') 查看
+                i.fa.fa-angle-right
 
       //- 股票相关信息
       .qn-section
@@ -189,8 +109,8 @@ block main_content
             .qn-tab-innerbox
               //- 相关新闻
               ul.qn-tab-items.items-stock-news.seo-news-list-main#items-stock-news
-                if stockNews.length > 0
-                  each item in stockNews
+                if stockNews.data.length > 0
+                  each item in stockNews.data
                     include ../news/seo_list_main
                   a.more-items(href="javascript:;")
                     span 显示更多&nbsp;
@@ -252,27 +172,6 @@ block main_content
 
       //- 二维码
       include ../widgets/qr_code
-
-//- 股票分时信息
-mixin stockNowInfo(stockInfo, change)
-  - var c = stockInfo[9]
-  - var cp = utils.formatNumVal(stockInfo[10], 2) + '%'
-
-  - if(stockInfo[10] > 0) {
-    - c = '+' + utils.formatNumVal(stockInfo[9], 1)
-    - cp = '+' + utils.formatNumVal(stockInfo[10], 2) + '%'
-  - } else {
-    - c = utils.formatNumVal(stockInfo[9], 1)
-  - }
-
-  h3 #{stockInfo[2]}
-    if change === 'up'
-      i.fa.fa-arrow-up
-    else if change === 'down'
-      i.fa.fa-arrow-down
-  ul
-    li #{c}
-    li #{cp}
 
 append foot_scripts
   script(data-main='/javascripts/stock/seo_info.js' src='/javascripts/lib/requirejs/require.js')

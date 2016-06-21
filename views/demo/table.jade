@@ -1,0 +1,220 @@
+extends common
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/demo/index.css')
+
+block main_content
+  .container
+    //- 基本实例
+    .qn-demo-section
+      h1 基本实例
+
+      table.qn-table
+        thead
+          tr
+            th 表头一
+            th 表头二
+            th 表头三
+            th 表头四
+            th 表头五
+        tbody
+          tr
+            td
+              a(href='#') 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td
+              a(href='#') 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td
+              a(href='#') 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+
+    //- 条纹状表格
+    .qn-demo-section
+      h1 条纹状表格
+
+      table.qn-table.striped
+        thead
+          tr
+            th 表头一
+            th 表头二
+            th 表头三
+            th 表头四
+            th 表头五
+        tbody
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+
+    //- 鼠标悬停
+    .qn-demo-section
+      h1 鼠标悬停
+
+      table.qn-table.hover
+        thead
+          tr
+            th 表头一
+            th 表头二
+            th 表头三
+            th 表头四
+            th 表头五
+        tbody
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+
+    //- 带边框的表格
+    .qn-demo-section
+      h1 带边框的表格
+
+      table.qn-table.bordered
+        tbody
+          tr
+            th 表头一
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+          tr
+            th 表头二
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+          tr
+            th 表头三
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+
+    //- 紧缩表格
+    .qn-demo-section
+      h1 紧缩表格
+
+      table.qn-table.condensed
+        thead
+          tr
+            th 表头一
+            th 表头二
+            th 表头三
+            th 表头四
+            th 表头五
+        tbody
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+
+    //- 综合表格(条纹+鼠标悬停)
+    .qn-demo-section
+      h1 综合表格(条纹+鼠标悬停)
+
+      table.qn-table.striped.hover
+        thead
+          tr
+            th 表头一
+            th 表头二
+            th 表头三
+            th 表头四
+            th 表头五
+        tbody
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+          tr
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+            td 内容五
+
+    //- 综合表格(条纹+边框)
+    .qn-demo-section
+      h1 综合表格(条纹+边框)
+
+      table.qn-table.bordered.striped.odd
+        tbody
+          tr
+            th 表头一
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+          tr
+            th 表头二
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四
+          tr
+            th 表头三
+            td 内容一
+            td 内容二
+            td 内容三
+            td 内容四

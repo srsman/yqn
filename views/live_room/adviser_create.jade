@@ -13,7 +13,7 @@ block main_content
     i.fa.fa-angle-right
     | #{title}
 
-  form#create-form.qn-section(action='/live_room/create', method='post')
+  form#create-form.qn-section(action='javascript:;', method='post')
     .qn-form-section
       span.qn-form-section-title 基本信息
 
@@ -22,21 +22,30 @@ block main_content
           i *
         .qn-form-control-box
           input.qn-form-control#group-name(type='text', name='group_name', placeholder='为你的直播间取个好听的名字吧')
+          .clearfix
 
       .qn-form-group
         label.qn-control-label(for='description') 直播群描述
         .qn-form-control-box
           textarea.qn-form-control#description(name='description', placeholder='请填写直播间描述')
+          .clearfix
 
       .qn-form-group.special
         label.qn-control-label 是否验证
         .qn-form-control-box
           .qn-radio
-            input.icheck#need-verify-n(type='radio', name='need_verify', value='N', checked)
-            label(for='need-verify-n') 所有客户可加入
+            label.checked.radio-pretty.inline(for='need-verify-n')
+              input#need-verify-n(type='radio', name='need_verify', value='N')
+              span
+               .text 所有客户可加入
+
           .qn-radio
-            input.icheck#need-verify-y(type='radio', name='need_verify', value='Y')
-            label(for='need-verify-y') 需我验证通过才能加入
+            label.radio-pretty.inline(for='need-verify-y')
+              input#need-verify-y(type='radio', name='need_verify', value='Y')
+              span
+                .text 需我验证通过才能加入
+
+        input#needVerifyVal(type='hidden' name='need_verify_val' value='N')
 
     .qn-form-section
       span.qn-form-section-title 高级设置
@@ -45,33 +54,43 @@ block main_content
         label.qn-control-label 是否收费
         .qn-form-control-box
           .qn-radio
-            input.icheck#is-charge-n(type='radio', name='is_charge', value='N',checked)
-            label(for='is-charge-n') 免费
+            label.checked.radio-pretty.inline(for='is-charge-n')
+              input#is-charge-n(type='radio', name='is_charge', value='N')
+              span
+                .text 免费
+
           .qn-radio
-            input.icheck#is-charge-y(type='radio', name='is_charge', value='Y')
-            label(for='is-charge-y') 收费
+            label.radio-pretty.inline(for='is-charge-y')
+              input#is-charge-y(type='radio', name='is_charge', value='Y')
+              span
+                .text 收费
+
+        input#isChargeVal(type='hidden' name='is_charge_val' value='N')
 
       .setting-create-price-box
         .qn-form-group
           label.qn-control-label(for='price') 价格
             i *
           .qn-form-control-box
-            input.qn-form-control#price(type='text', name='price', placeholder='请填写价格')
+            input.qn-form-control#price(type='text', name='price2', placeholder='请填写价格')
             span.qn-form-control-ext-txt 元&nbsp;/&nbsp;月
+            .clearfix
 
         .qn-form-group
           label.qn-control-label(for='sales-price') 优惠价
           .qn-form-control-box
-            input.qn-form-control#sales-price(type='text', name='sales_price', placeholder='请填写优惠价')
+            input.qn-form-control#sales-price(type='text', name='sales_price2', placeholder='请填写优惠价')
             span.qn-form-control-ext-txt 元&nbsp;/&nbsp;月
               i （对所有客户适用）
+            .clearfix
 
         .qn-form-group
           label.qn-control-label(for='vip-sales-price') VIP优惠价
           .qn-form-control-box
-            input.qn-form-control#vip-sales-price(type='text', name='vip_sales_price', placeholder='请填写VIP优惠价')
+            input.qn-form-control#vip-sales-price(type='text', name='vip_sales_price2', placeholder='请填写VIP优惠价')
             span.qn-form-control-ext-txt 元&nbsp;/&nbsp;月
               i （仅对VIP客户适用）
+            .clearfix
 
     .qn-form-section
       .qn-form-group.offset-label#create-form-submit-box

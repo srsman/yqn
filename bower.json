@@ -28,8 +28,8 @@
   },
   "exportsOverride": {
     "bootstrap": {
-      "js": "dist/js/bootstrap.min.js",
-      "css": "dist/css/bootstrap.min.css",
+      "js": "dist/js",
+      "css": "dist/css",
       "fonts": "dist/fonts"
     },
     "font-awesome": {

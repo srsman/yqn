@@ -5,13 +5,16 @@
 
 require([
   'jquery',
-  'common',
-  'formValidation'
+  'sui',
+  'functions'
 ], function($) {
   'use strict';
 
   /* 将方法划分为不同模块进行编写 */
   var SEMICOLON = SEMICOLON || {};
+  var IS_CELLPHONE = /^0?(13[0-9]|15[0-9]|177|18[0-9]|14[57])[0-9]{8}$/;
+  //var IS_CELLPHONE = /^\d{11}$/;
+  var regUrl = '/account/register';
 
   /*
    * 初始化
@@ -21,8 +24,9 @@ require([
    */
   SEMICOLON.initialize = {
     init: function() {
-      SEMICOLON.initialize.getCaptcha();
-      SEMICOLON.initialize.verifyRegInfo();
+      this.getCaptcha();
+      this.validateRegInfo();
+      //SEMICOLON.initialize.verifyRegInfo();
     },
 
     /* 获取注册的手机验证码 */
@@ -31,7 +35,7 @@ require([
         var $el = $(this),
             $username = $('#username'),
             usernameVal = $.trim($username.val()),
-            isCellphone = /^0?(13[0-9]|15[0-9]|177|18[0-9]|14[57])[0-9]{8}$/,
+            isCellphone = IS_CELLPHONE,
             param = {},
             params = {};
 
@@ -85,6 +89,122 @@ require([
             $el.removeClass('disabled');
             $el.html('获取失败，请重试');
           });
+        }
+      });
+    },
+
+    /* 验证用户注册信息 */
+    validateRegInfo: function() {
+      // 验证手机是否合法
+      $.validate.setRule('isUsername', function(value, element) {
+        //var isCellphone = /^0?(13[0-9]|15[0-9]|177|18[0-9]|14[57])[0-9]{8}$/;
+        var isCellphone = IS_CELLPHONE;
+        return isCellphone.test(value);
+      }, '手机号码不合法');
+
+      // 验证昵称是否合法
+      $.validate.setRule('isNickname', function(value, element) {
+        return (value.indexOf('齐牛') === -1 && value.indexOf('一起牛') === -1);
+      }, '昵称不合法');
+
+      // 验证密码是否合法
+      $.validate.setRule('isPassword', function(value, element) {
+        var isPwd = /^\S{6,18}$/;
+        return isPwd.test(value);
+      }, '密码由6-18位字母、数字和特殊字符组成');
+
+      $('#reg-form').validate({
+        rules: {
+          username: {
+            required: true,
+            isUsername: true
+          },
+          nickname: {
+            required: true,
+            isNickname: true
+          },
+          password: {
+            required: true,
+            isPassword: true
+          },
+          captcha: {
+            required: true
+          }
+        },
+        success: function () {
+          var $submitBox = $('#reg-form-submit-box'),
+            $submitBtn = $submitBox.find('button[type="submit"]'),
+            $form = $('#reg-form'),
+            url = regUrl,
+            type = $form.attr('method').toUpperCase(),
+            formData = $.serializeFormObject('#reg-form'),
+            param = {},
+            params = {};
+
+          param['certType'] = 0; // 代表手机号注册
+          param['certCode'] = formData.username;
+          param['captcha'] = formData.captcha;
+          param['eventId'] = formData.event_id;
+          param['nickname'] = formData.nickname;
+          param['pwd'] = formData.password;
+
+          params['params'] = param;
+
+          $.ajax({
+            type: type,
+            url: url,
+            data: JSON.stringify(params),
+            dataType: 'json',
+            contentType: 'application/json',
+            beforeSend: function() {
+              // 删除表单中所有的提示
+              if($form.find('.qn-alert').length) {
+                $.each($form.find('.qn-alert'), function() {
+                  $(this).parent().remove();
+                });
+              }
+
+              // 禁用登录按钮
+              $submitBtn.attr({'disabled': 'disabled'});
+              $submitBtn.html('注册中…');
+            }
+          }).done(function(data) {
+            $submitBtn.removeAttr('disabled');
+            $submitBtn.html('注册');
+
+            var message,
+              alertHtml = '<div class="qn-form-group special offset-label">';
+
+            if(data.code === 0) {
+              message = '注册成功，立即' +
+              '<a href="/denglu">登录</a>';
+
+              alertHtml += $.customAlert(1, message) + '</div>';
+            } else {
+              message = data.message;
+
+              if(message === '参数错误') {
+                message = '验证码错误或已失效';
+              } else if(message === '手机号码已注册') {
+                message = '手机号码已注册，直接' +
+                '<a href="/denglu">登录</a>';
+              }
+
+              alertHtml += $.customAlert(4, message) + '</div>';
+            }
+
+            $submitBox.before(alertHtml);
+          }).fail(function(data) {
+            $submitBtn.removeAttr('disabled');
+            $submitBtn.html('注册');
+
+            var alertHtml = '<div class="qn-form-group special offset-label">';
+
+            alertHtml += $.customAlert(4, '注册失败，请重试') + '</div>';
+
+            $submitBox.before(alertHtml);
+          });
+          return false;
         }
       });
     },

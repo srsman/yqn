@@ -1,0 +1,88 @@
+/* 行业详情 */
+
+.qn-seo-industry-info-box {
+  position: relative;
+  padding: 20px;
+
+  dl,
+  ul { float: left; }
+
+  dl {
+    width: 230px;
+    border-right: 1px dotted @border-default-color;
+
+    dt {
+      font-size: 20px;
+      color: @gray-dark;
+
+      a {
+        color: @gray-dark;
+
+        &:hover,
+        &:focus { color: @brand-info; }
+      }
+    }
+
+    dd {
+      position: relative;
+      padding-top: 10px;
+      font-size: 48px;
+      line-height: 48px;
+
+      i {
+        position: absolute;
+        bottom: 5px;
+        font-size: 24px;
+        font-style: normal;
+        line-height: 24px;
+      }
+
+      &.up { color: #f00; }
+
+      &.down { color: #10bd4b; }
+    }
+  }
+
+  ul {
+    margin: 35px 0 0 20px;
+
+    li {
+      font-size: @font-size-large;
+      color: @gray-light;
+
+      a {
+        color: @gray-dark;
+
+        &:hover,
+        &:focus { color: @brand-info; }
+      }
+
+      i {
+        font-style: normal;
+        color: @gray-dark;
+
+        &.up {
+          padding-right: 3px;
+          color: #f00;
+        }
+
+        &.down {
+          padding-left: 3px;
+          color: #10bd4b;
+        }
+      }
+    }
+
+    li + li { margin-top: 10px; }
+  }
+
+  i.update-time {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    font-size: @font-size-small;
+    font-style: normal;
+    color: @gray-light;
+  }
+}

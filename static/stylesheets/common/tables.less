@@ -3,8 +3,7 @@ table { background-color: @table-bg; }
 th { text-align: left; }
 
 /* 表格基础样式 */
-.qn-table,
-.qn-widget-table {
+.qn-table {
   width: 100%;
   max-width: 100%;
 
@@ -15,36 +14,18 @@ th { text-align: left; }
     > tr {
       > th,
       > td {
-        padding: @table-cell-padding;
+        padding: @table-cell-padding-vertical @table-cell-padding-horizontal;
         line-height: @line-height-base;
         vertical-align: top;
-        //border-top: 1px solid @table-border-color;
+      }
+
+      // 表头
+      > th {
+        background-color: @table-bg-head;
+        font-weight: normal;
+        color: @table-head-color;
       }
     }
-  }
-
-  // 表头的文字居底对齐
-  > thead > tr > th {
-    vertical-align: bottom;
-    background-color: #f9f9f9;
-    //border-bottom: 1px solid @table-border-color;
-    font-weight: normal;
-    color: @gray;
-  }
-
-  // 多行表头的情况
-  > thead:first-child {
-    > tr:first-child {
-      > th,
-      > td {
-        border-top: 0;
-      }
-    }
-  }
-
-  // 多个表体的情况
-  > tbody + tbody {
-    border-top: 2px solid @table-border-color;
   }
 
   // 表格内A标签
@@ -56,12 +37,9 @@ th { text-align: left; }
         &:hover,
         &:focus { color: @brand-info; }
       }
-    }
-  }
 
-  // 内嵌表格
-  .qn-table {
-    background-color: @body-bg;
+      &.highlight { color: @brand-primary; }
+    }
   }
 
   // 紧凑型的
@@ -72,7 +50,7 @@ th { text-align: left; }
       > tr {
         > th,
         > td {
-          padding: @table-condensed-cell-padding;
+          padding: @table-condensed-cell-padding-vertical @table-condensed-cell-padding-horizontal;
         }
       }
     }
@@ -80,39 +58,47 @@ th { text-align: left; }
 
   // 带边框的
   &.bordered {
-    border: 1px solid @table-border-color;
-
     > thead,
     > tbody,
     > tfoot {
       > tr {
         > th,
-        > td {
-          border: 1px solid @table-border-color;
+        > td { border-top: 1px solid @table-border-color; }
+
+        &:first-child {
+          > th,
+          > td { border-top: none; }
+        }
+
+        &:last-child {
+          > th,
+          > td { border-bottom: 1px solid @table-border-color; }
         }
       }
     }
 
-    > thead > tr {
-      > th,
-      > td {
-        border-bottom-width: 2px;
+    > tfoot {
+      > tr:last-child {
+        > th,
+        > td { border-bottom: none; }
       }
     }
   }
 
   // 隔行换色
   &.striped {
-    > tbody > tr:nth-of-type(even) {
-      background-color: @table-bg-accent;
+    > tbody > tr:nth-of-type(even) { background-color: @table-bg-accent; }
+
+    &.odd {
+      > tbody > tr:nth-of-type(even) { background-color: @table-bg; }
+
+      > tbody > tr:nth-of-type(odd) { background-color: @table-bg-accent; }
     }
   }
 
   // 鼠标移入行换色
   &.hover {
-    > tbody > tr:hover {
-      background-color: @table-bg-hover;
-    }
+    > tbody > tr:hover { background-color: @table-bg-hover; }
   }
 
   // 内容中间对齐
@@ -125,3 +111,14 @@ th { text-align: left; }
     }
   }
 }
+
+/* 表格标题 */
+.qn-table-title {
+  margin-bottom: 15px;
+  font-size: @font-size-large;
+  font-weight: bold;
+  color: @gray-dark;
+}
+
+.qn-table + .qn-table-title,
+.qn-table + .qn-table { margin-top: 30px; }

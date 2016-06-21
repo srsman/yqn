@@ -1,0 +1,70 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/stock/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        span 行业
+
+      //- 行业列表
+      .qn-section
+        .qn-section-main
+          h3.qn-section-title 行业板块
+
+          table.qn-table.striped.hover
+            thead
+              tr
+                th(width='180') 行业名
+                th(width='150').text-right 涨跌幅
+                th(width='180').text-center 领涨股
+                th.text-right 上涨个股数
+                th.text-right 下跌个股数
+            tbody
+              each item in industry.data
+                tr
+                  td
+                    a(href='/hangye/#{item.induCode}') #{item.induName}
+                  td.text-right !{utils.formatPct(item.induChgPct, 1)}
+                  td.text-center
+                    a(href='/gupiao/#{item.stk.assetId}') #{item.stk.stkName}
+                  td.text-right
+                    i.qn-stock-price.up #{item.upNums}
+                  td.text-right
+                    i.qn-stock-price.down #{item.downNums}
+
+
+          //- 分页
+          - var currPage = industry.page.curPage
+          - var totalPage = industry.page.pageCount
+          - var pageLink = '/hangye?page='
+          include ../common/pagination
+          +page(totalPage, currPage, pageLink)
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 热点新闻
+      include ../widgets/news
+
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

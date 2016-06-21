@@ -16,7 +16,6 @@ module.exports = function(grunt) {
           ' * name: <%= pkg.name %>\n' +
           ' * version: <%= pkg.version %>\n' +
           ' * author: <%= pkg.author %>\n' +
-          ' * date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
           ' * Copyright (c) 2015 - <%= grunt.template.today("yyyy") %>\n' +
           ' */',
 
@@ -101,12 +100,15 @@ module.exports = function(grunt) {
         files:[
           {
             expand: true,
-            cwd: 'static/images',
-            src: 'loading.gif',
-            dest: 'public/images'
+            cwd: '<%= cfg.src.images %>',
+            src: [
+              '*.{png,jpg,gif}',
+              '**/*.{png,jpg,gif}'
+            ],
+            dest: '<%= cfg.dist.images %>'
           }
         ]
-      },
+      }
     },
 
     // 压缩图片
@@ -225,9 +227,7 @@ module.exports = function(grunt) {
     watch: {
       options: {
         dateFormat: function(time) {
-          grunt.log.writeln('(∩•̀ω•́)⊃-*⋆ 亲爱哒小婊砸：');
           grunt.log.writeln('此次监听共历时' + time + '毫秒');
-          grunt.log.writeln('程序尚未退出，还在等着监听你的其他操作哟~');
         }
       },
       less: {

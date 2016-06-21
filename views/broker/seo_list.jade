@@ -12,13 +12,15 @@ block main_content
       .qn-seo-breadcrumbs 当前位置：
         a(href='/') 首页
         i.fa.fa-angle-right
-        span 券商开户
+        span 证券开户
       .qn-section
         .qn-section-main
           .qn-section-content
 
             //- 筛选部分
             .selector
+              input#cur-area(type='hidden', value=tag.area)
+              input#cur-broker(type='hidden', value=tag.broker)
 
               //- 区域筛选部分
               .selector-line#area-line
@@ -26,10 +28,19 @@ block main_content
                 a.option-all(href="javascript:;", data-id=0, class={active: tag.area == 0}) 全部
                 ul#brokerArea.clearfix(class={closed: brokerInfo && brokerInfo.areas && brokerInfo.areas.length > 40 })
                   if brokerInfo && brokerInfo.areas
-                    each item in brokerInfo.areas
-                      li(class={active: item.areaId == tag.area})
-                        a(href="javascript:;", data-id="#{item.areaId}") #{item.areaName}
-                if brokerInfo && brokerInfo.areas && brokerInfo.areas.length > 40
+                    - for(var i = 0; i < brokerInfo.areas.length; i++) {
+                        if i < 10
+                          if brokerInfo.areas[i].areaId == tag.area
+                            li(class="hot active")
+                              a(href="javascript:", data-id="#{brokerInfo.areas[i].areaId}") #{brokerInfo.areas[i].areaName}
+                          else
+                            li(class="hot")
+                              a(href="javascript:", data-id="#{brokerInfo.areas[i].areaId}") #{brokerInfo.areas[i].areaName}
+                        else
+                          li(class={active: brokerInfo.areas[i].areaId == tag.area})
+                            a(href="javascript:", data-id="#{brokerInfo.areas[i].areaId}") #{brokerInfo.areas[i].areaName}
+                    - }
+                if brokerInfo && brokerInfo.areas && brokerInfo.areas.length > 52
                   span(data-id="brokerArea", data-opened="false").option-expand 展开&nbsp;
                     i.fa.fa-chevron-down
 
@@ -55,7 +66,7 @@ block main_content
                       .item-left
                         a.broker-img(href="/quanshang/#{i.areaId}/#{i.brokerId}/#{i.busDeptId}")
                           img(src="#{i.companyLogo}", alt="#{i.fullName}")
-                        a.broker-info(href="/quanshang/#{i.areaId}/#{i.brokerId}/#{i.busDeptId}") #{i.brokerType} #{i.busAddress}
+                        a.broker-info(href="/quanshang/#{i.areaId}/#{i.brokerId}/#{i.busDeptId}") #{i.brokerType}开户
                       .item-right
                         ul
                           li
@@ -79,9 +90,45 @@ block main_content
             //- 分页
             - var currPage = brokerInfo.page.currPage
             - var totalPage = brokerInfo.page.totalPage
-            - var pageLink = '/quanshang?area=' + tag.area + '&broker=' + tag.broker+'&page='
+            - var pageLink = '/quanshang/' + tag.area + '/' + tag.broker+'?page='
             include ../common/pagination
             +page(totalPage, currPage, pageLink)
+
+      //- 热门开户城市
+      .qn-section
+        h3.qn-section-title 热门开户城市
+        .qn-section-main
+          ul.hot-broker-area-list
+            li
+              a(href='/quanshang/31/0', title='深圳证券开户') 深圳证券开户
+            li
+              a(href='/quanshang/2/0', title='上海证券开户') 上海证券开户
+            li
+              a(href='/quanshang/30/0', title='广州证券开户') 广州证券开户
+            li
+              a(href='/quanshang/1/0', title='北京证券开户') 北京证券开户
+            li
+              a(href='/quanshang/171/0', title='南京证券开户') 南京证券开户
+            li
+              a(href='/quanshang/3/0', title='天津证券开户') 天津证券开户
+            li
+              a(href='/quanshang/418/0', title='重庆证券开户') 重庆证券开户
+            li
+              a(href='/quanshang/359/0', title='郑州证券开户') 郑州证券开户
+            li
+              a(href='/quanshang/159/0', title='武汉证券开户') 武汉证券开户
+            li
+              a(href='/quanshang/119/0', title='杭州证券开户') 杭州证券开户
+            li
+              a(href='/quanshang/288/0', title='成都证券开户') 成都证券开户
+            li
+              a(href='/quanshang/241/0', title='长沙证券开户') 长沙证券开户
+            li
+              a(href='/quanshang/310/0', title='福州证券开户') 福州证券开户
+            li
+              a(href='/quanshang/311/0', title='厦门证券开户') 厦门证券开户
+            li
+              a(href='/quanshang/46/0', title='东莞证券开户') 东莞证券开户
 
     .seo-main-sidebar
 

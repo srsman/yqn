@@ -1,0 +1,47 @@
+//- 同行比较
+extends seo_f10_layout
+
+block seo_f10_menu
+  +f10Menu('thbj')
+
+block f10_content
+  if thbjInfo.mktPerform.length > 0 || thbjInfo.indexAnaly.length > 0
+    //- 市场表现
+    if thbjInfo.mktPerform.length > 0
+      h1.qn-table-title 市场表现
+      table.qn-table.striped
+        thead
+          tr
+            th(width='25%') #{thbjInfo.mktPerform[0][0]}
+            th(width='25%') #{thbjInfo.mktPerform[0][1]}
+            th(width='25%') #{thbjInfo.mktPerform[0][2]}
+            th(width='25%') #{thbjInfo.mktPerform[0][3]}
+        tbody
+          - for(var i = 1; i < thbjInfo.mktPerform.length; i++) {
+            tr
+              td #{thbjInfo.mktPerform[i][0]}
+              td #{thbjInfo.mktPerform[i][1]}
+              td #{thbjInfo.mktPerform[i][2]}
+              td #{thbjInfo.mktPerform[i][3]}
+          - }
+
+    //- 指标分析
+    if thbjInfo.indexAnaly.length > 0
+      h1.qn-table-title 指标分析
+      table.qn-table.striped
+        thead
+          tr
+            th(width='25%') #{thbjInfo.indexAnaly[0][0]}
+            th(width='25%') #{thbjInfo.indexAnaly[0][1]}
+            th(width='25%') #{thbjInfo.indexAnaly[0][2]}
+            th(width='25%') #{thbjInfo.indexAnaly[0][3]}
+        tbody
+          - for(var i = 1; i < thbjInfo.indexAnaly.length; i++) {
+            tr
+              td #{thbjInfo.indexAnaly[i][0]}
+              td #{thbjInfo.indexAnaly[i][1]}
+              td #{thbjInfo.indexAnaly[i][2]}
+              td #{thbjInfo.indexAnaly[i][3]}
+          - }
+  else
+    p 暂无数据

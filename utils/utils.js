@@ -2,8 +2,37 @@
  * 工具类
  * @Author: 大发
  */
+
 var utils = module.exports = {},
-    config = require('../yiqiniu_config');
+    fs = require('fs'),
+    path = require('path'),
+    appConfig = require('../app_config');
+
+
+/**
+ * 判断当前登录是否需要验证码
+ * @param req
+ * @returns {number}
+ */
+utils.needCaptcha = function(req) {
+  var needCaptcha = false;
+  // 判断登录错误是否过期
+  var loginErrExpire = req.session.loginErrExpire;
+  var now = new Date().getTime();
+
+  // 如果session不存在或已过期
+  if (!loginErrExpire || now > loginErrExpire) {
+    req.session.loginErrExpire = now + appConfig.session.loginErrExpire;
+    req.session.loginErr = 0;
+  } else {
+    // 登录错误的次数
+    var loginErr = req.session.loginErr;
+    if (loginErr && loginErr >= 3) {
+      needCaptcha = true;
+    }
+  }
+  return needCaptcha;
+};
 
 /*
  * SEO网页meta处理
@@ -17,33 +46,33 @@ var utils = module.exports = {},
 utils.seoMeta = function(module, custom) {
   var seoInfo = {};
 
-  seoInfo['title'] = config.seo.default.title;
-  seoInfo['keywords'] = config.seo.default.keywords;
-  seoInfo['description'] = config.seo.default.description;
+  seoInfo['title'] = appConfig.seo.default.title;
+  seoInfo['keywords'] = appConfig.seo.default.keywords;
+  seoInfo['description'] = appConfig.seo.default.description;
 
   // 如果没传模块就直接返回默认的
   if(typeof module === 'string') {
-    if(config.seo[module] !== undefined) {
+    if(appConfig.seo[module] !== undefined) {
       if(custom !== undefined) {
         if(custom.mixins === 1) {
           /* 不混合 */
-          seoInfo['title'] = custom.title !== undefined ? custom.title : config.seo[module].title;
+          seoInfo['title'] = custom.title !== undefined ? custom.title : appConfig.seo[module].title;
 
-          seoInfo['keywords'] = custom.keywords !== undefined ? custom.keywords : config.seo[module].keywords;
+          seoInfo['keywords'] = custom.keywords !== undefined ? custom.keywords : appConfig.seo[module].keywords;
 
-          seoInfo['description'] = custom.description !== undefined ? custom.description : config.seo[module].description;
+          seoInfo['description'] = custom.description !== undefined ? custom.description : appConfig.seo[module].description;
         } else {
           /* 混合 */
-          seoInfo['title'] = custom.title !== undefined ? custom.title + ' - ' + config.seo[module].title : config.seo[module].title;
+          seoInfo['title'] = custom.title !== undefined ? custom.title + ' - ' + appConfig.seo[module].title : appConfig.seo[module].title;
 
-          seoInfo['keywords'] = custom.keywords !== undefined ? custom.keywords + '，' + config.seo[module].keywords : config.seo[module].keywords;
+          seoInfo['keywords'] = custom.keywords !== undefined ? custom.keywords + '，' + appConfig.seo[module].keywords : appConfig.seo[module].keywords;
 
-          seoInfo['description'] = custom.description !== undefined ? custom.description + ' - ' + config.seo[module].description : config.seo[module].description;
+          seoInfo['description'] = custom.description !== undefined ? custom.description + ' - ' + appConfig.seo[module].description : appConfig.seo[module].description;
         }
       } else {
-        seoInfo['title'] = config.seo[module].title;
-        seoInfo['keywords'] = config.seo[module].keywords;
-        seoInfo['description'] = config.seo[module].description;
+        seoInfo['title'] = appConfig.seo[module].title;
+        seoInfo['keywords'] = appConfig.seo[module].keywords;
+        seoInfo['description'] = appConfig.seo[module].description;
       }
     }
   }
@@ -92,9 +121,7 @@ utils.isLogged = function(req, res, next) {
 
 // 错误处理
 utils.errorHandler = function(res, data) {
-  var statusCode = data.code;
-
-  res.status(statusCode).render('error/error', {
+  res.render('error/error', {
     message: data.message,
     error: {}
   });
@@ -107,6 +134,7 @@ utils.noPageHandler = function(res) {
 
 // 计算时间差
 utils.timeDifference = function(timestamps) {
+  timestamps = Number(timestamps);
 
   function formatNum(num) {
     num = Number(num);
@@ -201,6 +229,8 @@ utils.batchHandleTs = function(arr, keyword) {
 
 // 格式化时间
 utils.formatDate = function(timestamps, fmtype) {
+  timestamps = Number(timestamps);
+
   var date = new Date(timestamps),
       obj = {
         'M+': date.getMonth() + 1, //月份
@@ -371,7 +401,7 @@ utils.formatNumVal = function(num, type) {
       formatNum = utils.formatNumDecimal(num);
       break;
     case 2:
-      formatNum = utils.formatNumDecimal(parseInt(formatNum * 100));
+      formatNum = utils.formatNumDecimal(formatNum * 100);
       break;
     case 3:
       var yi = 100000000, // 亿
@@ -452,13 +482,52 @@ utils.formatChange = function(num, type, refer) {
   return formatNum;
 };
 
+/**
+ * 递归创建路径，同步
+ * @param dirname 文件路径
+ * @param mode 文件属性，默认为0777
+ */
+utils.mkdirsSync = function (dirname, mode) {
+  function mkdirsSync(dirname, mode) {
+    if (fs.existsSync(dirname)) {
+      return true;
+    } else {
+      if (mkdirsSync(path.dirname(dirname), mode)) {
+        fs.mkdirSync(dirname, mode);
+        return true;
+      }
+    }
+  }
+
+  mkdirsSync(dirname, mode);
+};
+
+/*
+ * 截取纯文本的固定字数
+ */
+utils.limitText = function(text, num) {
+  var newText;
+
+  if (num === undefined) {
+    num = 50;
+  }
+
+  if (text.length > num) {
+    newText = text.substring(0, num) + '…';
+  } else {
+    newText = text;
+  }
+
+  return newText;
+};
+
 /*
  * 股票详情地址转换
  * 说明：转换股票详情地址（app—转pc）
  * @text：文本内容
  */
 utils.formatStkUrl = function(text){
-  var reg = /href="\s*http\:\/\/localstock\.yiqiniu\.com[^"]+assetid=(\d{6}\.[A-Z]{2})[^"]*"/ig;
+  var reg = /href="\s*http\:\/\/localstock\.yiqiniu\.com[^"]+assetid=(\d{6}\.[A-Z]{3}\.[A-Z]{2}|\d{6}\.[A-Z]{2})[^"]*"/ig;
   return text.replace(reg, 'href="/gupiao/$1"');
 };
 
@@ -480,3 +549,4 @@ String.prototype.niuStrSub = function(len){
     return tmp.replace(/ /g,"&nbsp;");
   }
 };
+

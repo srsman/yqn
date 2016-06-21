@@ -12,7 +12,16 @@ body.seo-body {
 .main {
   padding: 30px 0;
 
-  .main-container { display: table; }
+  .main-container {
+    display: table;
+
+    &.full-width {
+      .seo-main-content {
+        padding-right: 0;
+        width: 1140px;
+      }
+    }
+  }
 }
 
 .main-sidebar,
@@ -104,9 +113,20 @@ body.seo-body {
       border-radius: @border-radius-base;
 
       // 主体内包含的标题
-      h3.qn-section-title {
-        margin: 20px;
+      .qn-section-main-title-box {
+        position: relative;
+        padding: 20px;
+
+        h3.qn-section-title { margin: 0; }
+
+        .qn-section-more {
+          top: 20px;
+          right: 20px;
+        }
       }
+
+      /* 需替换成上面这种结构，下面折行代码没有考虑到more的存在 */
+      h3.qn-section-title { margin: 20px; }
     }
 
     h3.qn-section-title + .qn-section-main { margin-top: 20px; }

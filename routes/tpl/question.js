@@ -7,7 +7,7 @@ var express = require('express'),
     moment = require('moment'),
     ajax = require('../../utils/ajax'),
     utils = require('../../utils/utils'),
-    config = require('../../yiqiniu_config'),
+    serverConfig = require('../../server_config'),
     seoMeta = utils.seoMeta(),
     router = express.Router();
 
@@ -15,90 +15,118 @@ var express = require('express'),
  * 问答列表
  * @qiulijun
  */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   var questionUrl = '/adviser/latest_qa_list',
       stockUrl = '/mktinfo_api/fetch_stk_list',
-      newStockUrl = '/mktinfo_api/fetch_ipo_list',
       brokerUrl = '/seo_api/fetch_recommend_broker', // 券商开户
-      ZXquestionParams = {},
-      GPquestionParams = {},
-      DPquestionParams = {},
+      adviserUrl = '/adviser/square_index', // 推荐投顾
+      viewpointUrl = '/adviser/fetch_adviser_note_list', // 精选观点
+      zxQuestionParams = {},
+      gpQuestionParams = {},
+      dpQuestionParams = {},
       stockParams = {},
-      newStockParams = {},
-      brokerParams = {};
+      brokerParams = {},
+      adviserParams = {},
+      viewpointParams = {};
 
   // 最新问题请求参数
-  ZXquestionParams['module'] = 'adviser';
-  ZXquestionParams['params'] = {};
-  ZXquestionParams['params']['count'] = 8;
+  zxQuestionParams['module'] = 'adviser';
+  zxQuestionParams['params'] = {};
+  zxQuestionParams['params']['count'] = 8;
 
   // 股票问题请求参数
-  GPquestionParams['module'] = 'adviser';
-  GPquestionParams['params'] = {};
-  GPquestionParams['params']['count'] = 8;
-  GPquestionParams['params']['qType'] = 1;
+  gpQuestionParams['module'] = 'adviser';
+  gpQuestionParams['params'] = {};
+  gpQuestionParams['params']['count'] = 8;
+  gpQuestionParams['params']['qType'] = 1;
 
   // 大盘问题请求参数
-  DPquestionParams['module'] = 'adviser';
-  DPquestionParams['params'] = {};
-  DPquestionParams['params']['count'] = 8;
-  DPquestionParams['params']['qType'] = 2;
+  dpQuestionParams['module'] = 'adviser';
+  dpQuestionParams['params'] = {};
+  dpQuestionParams['params']['count'] = 8;
+  dpQuestionParams['params']['qType'] = 2;
 
   // 股票请求参数
   stockParams['module'] = 'market';
   stockParams['params'] = {};
   stockParams['params']['pageSize'] = 10;
 
-  // 新股请求参数
-  newStockParams['module'] = 'market';
-  newStockParams['params'] = {};
-  newStockParams['params']['pageSize'] = 5;
 
   // 推荐券商请求参数
   brokerParams['params'] = {};
   brokerParams['params']['brokerNum'] = 4;
+
+  // 推荐投顾请求参数
+  adviserParams['module'] = 'adviser';
+  adviserParams['params'] = {};
+
+  // 观点请求参数
+  viewpointParams['module'] = 'adviser';
+  viewpointParams['params'] = {};
+  viewpointParams['params']['count'] = 3;
+  viewpointParams['params']['readId'] = 0;
 
   // 转发请求
   ajax.map.post({
     url: stockUrl,
     body: stockParams
   }, {
-    url: newStockUrl,
-    body: newStockParams
+    url: questionUrl,
+    body: zxQuestionParams
   }, {
     url: questionUrl,
-    body: ZXquestionParams
+    body: gpQuestionParams
   }, {
     url: questionUrl,
-    body: GPquestionParams
-  }, {
-    url: questionUrl,
-    body: DPquestionParams
+    body: dpQuestionParams
   }, {
     url: brokerUrl,
     body: brokerParams
+  }, {
+    url: adviserUrl,
+    body: adviserParams
+  }, {
+    url: viewpointUrl,
+    body: viewpointParams
   }).then(function(datas) {
     var stockData = datas[0],
-        newStockData = datas[1],
-        zxQuestionData = datas[2],
-        gpQuestionData = datas[3],
-        dpQuestionData = datas[4],
-        brokerData = datas[5];
+        zxQuestionData = datas[1],
+        gpQuestionData = datas[2],
+        dpQuestionData = datas[3],
+        brokerData = datas[4],
+        adviserData = datas[5],
+        viewpointData = datas[6];
 
-    if(stockData.code === 0 && newStockData.code === 0 && zxQuestionData.code === 0 && gpQuestionData.code === 0 && dpQuestionData.code === 0 && brokerData.code === 0) {
+    if(stockData.code === 0 && zxQuestionData.code === 0 && gpQuestionData.code === 0 && dpQuestionData.code === 0 && brokerData.code === 0 && adviserData.code === 0 && viewpointData.code === 0) {
       var seoCustomMeta = {};
 
       seoCustomMeta['title'] = '有问必答，上万投顾在线为您及时解答';
 
       seoMeta = utils.seoMeta('question', seoCustomMeta);
 
+      // 给投顾加上分享链接
+      if(adviserData.result.niuRcmd.length > 0) {
+        for(var i = 0; i < adviserData.result.niuRcmd.length; i++) {
+          var item = adviserData.result.niuRcmd[i],
+              thisUid = item.uId,
+              thisUrl,
+              qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
+              shareUrl = serverConfig.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
+
+          thisUrl = shareUrl + '/webstatic/register/card.html?userId=' + thisUid;
+
+          adviserData.result.niuRcmd[i]['shareUrl'] = thisUrl;
+        }
+      }
+
       res.render('question/seo_list', {
         ZXquestions: zxQuestionData.result.qa,
         GPquestions: gpQuestionData.result.qa,
         DPquestions: dpQuestionData.result.qa,
+        widgetRcmdAdviser: adviserData.result.niuRcmd,
         widgetStocks: stockData.result.stks,
-        widgetNewStocks: newStockData.result.stks,
         widgetBrokers: brokerData.result.brokers,
+        widgetViewpoints: viewpointData.result.data,
         seoMeta: seoMeta,
         user: req.session.userInfo,
         flag : req.query.flag,
@@ -117,15 +145,15 @@ router.get('/', function(req, res, next) {
  * 问答详情
  * @qiulijun
  */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res) {
   var questionUrl = '/adviser/ask_qa_detail', //问答详情
-      newStockUrl = '/mktinfo_api/fetch_ipo_list', //新股
+      widgetStockUrl = '/mktinfo_api/fetch_stk_list', //新股
       brokerUrl = '/seo_api/fetch_recommend_broker', // 券商开户
       adQuestionsUrl = '/adviser/adviser_square_qa', //投顾的问答
       adViewpointsUrl = '/adviser/fetch_viewpoint_list', //投顾的观点
       adInformationUrl = '/user_api/fetch_user_info', //投顾的信息
       params = {},
-      newStockParams = {},
+      widgetStockParams = {},
       brokerParams = {};
 
   // 问答详情请求参数
@@ -134,9 +162,9 @@ router.get('/:id', function(req, res, next) {
   params['params']['qId'] = req.params.id;
 
   // 新股请求参数
-  newStockParams['module'] = 'market';
-  newStockParams['params'] = {};
-  newStockParams['params']['pageSize'] = 5;
+  widgetStockParams['module'] = 'market';
+  widgetStockParams['params'] = {};
+  widgetStockParams['params']['pageSize'] = 5;
 
   // 推荐券商请求参数
   brokerParams['params'] = {};
@@ -221,8 +249,8 @@ router.get('/:id', function(req, res, next) {
         url: '/adviser/stk_qa_list',
         body: sameQuestionParams
       }, {
-        url: newStockUrl,
-        body: newStockParams
+        url: widgetStockUrl,
+        body: widgetStockParams
       }, {
         url: '/mktinfo_api/get_quot',
         body: stockParams
@@ -240,24 +268,29 @@ router.get('/:id', function(req, res, next) {
         body: brokerParams
       }).then(function(datas) {
         if(datas[0].code === 0 && datas[0].result !== 'undefined') {
-          var seoCustomMeta = {};
+          var seoCustomMeta = {},
+              seoCustomDescription = stockName + '（' + stockId + '）' + resData.qContent + resData.ans[0].aContent;
 
-          seoCustomMeta['title'] = stockName + '（' + stockId + '）的问答';
-          seoCustomMeta['keywords'] = stockName + '股票分析，' + stockName + '在线提问，' + stockName + '走势预测，' + stockName + '如何操作';
+          seoCustomDescription = seoCustomDescription.replace('/<[^>]+>/', '');
+
+          seoCustomMeta['title'] = stockName + '（' + stockId + '）_问答_一起牛';
+          seoCustomMeta['keywords'] = stockName + '（' + stockId + '）' + resData.qContent;
+          seoCustomMeta['description'] = seoCustomDescription.substring(0, 99);
+          seoCustomMeta['mixins'] = 1;
 
           seoMeta = utils.seoMeta('question', seoCustomMeta);
+
           adviserInfo = datas[5].result;
 
-
           var qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
-              shareUrl = config.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
+              shareUrl = serverConfig.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
 
           adviserInfo.thisUrl = shareUrl + '/webstatic/register/card.html?userId=' + adviserId;
 
           res.render('question/seo_info', {
             id: req.params.id,
             data: resData,
-            widgetNewStocks: datas[1].result.stks,
+            widgetStocks: datas[1].result.stks,
             widgetBrokers: datas[6].result.brokers,
             sameQuestions: datas[0],
             asset: datas[2].result.data,
@@ -277,8 +310,8 @@ router.get('/:id', function(req, res, next) {
     } else {
       /* 该问题没有相关股票 */
       ajax.map.post({
-        url: newStockUrl,
-        body: newStockParams
+        url: widgetStockUrl,
+        body: widgetStockParams
       }, {
         url: brokerUrl,
         body: brokerParams
@@ -293,21 +326,27 @@ router.get('/:id', function(req, res, next) {
         body: adviserParams
       }).then(function(datas) {
         if(datas[0].code === 0 && datas[0].result !== 'undefined') {
-          var seoCustomMeta = {};
+          var seoCustomMeta = {},
+              seoCustomDescription = resData.qContent + resData.ans[0].aContent;
 
-          seoCustomMeta['title'] = '有问必答，上万投顾在线为您及时解答';
+          seoCustomDescription = seoCustomDescription.replace('/<[^>]+>/', '');
+
+          seoCustomMeta['title'] = '老师对大盘未来趋势怎么看？_问答_一起牛';
+          seoCustomMeta['keywords'] = resData.qContent;
+          seoCustomMeta['description'] = seoCustomDescription.substring(0, 99);
+          seoCustomMeta['mixins'] = 1;
 
           seoMeta = utils.seoMeta('question', seoCustomMeta);
           adviserInfo = datas[4].result;
           var qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
-              shareUrl = config.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
+              shareUrl = serverConfig.env[qiniuEnv].target.h5; // 当前项目环境的分享地址;
 
           adviserInfo.thisUrl = shareUrl + '/webstatic/register/card.html?userId=' + adviserId;
 
           res.render('question/seo_info', {
             id: req.params.id,
             data: resData,
-            widgetNewStocks: datas[0].result.stks,
+            widgetStocks: datas[0].result.stks,
             widgetBrokers: datas[1].result.brokers,
             adQuestions: datas[2],
             adViewpoints: datas[3],

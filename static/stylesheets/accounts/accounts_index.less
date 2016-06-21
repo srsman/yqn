@@ -54,11 +54,11 @@
   width: 765px;
   border-right: 1px solid @border-default-color;
 
-  .qn-control-label { width: 50px; }
+  .qn-control-label { width: 60px; }
 
   .qn-form-group-tip { padding-left: 65px; }
 
-  .qn-form-group.offset-label { padding-left: 65px; }
+  .qn-form-group.offset-label { padding-left: 75px; }
 
   .captcha-section {
     .qn-form-control { width: 125px; }
@@ -120,6 +120,7 @@
   table img {
     width: 84px;
     height: 84px;
+    max-width: none;
   }
 }
 
@@ -155,3 +156,30 @@
   &:hover,
   &:focus { color: #fff; }
 }
+
+
+// 左边距5像素
+.m-l-5 {
+  margin-left: 5px;
+}
+
+// 验证码
+.captcha-control-box {
+  width: 400px;
+}
+.qn-form-captcha {
+  width: 140px;
+}
+.captcha {
+  height: 32px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sui-msg.msg-error {
+  margin-top: 2px;
+}
+
+
+

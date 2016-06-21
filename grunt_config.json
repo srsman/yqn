@@ -12,7 +12,7 @@
     "js": "static/javascripts",
     "lib": "static/javascripts/lib",
     "plugins": "static/javascripts/plugins",
-    "tpls": "static/javascripts/tpls",
+    "tpls": "static/templates",
     "images": "static/images",
     "utils": "utils",
     "routes": "routes"

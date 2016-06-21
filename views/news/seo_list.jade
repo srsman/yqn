@@ -16,20 +16,25 @@ block main_content
       .qn-section
         .qn-section-main
           h3.qn-section-title 热点新闻
-          .qn-section-newsContent
-            dl
-              each item in newsInfo.data
-                dt
-                  a.qn-post-title-link(href="/xinwen/#{item.newsId}") #{item.title}
-                dd
-                  p.news-content #{item.content}
-                  p.post-time #{utils.timeDifference(item.date)}
-          //- 分页
-          - var currPage = newsInfo.page.curPage
-          - var totalPage = newsInfo.page.pageCount
-          - var pageLink = '/xinwen?page='
-          include ../common/pagination
-          +page(totalPage, currPage, pageLink)
+
+          if newsInfo.data
+            .qn-section-newsContent
+              dl
+                each item in newsInfo.data
+                  dt
+                    a.qn-post-title-link(href="/xinwen/#{newsInfo.newsType}/#{item.newsId}") #{item.title}
+                  dd
+                    p.news-content #{item.content}
+                    p.post-time #{utils.timeDifference(item.date)}
+            //- 分页
+            - var currPage = newsInfo.page.curPage
+            - var totalPage = newsInfo.page.pageCount
+            - var pageLink = '/xinwen?page='
+            include ../common/pagination
+            +page(totalPage, currPage, pageLink)
+          else
+            .qn-section-newsContent
+              p 暂无数据
 
     .seo-main-sidebar
 

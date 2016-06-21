@@ -11,7 +11,7 @@ define([
   'push',
   'dialog'
 ], function($, template, qrcode) {
-  'use strict';
+  // 'use strict'; // 百度分享不支持
 
   var $window = $(window);
 
@@ -21,17 +21,15 @@ define([
   /*
    * 初始化
    * @init: 模块初始化方法
-   * @switchHttps: 强制转换成https访问
    * @initEmoji: 初始化页面中的emoji（需优化的方法，该功能应在模板绑定时执行，先mark）
    * @initPlugins: 初始化插件
    * @goToTopStatus: 回到顶部按钮的显示与隐藏
    * @goToTop: 回到顶部
    * @sidebarHighlight: 侧边栏菜单高亮
-   * @headNavHighlight: 顶部导航栏高亮
+   * @pageShare: 分享页面
    */
   SEMICOLON.initialize = {
     init: function() {
-      //SEMICOLON.initialize.switchHttps();
       SEMICOLON.initialize.initEmoji();
       SEMICOLON.initialize.initPlugins();
       SEMICOLON.initialize.goToTopStatus();
@@ -39,20 +37,11 @@ define([
       if($('.main-sidebar').length) {
         SEMICOLON.initialize.sidebarHighlight();
       }
-      if($('.header-nav').length){
-        SEMICOLON.initialize.headNavHighlight();
-      }
       if($('.invokeDialog').length){
         SEMICOLON.initialize.initInvokeDialog();
       }
-    },
-
-    /* 强制转换成https访问 */
-    switchHttps: function() {
-      var url = window.location.protocol;
-
-      if(/http:/.test(url)) {
-        window.location.protocol = 'https:';
+      if($('.bdsharebuttonbox').length) {
+        SEMICOLON.initialize.pageShare();
       }
     },
 
@@ -120,23 +109,6 @@ define([
       $('.sidebar-menu-wrap').find('.' + keyword).addClass('active');
     },
 
-    /* 顶部导航栏高亮 */
-    headNavHighlight:function(){
-      var url = window.location.href,
-        regx = /https:\/\/|http:\/\//,
-        section = url.replace(regx,"").split("/"),
-        keyword;
-
-      if(section.length < 2 || section[1] === ""){
-        $('.header-nav').find('.index').addClass('active');
-        return;
-      }
-
-      keyword = section[1];
-
-      $('.header-nav').find('.' + keyword).addClass('active');
-    },
-
     initInvokeDialog:function() {
       var $button = $('.invokeDialog');
 
@@ -162,6 +134,24 @@ define([
         });
 
       });
+    },
+
+    /* 分享页面 */
+    pageShare: function() {
+      window._bd_share_config = {
+        "common": {
+          "bdSnsKey": {},
+          "bdText": "",
+          "bdMini": "2",
+          "bdMiniList": false,
+          "bdPic": "",
+          "bdStyle": "1",
+          "bdSize": "16"
+        },
+        "share": {}
+      };
+
+      with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/javascripts/lib/share/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
     }
   };
 

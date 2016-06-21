@@ -30,6 +30,12 @@ define([
       var userId = $('#header-user-avatar-box').data('id');
 
       if(userId) {
+        /*
+         * 亮至机器：http://192.168.1.129:8182
+         * 181：http://192.168.1.181:8182
+         * 179：http://192.168.1.179:8182
+         * 生产：https://official.yiqiniu.com:7001
+         */
         var socket = io.connect('http://192.168.1.129:8182', {reconnection: false});
 
         //向服务端发送身份识别
@@ -40,8 +46,6 @@ define([
         //统一接收推送消息，然后按模块处理
         socket.on("WEB_IPUSH", function(data){
           var dataObj = JSON.parse(data.body);
-
-          console.log(dataObj);
 
           if(dataObj.module === 10002){
             SEMICOLON.square.init(dataObj.result);

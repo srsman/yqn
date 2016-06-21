@@ -1,0 +1,62 @@
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/industry/seo_index.css')
+
+block main_content
+  .container.main-container
+    //- 主体内容
+    .seo-main-content
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        a(href='/hangye') 行业
+        i.fa.fa-angle-right
+        a(href='/hangye/#{industryId}') #{industryDetail.induName}
+        i.fa.fa-angle-right
+        span 行业事件
+
+      //- 行业详情
+      include seo_info_main
+
+      //- 相关事件
+      .qn-section
+        h3.qn-section-title 行业事件
+
+        .qn-section-main
+          ul.seo-news-list-main
+            each item in events
+              li.seo-news-list-item
+                dl
+                  dt
+                    a.qn-post-title-link(href='/hangye/#{industryId}/xinwen/#{item.newsId}', title='#{item.title}') #{item.title}
+                  dd
+                    .seo-news-meta
+                      | #{moment(Number(item.date)).format('MM月DD日 HH:mm:ss')}
+            li
+              a#get-news-more.more-item(href='javascript:', data-times=0, data-last='#{events[events.length - 1].newsId}')
+                span 显示更多&nbsp;
+                i.fa.fa-angle-double-down
+
+    //- 侧边组件
+    .seo-main-sidebar
+      //- 新股预告
+      include ../widgets/new_stocks
+
+      //- 热门股票
+      include ../widgets/hot_stocks
+
+      //- 券商开户
+      include ../widgets/recommend_broker
+
+      //- 二维码
+      include ../widgets/qr_code
+
+append foot_scripts
+  script(data-main='/javascripts/industry/seo_news_list.js' src='/javascripts/lib/requirejs/require.js')

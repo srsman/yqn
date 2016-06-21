@@ -1,0 +1,38 @@
+//- F10布局模板
+extends ../common/seo_layout
+
+block header
+  +he('shichang')
+
+//- 添加自定义样式
+append css
+  link(rel='stylesheet', href='/stylesheets/stock/seo_index.css')
+
+block main_content
+  .container.main-container.full-width
+    .seo-main-content
+      //- 面包屑
+      .qn-seo-breadcrumbs 当前位置：
+        a(href='/') 首页
+        i.fa.fa-angle-right
+        a(href='/shichang') 市场
+        i.fa.fa-angle-right
+        a(href='/gupiao/#{stockInfo[0]}') #{stockInfo[1]}
+        i.fa.fa-angle-right
+        span F10
+
+      //- 股票详情
+      include seo_stock_info_main
+
+      //- 公司资料
+      .qn-section
+        .qn-section-main
+          .seo-stock-f10-box
+            include seo_f10_menu
+            block seo_f10_menu
+              +f10Menu()
+
+            block f10_content
+
+append foot_scripts
+  script(data-main='/javascripts/custom.js' src='/javascripts/lib/requirejs/require.js')

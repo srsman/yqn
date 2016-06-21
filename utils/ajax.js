@@ -9,10 +9,10 @@ var ajax = module.exports = {},
     keys = require('when/keys'),
     request = require('request'),
     log4js = require('log4js'),
-    config = require('../yiqiniu_config'),
+    serverConfig = require('../server_config'),
     utils = require('../utils/utils'),
     qiniuEnv = process.env.NODE_ENV, // 当前的项目环境
-    urlPrefix = config.env[qiniuEnv].target, // 当前项目环境的转发地址
+    urlPrefix = serverConfig.env[qiniuEnv].target, // 当前项目环境的转发地址
     slice = Array.prototype.slice;
 
 var requestLog = log4js.getLogger('request');
@@ -26,7 +26,7 @@ var _request = ajax.request = function(url, options) {
 
   options.method = (options.method || 'GET').toUpperCase();
 
-  options.strictSSL = config.env[qiniuEnv].strictSSL;
+  options.strictSSL = serverConfig.env[qiniuEnv].strictSSL;
 
   if(options.req) {
     // 只保留req中的headers部分与body部分
@@ -92,7 +92,14 @@ var _request = ajax.request = function(url, options) {
 
   options.body = utils.addSrc(options.body);
 
+  // 请求开始时间
+  var reqTimeStart = new Date();
+
   request(url, options, function(error, response, body) {
+    // 请求结束时间和总时间
+    var reqTimeEnd = new Date(),
+        reqTimeTotal = reqTimeEnd - reqTimeStart;
+
     var statusCode = response && response.statusCode || 500;
 
     // 判断数据中是否包含密码字段，有则不记录详细参数进日志
@@ -105,9 +112,9 @@ var _request = ajax.request = function(url, options) {
         }
       } catch(e) {
         if(hasPwd === 1) {
-          requestLog.info('请求转发解析数据异常：【' + url + '】');
+          requestLog.info('耗时：' + reqTimeTotal + 'ms，请求转发解析数据异常：【' + url + '】');
         } else {
-          requestLog.info('请求转发解析数据异常：【' + url + '】', options, JSON.stringify(body));
+          requestLog.info('耗时：' + reqTimeTotal + 'ms，请求转发解析数据异常：【' + url + '】', options, JSON.stringify(body));
         }
 
         deferred.reject({
@@ -119,17 +126,17 @@ var _request = ajax.request = function(url, options) {
       }
 
       if(hasPwd === 1) {
-        requestLog.info('请求转发成功：【' + url + '】');
+        requestLog.info('耗时：' + reqTimeTotal + 'ms，请求转发成功：【' + url + '】');
       } else {
-        requestLog.info('请求转发成功：【' + url + '】', options, JSON.stringify(body));
+        requestLog.info('耗时：' + reqTimeTotal + 'ms，请求转发成功：【' + url + '】', options, JSON.stringify(body));
       }
 
       deferred.resolve(body);
     } else {
       if(hasPwd === 1) {
-        requestLog.error('请求转发异常：【' + url + '】');
+        requestLog.error('耗时：' + reqTimeTotal + 'ms，请求转发异常：【' + url + '】');
       } else {
-        requestLog.error('请求转发异常：【' + url + '】', options, error || JSON.stringify(body));
+        requestLog.error('耗时：' + reqTimeTotal + 'ms，请求转发异常：【' + url + '】', options, error || JSON.stringify(body));
       }
 
       deferred.reject({

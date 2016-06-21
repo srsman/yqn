@@ -5,7 +5,7 @@ li.seo-news-list-item.item(data-mid=item.artid)
       if item.url
         h3.qn-post-title #{item.title}
       else
-        a.qn-post-title-link(href='/xinwen/' + item.artid, title=item.title) #{item.title}
+        a.qn-post-title-link(href='/xinwen/#{stockNews.newsType}/#{item.artid}', title=item.title) #{item.title}
     dd
       if item.content
         p #{item.content}
@@ -15,7 +15,7 @@ li.seo-news-list-item.item(data-mid=item.artid)
 
       .seo-news-meta
         if item.url
-          | #{moment(item.date).format('YYYY-MM-DD')}
+          | #{moment(Number(item.date)).format('YYYY-MM-DD')}
         else
           | #{utils.timeDifference(item.date)}
 
